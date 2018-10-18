@@ -1,0 +1,646 @@
+\documentclass[rocnikovka]{gzwroc} %specialni trida pro rocnikove prace/soc; varianta se ridi argumentem rocnikovka nebo soc
+% parametry nastaveni spolecne pro oba typy prace
+\usepackage[czech]{babel}
+\nazevprace{Metody aproximace Ludolfova čísla} % nazev prace v cestine
+\nazevpraceen{Methods of approximation of Archimedes' constant} % nazev prace v anglictine - nepovinne, paklize se jedna o rocnikovou praci (v takovem pripade zavolat a nechat zavorky prazdne)
+\autor[m]{Jiří Zelenka} % tento prikaz prida dalsiho autora, nepovinny parametr pohlavi m/f pomaha s automatickym sklonovanim
+%\konzultant{} % stejne jako autora lze pridavat konzultanty, zde chybi nepovinny parametr - implicitne m
+\vemeste{V Domoušicích} % v prohlaseni o autenticite prace je treba druhy pad mesta s predlozkou, autor sablony se z toho nechtel zblaznit a tak to proste pridal extra jako parametr
+%\datum{} % datum prohlaseni o autenticite
+\anotace{Cílem mé ročníkové práce je informovat o základních metodách aproximace Ludolfova čísla (dále jen „$\pi$“). V práci jsem popsal historický vývoj a metody jeho výpočtu. Každou metodu zmíněnou v textu jsem otestoval v počítačové simulaci, popřípadě jsem provedl experiment vedoucí k přibližné hodnotě $\pi$. Posledním tématem, kterým jsem se zabýval, bylo využití počítačových technologií k přiblížení se skutečné hodnotě $\pi$.}{A purpose of my work is information of basic methods of approximation of Archimedes' constant (hereinafter "$\pi$"). In work I described a historical development and methods of its calculation. Every method which I inform in the text I tested by computing simulation or I made an experiment which led to an approximate value of $\pi$. Eventually I occupy with using of computer technology for calculation $\pi$.} % anotace je resena timto prikazem, prvni parametr je ceska anotace, druhy preklad do anglictiny - ten nemusi byt doslovny, ale mel by zachovavat myslenku ceske varianty
+\klicovaslova{Ludolfovo číslo, pí, konstanta, algoritmy, počítače}{Archimedes' constant, pi, constant, algorithms, computers} % prikaz pro nastaveni klicovych slov - stejne jako u anotace, prvni parametr jsou klicova slova v cestine, druhy jejich anglicky preklad
+
+%parametry nastaveni pro rocnikovou praci
+\nazevskoly{Gymnázium Zikmunda Wintra Rakovník, příspěvková organizace} % oficialni nazev skoly pro titulni stranu
+\trida{C3A} % trida, ve ktere autor obhajuje
+\skolnirok {2018/2019} % skolni rok, ve kterem je prace obhajovana
+\vedouci{Mgr. Vojtěch Delong} % vedouci prace
+
+% parametry nastaveni pro soc
+\cislooboru{1} % cislo oboru, ve kterem se obhajuje soc - viz stranky soc.cz
+\nazevoboru{Matematika a statistika} % nazev oboru podle predchoziho cisla
+\skola{Gymnázium Zikmunda Wintra Rakovník, příspěvková organizace,\\ Žižkovo náměstí 186, 26901 Rakovník} % oficialni nazev skoly s adresou
+\kraj{Středočeský kraj} % oficialni nazev kraje, za ktery prace vstupuje do souteze
+\mesto{Rakovník} % obec puvodu prace
+\rok{2018} % rok vzniku prace - konkretne rocnik soc (pocitaji se i upravy kvuli soutezi)
+
+% zacatek prace
+\begin{document}
+\titulnistrana % automaticky vytvori titulni stranu
+\prohlaseni % automaticky vytvori stranu s prohlasenim o autenticite
+\podekovani % zacatek nepovinneho podekovani, podobne jako na Ceskem slaviku nebo tak
+Na tomto místě můžete vložit poděkování těm, kteří vám s tvorbou práce pomohli. Poděkování je vaše autorské dílo, nemá předepsanou podobu a není povinnou součástí práce. Záleží jen na~vás, zda, komu a jakým způsobem poděkujete.
+\newpage % podekovani je treba zakoncit novou stranou, tento radek zakomentujte nebo vymazte, pokud podekovani vyradite
+\vyrobanotaci % zde se vytvari strana s anotaci
+\tableofcontents % tento prikaz vytvori obsah - kliknutim se lze presouvat v pdf
+\newpage % prikaz nove strany za obsahem
+\section{Úvod} % clanek se deli primarne na sekce - vyraz kapitola nebo cast je vyhrazen dokumentum typu knihy apod.
+Člověk již od dob, když si začal uvědomovat tvary a velikosti, si musel být vědom, že existuje jistá závislost mezi průměrem a obvodem kruhu. Nejspíš okolo 2000 př. n. l. [1] lidé ve vyspělých civilizacích začali užívat konstantu, kterou, když vynásobili průměr kruhu, dostali obvod kruhu.\\
+Zprvu užívali hodnoty experimentálně změřené. Až ve starověku přišel Archimédes ze Syrakus s prvním algoritmem, pomocí něhož lze nalézt hodnotu konstanty s libovolnou přesností.\\
+Vzhledem k tomu, že ve středověku nebyl téměř žádný zájem o tuto oblast matematiky, další přínosy pocházejí až z novověku. Velký posun kupředu byl objev nekonečného součtu a součinu a řetězových zlomků. Následkem toho vzniklo nespočet algoritmů, nicméně většina měla pomalou konvergenci\footnote[1]{Konvergence je rychlost algoritmu. Vyjadřuje, jak moc se přiblížíme skutečné hodnotě s každou další iterací (provedeným krokem).}.\\
+Zdokonalování a vymýšlení nových algoritmů bylo podmíněno mírou poznatků matematiky, hlavně z oblasti teorie čísel a rovnic. Asi nejcennější příspěvek z konce raného novověku je objev integrálů Sirem Isaacem Newtonem. Do 18. století neměla konstanta jednotné označení, až Leonhard Euler začal používat námi již známé řecké písmeno $\pi$.\\
+Další velký rozkvět zažilo $\pi$ až s příchodem počítačů v polovině 20. století. Doté doby bylo $\pi$ spočítáno jen na 808 desetinných míst. Během několika let bylo vytvořeno mnoho rekordů. Ze začátku to bylo několik desítek tisíc desetinných míst. V roce 2016 bylo ve Švýcarsku $\pi$ spočítáno na 22,4 biliónů desetinných míst [2].\\
+V první části si ukážeme pomocí Lindenmannova důkazu, že $\pi$ je iracionální, resp. transcendentní\footnote[2]{Transcendentní iracionální čísla nejdou vyjádřit zlomkem. Nemají totiž ukončený desetinný rozvoj a zároveň nemají periodu. Od algebraických  iracionálních čísel se liší tím, že nemůže být kořenem žádné algebraické rovnice s racionálními koeficienty.}. Tím si objasníme, proč se nikomu v historii nepovedlo a ani nepovede konečnou metodou vyjádřit celý desetinný rozvoj.\\
+Od další části vše už bude poskládáno chronologicky. Ukážeme si, jakou hodnotu používaly jednotlivé civilizace v Evropě a na Blízkém východě. Ve starověku ještě zůstaneme a rozebereme si Archimédův algoritmus.\\
+Ze středověku si představíme pouze Leonarda Fibonacciho, který tento algoritmus studoval.\\
+Čtvrtá kapitola se bude zaobírat novověkem, kde si představíme Viètův a Wallisův nekonečný součin. Jedním z témat budou i řetězové zlomky, hlavně Brounckerův řetězový zlomek. Dále bude následovat Gregoryho-Leibnizova a Newtonova řada. U Newtonovy řady si podrobně popíšeme odvození, protože je to první řada, která byla odvozena pomocí integrálů. Leonharda Eulera si zmíníme nejen kvůli tomu, že dal světu symbol $\pi$, ale i on představil veřejnosti několik řad.\\
+V předposlední části bude simulace Monte Carlo \footnote[3]{Monte Carlo je jedna z mnoha metod numerické integrace. Spočívá v generován pseudonáhodných bodů na určité ploše. Poměr bodů pod a nad křivkou představují poměr plochy pod a nad křivkou. Tuto metodu lze použít v jakémkoliv n-dimenzionálním prostoru.} a s tím spojena Buffonova jehla, kterou jsem i experimentálně ověřil.\\
+V poslední části se podíváme výpočty $\pi$ na počítači a nejzajímavější rekordy.
+\subsection{Vlastnosti $\pi$}
+Historicky první důkaz přinesl roku 1761 Johann Heinrich Lambert. Ten potvrdil, že $\pi$ je iracionální, ale nevyvrátil, že $\pi$ je algebraické. V roce 1794 Adrien-Marie Legendre dokázal, že $\pi^2$ je iracionální, a byl přesvědčen, že není algebraické iracionální číslo, ale že to půjde těžce dokázat. Až Carl Louis Ferdinand von Lindemann v roce 1882 přišel s důkazem, že $\pi$ je transcendentní iracionální číslo.\\
+Lindemannův důkaz vychází z Eulerovy identity:
+$$
+\eu^{i\pi}+\eu^{0}=0.
+$$
+Jestliže exponenty 0 a $i\pi$ jsou různá čísla, tak musí být navzájem lineálně nezávislá\footnote[3]{}. Podle Lindemannova–Weierstrassova teorému musí být i čísla $\eu^{i\pi}$ a $\eu^{0}$ algebraicky nezávislá. Z toho také vyplývá, že alespoň 1 exponent číslo transcendentní. Již na první pohled je jasné že 0 není transcendentní, protože může vyjí jako kořen algebraické rovnice ($x=0$). V tom případě musí být $i\pi$ transcendentní. Aby z součinu čísel vyšlo transcendentní číslo, musí alespoň jeden činitel být také transcendentní číslo. A když lze zapsal, že:
+$$
+i=\sqrt{-1} \ztoho i^2=-1 \ztoho i^2+1=0,
+$$
+musí nutně být $\pi$ transcendentní [1].
+\section{Historický vývoj odhadu $\pi$}
+\subsection{Starověk}
+Již před 1 000 000 let si člověk začal uvědomovat tvary, velikosti (čísla) a vztahy mezi veličinami, např.: větší kámen je těžší, starší strom je větší. Někdy v době kamenné lidé začali počítat, o čemž svědčí řezy na kostech (obr. 1).
+\begin{figure}[!ht]
+\includegraphics[width=4cm]{kosti}
+\caption{Zářezy na kostech [3]}
+\label{fig:kruh}
+\end{figure}
+V této době člověk začal vnímat monotonní funkce\footnote[4]{$f(x): y=x$}, např.: 2krát větší pole znamená 2krát víc úrody. Jenže to u kruh, jednoho z nepřirozenějších tvarů, neplatilo. Věděli jen, že čím větší průměr, tím větší obvod. Až někdy kolem roku 2000 př. n. l. přišli na to, že, aby tato úměra platila pro výpočet, musí  průměr vynásobit konstantou, a tak začaly vznikat první aproximace $\pi$ [1].
+\subsubsection{První numerické aproximace}
+\paragraph{Blízký východ}
+Mezi prvními oblastmi, kde se doloženě rozvíjela matematika, bylo území Blízkého východu. Hlavně u velkých řek, jako je Eufrat a Tigris, se začaly vyvíjet první civilizace. Již od 3. tisíciletí př. n. l. se začínají objevovat první písemné prameny včetně matematiky. 
+V roce 1936 byla nalezena přibližně 200 mil od Babylonu ve městě Susa hliněná destička, která tvrdí, že podíl obvodu pravidelného šestiúhelníku a obvodu kruhu o stejném průměru je [1]:
+$$
+\frac{57}{60}+\frac{36}{60^2}=\frac{96}{100}
+$$
+Pokud víme, že obvod pravidelného šestiúhelníku $o_s$ je šestinásobek poloměru $r$ a že obvod kruhu $o_k$ je poloměr krát dvojnásobek $\pi$, můžeme si vyjádřit hodnotu $\pi$.
+\begin{equation}
+\frac{o_s}{o_k}=\frac{96}{100} \ztoho \frac{6r}{2\pi r}=\frac{96}{100} \ztoho \frac{3}{\pi}=\frac{96}{100} \ztoho\pi=3\frac{1}{8}
+\end{equation}
+Z této destičky je jasné že v Babylonii používali za hodnotu $\pi$ 3,125.\\
+Na většině území zpravidla používali hodnotu 3 [3]. Na to poukazují památky Židů, například "První kniha královská" praví o Šalomounově paláci (kapitola 7, verš 23): "Udělal také moře slité, desíti loket od jednoho kraje k druhému, okrouhlé vůkol, a pět loket byla vysokost jeho, a okolek jeho třicíti loket vůkol." [4] nebo i samotných Babyloňanů. Na tabulce YBC 7302 ve tvaru kruhu jsou napsána čísla 3, 9 a 45, z nich jde usuzovat, že obvod je dán 3, 9 je druhá mocnina obvodu a 45 je její obsah. Tyto hodnoty se dají použít ve vzorci:
+\begin{equation}
+S=\frac{1}{12}o^2,
+\end{equation}
+kde $S$ je obsah a $o$ je obvod. [5] Pokud si vzorec 2 rozepíšeme, dostaneme, že $\pi$ je v této aproximaci 3.
+$$
+S=\frac{1}{12}o^2 \ztoho \pi r^2=\frac{1}{12}4\pi^2r^2 \ztoho 1=\frac{1}{3}\pi \ztoho \pi=3
+$$
+\begin{figure}[!ht]
+\includegraphics[width=6cm]{YBC}
+\caption{Tabulka YBC 7302 [5]}
+\label{fig:kruh}
+\end{figure}
+\paragraph{Egypt}
+Matematika v Egyptě musela existovat již v 3. tisíciletím př. n. l., protože v přibližně té době probíhaly tavby pyramid a kanálů, na které byly potřeba pokročilé znalosti matematiky [3].\\
+Roku 1858 poblíž Nilu byl nalezen Rhindův papyrus [1], který obsahuje návod na výpočet obsahu kruhu. V příkladu R50 se tvrdí, že obsah trojúhelníka $S$ je roven $\frac{64}{81}$ druhé mocnině průměru $d$.
+\begin{equation}
+S=\frac{64}{81}d^2
+\end{equation}
+Když si vztah upravíme, dostaneme hodnotu $\pi$.
+$$
+S=\frac{64}{81}d^2 \ztoho \frac{1}{4}\pi d^2=\frac{64}{81}d^2 \ztoho \pi=3\frac{13}{81}
+$$
+Pomocí našeho vzorce pro obsah kruhu je jasné, že pro Egypťany byla hodnota $\pi$ 3,16. Jak ke vzorci 3 došli, zůstává záhadou, ale mnoho historiků matematiky se přiklání, že na násobek $\frac{64}{81}$ přišli pomocí čtvercové sítě, kterou používali při projektování staveb. Když na čtvercové síti složené z 9 čtverců jako na obrázku 2 aproximujeme kruh osmiúhelníkem dostaneme, že obsah kruhu je $\frac{7}{9}$ druhé mocniny průměru kruhu. Protože $\frac{64}{81}$ snadno zapisovatelné pomocí kamenných zlomků, které se v té době hojně používaly, je možné, že $\frac{63}{81}$ nahradili $\frac{64}{81}$. [5]
+\begin{figure}[!ht]
+\includegraphics[width=6.5cm]{Egypt}
+\caption{Síť pro aproximaci kruhu}
+\label{fig:kruh}
+\end{figure}
+\paragraph{Řecko}
+Na úplném vrcholu byla starověká matematika v Řecku a to hlavně díky velkému množství vědců z celé řady oborů. Do dnešní doby se v matematice používá mnoho jejich poznatků, např.: Archimédovy geometrické řady, Pythagorova věta, Euklidovy věty a Archimédův algoritmus na výpočet $\pi$, který je rozebrán v kapitole 2.2.2.
+\paragraph{Řím}
+Klaudios Ptolemaios, vědec žijící v Alexandrii 85-165 n. l. [12], ve své 1. knize „Almagestu“ sestavil tabulku tětiv (sinů). Funkci sinus značí jako $\mathrm{chrd} \textrm{ }\alpha$. K určení základních hodnot užívá do té doby již známých znalostí z matematiky. Pro získání malých úhlů odvodil vzorec pro $\mathrm{chrd}$ polovičního úhlu:
+$$
+\mathrm{chrd}^2\frac{\alpha}{2}=\frac{1-\mathrm{chrd}\textrm{ }(180\dg-\alpha)}{2},
+$$
+který lze zapsat dnešním zápisem jako:
+$$
+\sin^2\frac{\alpha}{2}=\frac{1-\cos\alpha}{2}.
+$$
+Když se dostal až na  $1\dg$ využil novou goniometrickou funkci aproximaci obvodu kruhu $o$, kterou lze vidět na obrázku XX.
+\begin{figure}[!ht]
+\includegraphics[width=8.5cm]{Ptol}
+\caption{Ptolemaiova aproximace kruhu}
+\label{fig:kruh}
+\end{figure}
+Tato aproximace by šla zapsat dnešním moderním zápisem takto:
+$$
+o=\lim_{n\to\infty} nr\sin\left(\frac{360\dg}{n}\right),
+$$
+když to  vložíme do vzorce pro $\pi$:
+$$
+\pi=\frac{o}{2r},
+$$
+dostaneme, že:
+\begin{equation}
+\pi=\lim_{n\to\infty}\frac{n\sin\left(\frac{360\dg}{n}\right)}{2}.
+\end{equation}
+Ptolemaios pro $\alpha = 1\dg$ ($n=360$) dostal hodnotu $\pi$ 3,14166. Důvod, proč nedostal hodnotu 3,14143, je, že během svého výpočtu $\mathrm{chrd} \textrm{ }1\dg$ zaokrouhloval.
+\subsubsection{Archimédův algoritmus}
+Archimédes (287-212 př. n. l.[3]) použil k výpočtu $\pi$ úvahu, že obvod vepsaného pravidelného n-úhelníku $o_n$ je menší než obvod kruhu $o_k$ a že obvod opsaného pravidelného n-úhelníku $O_n$ je menší než obvod kruhu:
+\begin{figure}[!ht]
+\includegraphics[width=7cm]{arch1}
+\caption{Kruh s opsaným a vepsaným n-úhelníkem}
+\label{fig:kruh}
+\end{figure}
+$$ o_n<o_k<O_n $$
+$$ ns_n<2\pi r<nS_n $$
+\begin{equation}
+\frac{ns_n}{2r}<\pi<\frac{nS_n}{2r},
+\end{equation}
+kde $n$ je počet vrcholů/stran, $r$ je poloměr kružnice, $s_n$ je délka strany vepsaného n-úhelníku a $S_n$ je délka strany opsaného n-úhelníku [1].\\
+Princip tohoto algoritmu je ten, že čím více bude mít n-úhelník vrcholů, tím více bude opisovat kruh a tím bude menší interval.\\
+Archimédes začal výpočet na snadno spočítatelném šestiúhelníku, kde délka strany vepsaného šestiúhelníka je poloměr kružnice\footnote[5]{Pravidelný šestiúhelník se skládá z šesti rovnostranných trojúhelníků. To znali již Babyloňané[1].}, pro jednoduchost výpočtu zavedeme jednotkový poloměr ($r=1$).
+\begin{figure}[!ht]
+\includegraphics[width=3.5cm]{arch3}
+\caption{Jeden trojúhelník z vepsaného šestiúhelníka}
+\label{fig:kruh}
+\end{figure}
+\begin{equation}
+s_6=r \ztoho s_6=1
+\end{equation}
+Délka stany opsaného šestiúhelníka jde vypočítat pomocí Pythagorovy věty.
+\begin{figure}[!ht]
+\includegraphics[width=3.5cm]{arch4}
+\caption{Jeden trojúhelník z opsaného šestiúhelníka}
+\label{fig:kruh}
+\end{figure}
+$$ S_6^2=r^2+\left(\frac{S_6}{2}\right)^2 \ztoho 4S_6^2=4r^2+S_6^2 \ztoho S_6^2=\frac{4}{3}r^2 \ztoho S_6=\frac{2\sqrt{3}}{3}r $$
+\begin{equation}
+\ztoho S_6=\frac{2\sqrt{3}}{3}
+\end{equation}
+Když se hodnoty $s_6$ a $S_6$ vloží do vztahu 4, vyjde, že $3<\pi <2\sqrt{3}$. Archimédes u této hodnoty nevydržel, a tak počítal dál, ale, protože pro víceúhelníky není výpočet tak jednoduchý\footnote[6]{Za Archyméda nebyly známé goniometrické funkce. První, kdo určil jejich hodnoty, byl Ptolemaios. [3]}, odvodil si vztah pro 2n-úhelníky.\\
+\begin{figure}[!ht]
+\includegraphics[width=7cm]{arch2}
+\caption{1 trojúhelník z vepsaného šestiúhelníka a 2 trojúhelníky z vepsaného dvanáctiúhelníka}
+\label{fig:kruh}
+\end{figure}
+Z obrázku 5 můžu sestavit soustavu 3 rovnic, ze kterých se dá vyjádřit $s_{2n}$:
+\begin{enumerate}
+\item Protože se jedná o mnohoúhelník vepsaný, vrcholy budou ležet vždy n kružnici ve vzdálenosti $r$ od středu $S$.
+$$
+r = x+y
+$$
+\item Pro pravý trojúhelník z obrázku 8 podle Pythagorovy věty platí, že:
+$$
+r^2=x^2+\left(\frac{1}{2}s_n\right)^2=x^2+\frac{1}{4}s_n^2.
+$$
+\item Pro levý trojúhelník z obrázku 8 podle Pythagorovy věty platí, že:
+$$
+s_{2n}^2=y^2+\left(\frac{1}{2}s_n\right)^2=y^2+\frac{1}{4}s_n^2.
+$$
+\end{enumerate}
+Celá soustava se dá upravit a dá se z ní vyjádřit $s_{2n}$. (Jednotlivé rovnice soustavy rovnic jsou zapsány ve sloupcích pod sebou a jednotlivé kroky úprav jsou vždy mezi sloupci doprava.)
+\begin{minipage}[t]{0.3\textwidth}
+\begin{eqnarray}
+x+y &=& r \nonumber \\
+x^2+\frac{s_n^2}{4}&=&r^2\nonumber\\
+y^2+\frac{s_n^2}{4}&=&s_{2n}^2\nonumber
+\end{eqnarray}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.3\textwidth}
+\begin{eqnarray}
+x+y &=& 1 \nonumber \\
+x^2+\frac{s_n^2}{4}&=&1\nonumber\\
+y^2+\frac{s_n^2}{4}&=&s_{2n}^2\nonumber
+\end{eqnarray}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.3\textwidth}
+\begin{eqnarray}
+y &=& 1-x \nonumber \\
+x&=&\sqrt{1-\frac{s_n^2}{4}}\nonumber\\
+y^2+\frac{s_n^2}{4}&=&s_{2n}^2\nonumber
+\end{eqnarray}
+\end{minipage}\hfill
+$$
+(1-x)^2+\frac{s_n^2}{4}=s_{2n}^2 \ztoho 1-2x+x^2+\frac{s_n^2}{4}=s_{2n}^2 \ztoho 1-2\sqrt{1-\frac{s_n^2}{4}}+1-\frac{s_n^2}{4}+\frac{s_n^2}{4}=s_{2n}^2
+$$
+\begin{equation}
+\ztoho s_{2n}^2=2-2\sqrt{1-\frac{s_n^2}{4}} \ztoho s_{2n}=\sqrt{2-\sqrt{4-s_n^2}}
+\end{equation}
+\begin{figure}[!ht]
+\includegraphics[width=8cm]{arch5}
+\caption{1 trojúhelník z opsaného šestiúhelníka a 1 trojúhelník z opsaného dvanáctiúhelníka}
+\label{fig:kruh}
+\end{figure}
+Z obrázku 6 je patrné, že když se zpoloviční úhel $\alpha$ na úhel $\beta$ (zdvojnásobení počtu vrcholů) musí platit:
+$$
+\frac{\frac{1}{2}S_{2n}}{\frac{1}{2}(S_n-S_{2n})}=\frac{r}{l},
+$$
+protože v libovolném trojúhelníku je poměr libovolných dvou stran svírající úhel $\phi$ stejný jako poměr úseček ve zbývající straně osou úhlu $\phi$ dělíc. Pomocí Pythagorovy věty lze spočítat stranu $l$.
+$$
+l=\sqrt{r^2+\left(\frac{1}{2}S_n\right)^2}=\sqrt{1+\frac{1}{4}S_n^2}
+$$
+Nyní stačí dosadit a vyjádřit $S_{2n}$[6].
+$$
+\frac{\frac{1}{2}S_{2n}}{\frac{1}{2}(S_n-S_{2n})}=\frac{r}{\sqrt{r^2+\frac{1}{4}S^2_n}} \ztoho \frac{S_{2n}}{S_n-S_{2n}}=\frac{1}{\sqrt{1+\frac{1}{4}S^2_n}}
+$$
+$$
+\ztoho \frac{S_{2n}}{S_{2n}(\frac{S_n}{S_{2n}}-1)}=\frac{1}{\sqrt{1+\frac{1}{4}S^2_n}} \ztoho \frac{S_n}{S_{2n}}-1=\sqrt{1+\frac{1}{4}S^2_n}
+$$
+\begin{equation}
+\ztoho S_{2n}=\frac{S_n}{1+\sqrt{1+\frac{1}{4}S^2_n}} \ztoho S_{2n}=\frac{2S_n}{2+\sqrt{4+S^2_n}} 
+\end{equation}
+Tímto postupem došel až k 96-úhelníku a vypočítal, že $3\frac{10}{71}<\pi <\frac{1}{7}$, neboli $3.1408<\pi <3.1429$. Ve výpočtu musel odmocňovat, např: $\sqrt{3}\approx \frac{265}{153}$, ale dodnes se neví jak to udělal.\\
+Je možné, že Archimédes šel později ještě dál, protože v roce 1896 v Istanbulu byla nalezena Metrika z roku 60 př. n. l. od Herona z Alexandrie (10-70 n. l. [7]), kde se Heron odvolává na Archiméda s tím, že $3.1416<\pi <3.1738$. Chyba v horním intervalu vznikla asi opisem originálu. [1]
+\subsection{Středověk}
+Vzhledem k tomu, že během středověku probíhal souboj vědy a náboženství a starověké poznatky stačily, došlo v řadě vědeckých disciplín, v četně matematiky, k útlumu. Jediný, kdo se v této době zabýval $\pi$ byl Leonardo Fibonacci a Mikuláš Kusánský. [1] [12]
+\subsubsection{Leonard Fibonacci}
+Leonardo z Pizy/Fibonacci (1180-1250) použil ke svému výpočtu $\pi$ Archimédovu metodu. Pomocí decimální aritmetiky, která ještě za Archiméda nebyla známá, došel u 96-úhelníku k nerovnosti $\frac{1440}{458\frac{4}{9}}<\pi<\frac{1440}{458\frac{1}{5}}$. Když se z mezních hodnot udělá průměr:
+$$
+\frac{\frac{4}{9}+\frac{1}{5}}{2}=\frac{29}{90}\doteq\frac{1}{3},
+$$
+vyjde Fibonacciho hodnota $\pi$ $\frac{864}{275}\approx 3,141818$. [1] [10]
+\subsubsection{Mikuláš Kusánský}
+Mikuláš Kusánský (1401-1464) byl německý filosof, teolog, diplomat, matematik a kardinál v Římě. Objevil novou „sendvičovou“ metodu pro výpočet $\pi$. Vzal si pravidelný n-úhelník s obvodem 2, který byl vepsán a opsán kružnicemi (obr. XX), a zdvojnásobováním úhlů v mnohoúhelník o stejném obvodu zpřesňoval krajní intervaly výpočtů $\pi$.\\
+\begin{figure}[!ht]
+\includegraphics[width=6.5cm]{Cusa}
+\caption{Kusánského algoritmus}
+\label{fig:kruh}
+\end{figure}
+Začal na čtverci o straně $a_4$, která se rovnala $\frac{1}{2}$ a která je v vidění na obrázku X. Poloměr vepsané kružnice $r_n$ je polovina strany čtverce, tj. $\frac{1}{4}$. Poloměr opsané kružnice $R_n$ lze spočítat pomocí Pythagorovy věty.
+$$
+R_4=\sqrt{r_4^2+\left(\frac{a_4}{2}\right)^2}=\sqrt{\frac{1}{16}+\frac{1}{16}}=\frac{\sqrt{2}}{4}
+$$
+Když znal poloměr vepsané a opsané kružnice, začal iterovat pomocí jeho nalezených vzorců pro obvody kružnic v 2n-úhelníku.
+\begin{equation}
+r_{2n}=\frac{R_n+r_n}{2} 
+\end{equation}
+\begin{equation}
+R_{2n}=\sqrt{R_nr_{2n}}
+\end{equation} 
+Jak již bylo zmíněno, obvod opsané $o_{in}$ a vepsaná $o_{out}$ kružnice tvoří meze intervalu, ve kterém se nachází obvod n-úhelníka $o$. Interval lze rozepsat do dvou nerovností.
+\begin{equation}
+o_{in}<o \ztoho 2\pi r_n<o \ztoho \pi<\frac{2}{2r_n} \ztoho \pi<\frac{1}{r_n}
+\end{equation}
+\begin{equation}
+o<o_{out} \ztoho o<2\pi R_n \ztoho \frac{2}{2R_n}<\pi \ztoho \frac{1}{R_n}<\pi
+\end{equation}
+Z nerovností v rovnicích 13 a 14 lze udělat jednu nerovnost.
+\begin{equation}
+\frac{1}{R_n}<\pi<\frac{1}{r_n}
+\end{equation}
+Kusánský přišel ke vzorci 11 tak, že sestrojil konstrukci, v které je čtyř a osmiúhelník o stejné obvodu, takže platí, že:
+\begin{figure}[!ht]
+\includegraphics[width=5cm]{Cusa2}
+\caption{Výpočet poloměru vepsané kružnice osmiúhelníka}
+\label{fig:kruh}
+\end{figure}
+$$
+|AB|=2|EF| \ztoho a_4=2a_8.
+$$
+Z tohoto tvrzení, pak vyplývá, že bod $H$, který je od středu $S$ vzdálen jako poloměr vepsané kružnice 2n-úhelníku\footnote[7]{v tomto případě osmiúhelníku}, je přesně uprostřed mezi $G$ a $V$, což jde si ověřit tak, že vezmeme pravoúhlý trojúhelník $GVB$, který bude mít úhel $\alpha$ při vrcholu $V$, a pomocí funkce tangens zapíšeme rovnici: %ověření je vlastní pozn.
+$$
+\tan\left(\frac{|BG|}{|GV|}\right)=\tan\left(\frac{|FH|}{|HV|}\right) \ztoho \frac{|BG|}{|GV|}=\frac{|FH|}{|HV|} \ztoho \frac{\frac{1}{2}a_4}{|GV|}=\frac{\frac{1}{2}a_8}{|HV|}
+$$
+$$
+\ztoho \frac{2}{|GV|}=\frac{1}{|HV|} \ztoho |GV|=2|HV|.
+$$
+Teď stačí délky poloměrů zprůměrovat.
+$$
+|SH|=\frac{|SG|+|SV|}{2} \ztoho r_{2n}=\frac{R_n+r_n}{2}
+$$
+\begin{figure}[!ht]
+\includegraphics[width=5cm]{Cusa3}
+\caption{Výpočet poloměru opsané kružnice osmiúhelníka}
+\label{fig:kruh}
+\end{figure}
+Vzorec 12 vychází z Eukleidovy věty o odvěsně [9], kde:
+$$
+|SF|^2=|SV||SH| \ztoho |SF|=\sqrt{|SV||SH|} \ztoho R_{2n}=\sqrt{R_nr_{2n}}.
+$$
+Kusánský se ještě před pře objevením tohoto algoritmu zabýval geometrickým  přiblížením k obvodu kruhu. Vymyslel hned několik přiblížení. Pravděpodobně nejpřesnější se nachází v knize „Dialogus de circuli quadratura“ z roku 1457, která je na obrázku XX.
+\begin{figure}[!ht]
+\includegraphics[width=6.5cm]{CusaB}
+\caption{Výpočet poloměru vepsané kružnice osmiúhelníka}
+\label{fig:kruh}
+\end{figure}
+V konstrukci na obrázku hledá přiblížení obvodu $o_k$ kružnice $k$ se středem v bodě $S$ a poloměrem $r$. Kružnice protínají kolmé přímky v bodech $A$, $B$, $C$ a $D$ se společným bodem $S$. Dále narýsoval kružnici $l$ s poloměrem $R$, který se rovná:
+$$
+R=\frac{r+|AB|}{2}=\frac{r+\sqrt{r^2+r^2}}{2}=\frac{r+\sqrt{2}r}{2}=\frac{r(1+\sqrt{2})}{2}
+$$
+Na kružnici $l$ umístil bod $K$ tak, aby platilo, že úhel $BSK$ je $60\dg$. Nakonec vepsal do kružnice $L$ rovnostranný trojúhelník $IJK$ se stanou $a$. Strana $a$ se rovná:
+$$
+\sin 60\dg =\frac{\frac{a}{2}}{R} \ztoho \frac{\sqrt{3}}{2}= \frac{a}{2R} \ztoho a= \frac{2R\sqrt{3}}{2} \ztoho a= \frac{r(\sqrt{3}+\sqrt{6})}{2}
+$$
+Když oba obvody porovnáme, zjistíme přibližnou hodnotu $\pi$ [13].
+$$
+o_k=o_{\triangle IJK} \ztoho 2\pi r=3a \ztoho 2\pi r= \frac{3r(\sqrt{3}+\sqrt{6})}{2} \ztoho \pi= \frac{3(\sqrt{3}+\sqrt{6})}{4}
+$$
+$$
+\pi \approx 3,136
+$$
+\subsection{Novověk}
+Konec 15. století a začátek 16. století byl ve znamení zámořských cest. Z tohoto důvodu byl požadavek na přesnější měřící přístroje, což mělo za následek rozvoj přírodních věd včetně matematiky. [1]
+\subsubsection{Viètův nekonečný součin}
+François Viète (1540–1603) jako  vymysle algoritmus na výpočet $\pi$ založený na nekonečném součinu (vzorec 10).
+\begin{equation}
+\frac{2}{\pi}=\frac{\sqrt{2}}{2}\cdot\frac{\sqrt{2+\sqrt{2}}}{2}\cdot\frac{\sqrt{2+\sqrt{2+\sqrt{2}}}}{2}\cdot ...
+\end{equation}
+Vydal ho v knize „Variorum de rebus mathematicis responsorum, liber VIII“ v roce 1593. [1]\\
+Tento lze snadno odvodit pomocí goniometrický funkcí. Pomocí vzorce:
+$$
+\sin 2\alpha = 2\sin \alpha \cos \alpha
+$$
+můžeme libovolně mnohokrát rozložit sinus.
+$$
+\sin x = 2\sin \frac{x}{2} \cos \frac{x}{2} = 2\left( 2\sin \frac{x}{2\cdot 2} \cos \frac{x}{2\cdot 2}\right) \cos \frac{x}{2} =
+$$
+\begin{equation}
+= 2^3 \sin \frac{x}{2^3} \cos \frac{x}{2^3} \cos \frac{x}{2^2} \cos \frac{x}{2}
+\end{equation}
+Již ve 3. rozkladu je vidět obecný vzorec pro rozklad (rovnice 11).
+\begin{equation}
+\sin x =2^n \sin \frac{x}{2^n}\prod_{i=1}^{n} \cos \frac{x}{2^i} \ztoho \prod_{i=1}^{n} \cos \frac{x}{2^i} = \frac{\sin x}{2^n \sin \frac{x}{2^n}}
+\end{equation}
+Pravou stranu nově vzniklé rovnice rozšíříme o $\frac{x}{x}$.
+\begin{equation}
+\prod_{i=1}^{n} \cos \frac{x}{2^i} = \frac{\sin x}{x} \cdot  \frac{\frac{x}{2^n}}{\sin \frac{x}{2^n}}
+\end{equation}
+Další úpravy budou za podmínky, že $n$ se bude limitně blížit nekonečnu. A protože
+$$
+\lim_{n\to\infty} \frac{\frac{x}{2^n}}{\sin \frac{x}{2^n}} = 1,
+$$
+\begin{equation}
+\frac{\sin x}{x} = \lim_{n\to\infty} \prod_{i=1}^{n} \cos \frac{x}{2^i}.
+\end{equation}
+Když za $x$ dosadíme $\frac{\pi}{2}$, vyjde nám:
+\begin{equation}
+\frac{2}{\pi}=\sqrt{\frac{1}{2}}\cdot\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}}}\cdot\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}}}}\cdot ...,
+\end{equation}
+což lze upravit na rovnici 10. Z té samé rovnice lze vyjádřit i samotné $\pi$.
+$$
+\pi=2\cdot\frac{2}{\sqrt{2}}\cdot\frac{2}{\sqrt{2+\sqrt{2}}}\cdot\frac{2}{\sqrt{2+\sqrt{2+\sqrt{2}}}}\cdot ...
+$$
+François Viète během svého života spočítal $\pi$ na 9 desetinných míst, ale použil k tomu Archimédův algoritmus [11].\\
+\begin{figure}[!ht]
+\includegraphics[width=8cm]{Viete}
+\caption{Viètova geometrická aprogimace}
+\label{fig:kruh}
+\end{figure}
+Kromě toho to algoritmu publikoval v tomtéž díle také geometrickou aproximaci $\pi$ (obrázek X). Na obrázku je kružnice $o_k$ se středem $S$ a poloměrem $R$ nebo-li $SA$, úsečka $AI$, která je stejně dlouhá jako úsečka $DH$ a dvě rovnoběžné přímky: $IG$ a $AJ$. Obvod kružnice $o_k$ je přibližně $4SJ$. Pomocí zmíněné aproximací můžeme dopočítat přibližnou hodnotu $\pi$.\\
+Protože podle věty uuu je trojúhelník SIG podobný trojúhelníku SAJ, můžeme napsat, že
+$$
+\frac{|SI|}{|SA|}=\frac{|SG|}{|SJ|} \ztoho |SJ|=\frac{|SA|\cdot |SG|}{|SI|}
+$$
+To lze dokázat pomocí obrázku XX, kde platí:
+\begin{figure}[!ht]
+\includegraphics[width=6.5cm]{Viete2}
+\caption{Pravoúhlý trojúhelník SIG a SAJ}
+\label{fig:kruh}
+\end{figure}
+$$
+|SI|=|SG| \tan \alpha
+$$
+$$
+|SA|=|SJ| \tan \alpha
+$$
+První rovnici můžeme vydělit tou druhou a dostaneme:
+$$
+\frac{|SI|}{|SA|}=\frac{|SG|}{|SJ|}
+$$
+$\pi$ se dá pak vyjádřit:
+$$
+\pi=\frac{o_k}{2R}=\frac{4|SJ|}{2R}=\frac{2\frac{|SA|\cdot |SG|}{|SI|}}{R}=\frac{2\frac{R\cdot |SG|}{|SI|}}{R}=2\frac{|SG|}{|SI|}
+$$
+K výpočtu $SI$ použijeme délku úsečky $DE$ z trojúhelníku $DSE$. Podle Pythagorovy věty
+$$
+|DE|^2=|DS|^2+|SE|^2=R^2+\left(\frac{1}{2}R \right)^2=R^2+\frac{1}{4}R^2=\frac{5}{4}R^2 \ztoho |DE|=\frac{\sqrt{5}}{2}R
+$$
+Dále potřebujeme délku úsečky $DH$.
+$$
+|DH|=|DE|-|HE|=\frac{\sqrt{5}}{2}R-\frac{1}{2}R=\left(\frac{\sqrt{5}}{2}-\frac{1}{2}\right)R
+$$
+Nyní můžeme spočítat $SI$.
+$$
+|SI|=|SA|-|AI|=|SA|-|DH|=R-\left(\frac{\sqrt{5}}{2}-\frac{1}{2}\right)R=\left(\frac{1-\sqrt{5}}{2}+\frac{1}{2}\right)R=\left(\frac{3}{2}-\frac{\sqrt{5}}{2}\right)R=\frac{1}{2}\left(3-\sqrt{5}\right)R
+$$
+Podle věty uuu je trojúhelník $DSE$ podobný s trojúhelníkem $DGF$, proto
+$$
+\frac{|DG|}{|DS|}=\frac{|GF|}{|SE|} \ztoho \frac{|DG|}{|GF|}=\frac{|DS|}{|SE|}=\frac{R}{\frac{1}{2}R}=2 \ztoho |DG|=2|GF|
+$$
+Úsečku $DG$ můžeme rozdělit na dvě úsečky se společným bodem $S$.
+$$
+|DG|=|DS|+|SG| \ztoho 2|GF|=R+|SG| \ztoho G=\frac{1}{2} \left(R+|SG|\right)
+$$
+Podle Pythagorovy věty lze napsat, že
+$$
+|SG|^2+|GF|^2=|SF|^2 \ztoho |SG|^2+(\frac{1}{2}\left(R+|SG|\right))^2=R^2\ztoho |SG|^2+\frac{1}{4}(R^2+2R\cdot |SG| +|SG|^2)-R^2=0 \ztoho 4|SG|^2 +R^2+2R\cdot |SG|+|SG|^2-4R^2=0 \ztoho 5|SG|^2+2R\cdot |SG|-3R^2=0 \ztoho |SG|=\frac{-2R\pm \sqrt{4R^4+60R^2}}{10}=\frac{-2R\pm 8R}{10}=\frac{-R\pm 4R}{5}
+$$
+Protože v tomto případě nemůže být délka záporná použijeme znaménko $+$.
+$$
+|SG|=\frac{-R+4R}{5}=\frac{3}{5}R
+$$
+Nyní stačí dosadit do vzorce pro výpočet $\pi$.
+$$
+\pi=2\frac{|SG|}{|SI|}=2\frac{\frac{3}{5}R}{\frac{1}{2}\left(3-\sqrt{5}\right)R}=\frac{12}{5\left(3-\sqrt{5}\right)}=\frac{9+3\sqrt{5}}{5}=\frac{3}{5}(3+\sqrt{5}
+$$
+Podle Vièteho geometrické aproximace přibližně vychází $\pi$ 3,14164.
+\subsubsection{Descartesův algoritmus}
+René Descartes (1596-1650) vymyslel nový algoritmus, který byl publikován až posmrtně v roce 1701. Spočíval v tom, že n-úhelník o poloměru $o$ je obehnán vepsanou a opsanou kružnicí o poloměrech $r_n$ a $R_n$, a pomocí vzorců lze spočítat poloměry pro 2n-úhelníky o stejném obvodu [11].
+\begin{figure}[!ht]
+\includegraphics[width=6cm]{Desc}
+\caption{Descartesův algoritmus}
+\label{fig:kruh}
+\end{figure}
+\begin{equation}
+r_{2n}=\frac{r_n+R_n}{2}
+\end{equation}
+\begin{equation}
+R_{2n}=\sqrt{\frac{R_n(r_n+R_n)}{2}}
+\end{equation}
+Když použijeme vzorec pro obvod kruhu
+$$
+o=2\pi r \ztoho \pi=\frac{o}{2r},
+$$
+můžeme $\pi$ vyjádřit nerovností:
+\begin{equation}
+\frac{o}{2R_n}<\pi<\frac{o}{2r_n}
+\end{equation}
+\subsubsection{Gregoryho algoritmus}
+James Gregory (1638-1675) představil v roce 1667 veřejnosti nový algoritmu založený na jednotkové kružnice opsána nebo vepsána n-úhelníkem. Algoritmus objem $V$ a obvod $o$ pro 2n-úhelník pomocí vzorců:
+\begin{equation}
+V_{2n}=\sqrt{V_no_n}
+\end{equation}
+\begin{equation}
+o_{2n}=\frac{2V_no_n}{V_n+V_2n}.
+\end{equation}
+Tyto vzorce platí jak pro vepsaný, tak opsaný n-úhelník. Mezi objeme a obvodem platí vztah, že
+$$
+V_n<\pi<o_n [11]. 
+$$
+\subsubsection{Willebrord Snell}
+Roku 1654 Christiaan Huygens (1629-1695) použil nerovnici od Willebrorda Snella (1580-1626) z roku 1621 k výpočtu přibližné hodnoty $\pi$. Nerovnice vypadala takto:
+\begin{equation}
+\frac{3\sin\phi}{2+\cos\phi}<\phi<\tan\frac{\phi}{3}+2\sin\frac{\phi}{3},
+\end{equation}
+a když do ní dosadil, že $\phi  = \frac{\pi}{30}$, dostal, že $\pi$ je 3,141 592 653 .... Přesnost byla na 9 desetinných míst [11].
+Snell v roce, kdy vydal předchozí nerovnost, vydal v knize „Cyklometrius" 2 nerovnice zvyšující účinnost Archimédovy metody. Zjistil totiž to, že v jakékoliv fázi iterování pro $n>=3$ je $\pi$ blíže spodní hranici intervalu $q_n$ než spodní hranici intervalu $p_n$ (obrázek XX).
+\begin{figure}[!ht]
+\includegraphics[width=6cm]{Snell}
+\caption{Interval z Archimédovy metody}
+\label{fig:kruh}
+\end{figure}
+$$
+\pi-p_n<q_n-\pi
+$$
+Pro jednotlivé $n>=3$ pak mu vyšli 2 stálé nerovnosti.
+\begin{equation}
+\frac{q_n-\pi}{\pi-p_n}>2,  \lim_{n\to\infty} \frac{q_n-\pi}{\pi-p_n}=2
+\end{equation}
+\begin{equation}
+\frac{\pi-p_n}{\pi-p_{2n}}<4,  \lim_{n\to\infty} \frac{\pi-p_n}{\pi-p_{2n}}=4
+\end{equation}
+Když tyto nerovnosti upravíme:
+$$
+\frac{q_n-\pi}{\pi-p_n}>2 \ztoho q_n-\pi>2\pi-2p_n \ztoho -3\pi>-2p_n-q_n \ztoho \pi<\frac{2}{3}p_n+\frac{1}{3}q_n
+$$
+$$
+\frac{\pi-p_n}{\pi-p_{2n}}<4 \ztoho \pi-p_n<4\pi-4p_{2n} \ztoho -3\pi<-4p_{2n}+p_n \ztoho \pi>\frac{4}{3}p_{2n}-\frac{1}{3}p_n,
+$$
+získáme nerovnice pro výrazné zúžení intervalu z Archimédova algoritmu.\\
+Snell sice tyto nerovnosti objevil, ale dokázal je až „Huygens v De circuli magnitude inventa" v roce 1654.
+\subsubsection{Wallisův nekonečný součin}
+John Wallis (1616 – 1703 [11]) v roce 1655 v knize „Arithmetica Infinitorum“ vydává po Viètem 2. nekonečný součin a zároveň historicky 1. algoritmus pro výpočet $\pi$ obsahující pouze racionální operace [1].
+\begin{equation}
+\frac{\pi}{2}=\frac{2\cdot2\cdot4\cdot4\cdot6\cdot6\cdot...}{1\cdot3\cdot3\cdot5\cdot5\cdot7\cdot...}
+\end{equation}
+Ten lze přepsat do moderní obecnější podoby pro $\pi$.
+$$
+\pi=\lim_{n\to\infty}2\prod_{i=1}^{n} \left(\frac{2i}{2i-1}\cdot\frac{2i}{2i+1} \right)=\lim_{n\to\infty}2\prod_{i=1}^{n} \frac{4i^2}{4i^2-1}
+$$
+\subsubsection{Brounckerův řetězový zlomek}
+William Brouncker (1620-1684)
+\begin{equation}
+\frac{4}{\pi}=1+\frac{1^2}{2+\frac{3^2}{2+\frac{5^2}{2+...}}}
+\end{equation}
+Neznáme jeho odvození, ale dochvalo se nám odvození od Leonharda Eulera z roku 1775. Jednotlivé členy Gregoryho-Leibnizovy řady rozložil:
+$$
+\frac{\pi}{4}=1+1\left(-\frac{1}{3}\right)+1\left(-\frac{1}{3}\right)\left(-\frac{1}{3}\right)+1\left(-\frac{1}{3}\right)\left(-\frac{3}{5}\right)\left(-\frac{5}{7}\right)+...
+$$
+a pomocí vzorce:
+$$
+a_1+a_1a_2+a_1a_2a_3+...=\frac{a_1}{1-\frac{a_2}{1+a_2-\frac{a_3}{1+a_3-...}}}
+$$
+přepsal na [1]:
+$$
+\frac{\pi}{4}=\frac{1}{1-\frac{-\frac{1}{3}}{1+\left(-\frac{1}{3}\right)-\frac{-\frac{3}{5}}{1+\left(-\frac{3}{5}\right)-...}}}=\frac{1}{1+\frac{1}{2+\frac{3^2}{2+...}}} \ztoho \frac{4}{\pi}=1+\frac{1}{2+\frac{3^2}{2+...}}
+$$
+Můžeme místo poslední úpravy rovnici vynásobit 4 a dostat rovnici pro samotné $\pi$:
+\begin{equation}
+\pi=\frac{4}{1+\frac{1^2}{2+\frac{3^2}{2+2+\frac{5^2}{2+...}}}}
+\end{equation}
+\subsubsection{Gregoryho-Leibnizova řada}
+Tato nekonečná řada byla objevena nezávisle 2 matematiky: v roce 1671 James Gregory a v roce 1674 Gottfried Wilhelm Leibniz (1646-1716).
+\begin{equation}
+\frac{\pi}{4}=1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+...
+\end{equation}
+Gregory pomocí Cavalieriho vzorec a dlouhého dělení v integrandu dosáhl Taylorůva rozvoje pro funkci arkus tangens. Taylorův rozvoj lze dnešním zápisem zapsat takto:
+$$
+f(x)=\lim_{n\to\infty} \sum_{i=0}^{n} \frac{f^{(i)}(a)}{i!}(x-a)^i
+$$
+Protože známe hodnotu arkus tangens v bodě 0 ($\arctan(0)=0$), můžeme tuto hodnotu dosadit za $a$:
+$$
+\arctan(x)=\frac{\arctan(a)}{1}(x-a)^0+\frac{\frac{1}{a^2+1}}{1}(x-a)^1+\frac{\frac{0(a^2+1)-1(2a+0)}{(a^2+1)^2}}{2}(x-a)^2+
+$$
+$$
++\frac{\frac{-2(a^2+1)^2-(-2a)2(a^2+1)2a}{(a^2+1)^4}}{6}(x-a)^3+...
+$$
+$$
+\ztoho \arctan(x)=\arctan(a)+\frac{1}{a^2+1}(x-a)+\frac{-2a}{2(a^2+1)^2}(x-a)^2+
+$$
+$$
++\frac{-2(a^2+1)^2+8a^2(a^2+1)}{6(a^2+1)^4}(x-a)^3+...
+$$
+$$
+\ztoho \arctan(x)=\arctan(0)+\frac{1}{0^2+1}(x-0)+\frac{-2\cdot0}{2(0^2+1)^2}(x-0)^2+
+$$
+$$
++\frac{-2(0^2+1)^2+8\cdot0^2(0^2+1)}{6(0^2+1)^4}(x-0)^3+...
+$$
+$$
+\ztoho \arctan(x)=x+\frac{-2}{6}x^3+...\ztoho \arctan(x)=x-\frac{x^3}{3}+...
+$$
+Kdybychom hned ze začátku pracovali s 8 členy namísto 4, řada by vypadala takto:
+$$
+\arctan(x)=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+...
+$$
+Nakonec Gregory dosadil $x=1$ a dostal řadu v rovnici 30. Po vynásobení 4 dostaneme řadu pro samotné $\pi$, která lze zapsat modernějším způsobem:
+\begin{equation}
+\pi=\lim_{n\to\infty} 4\sum_{i=0}^{n} \frac{(-1)^i}{2i+1}
+\end{equation}
+[11][1]
+\subsubsection{Kochańskiho geometrická aproximace}
+Roku 1685 Adam Adamandy Kochański (1631 Dobrzyniu n. Wisłą-1700 Teplice v Čechách [11][8]) vypočítal přibližnou hodnotu $\pi$ pomocí konstrukce, která je na obrázku 7, kde platí, že $\theta =30\dg$ a úsečka $CD$ je přibližně polovina obvodu kruhu o poloměru $r$.\\
+Úsečku $CD$ lze spočítat pomocí Pythagorovi věty.
+$$ |CD|=\sqrt{|AB|^2+(|AD|-|BC|)^2}=\sqrt{(2r)^2+(3r-r\tg 30\dg)^2} = \sqrt{4r^2+\left(3r-\frac{r}{\sqrt{3}}\right)^2}= $$
+\begin{equation}
+=\sqrt{4r^2+\frac{(3\sqrt{3}-1)^2}{3}r^2} = r\sqrt{\frac{40-6\sqrt{3}}{3}}
+\end{equation}
+Nakonec úsečku stačí tát do vzorce pro $\pi$.
+\begin{equation}
+\pi=\frac{2r\sqrt{\frac{40-6\sqrt{3}}{3}}}{2r}=\sqrt{\frac{40-6\sqrt{3}}{3}}
+\end{equation}
+\begin{figure}[!ht]
+\includegraphics[width=9cm]{koch}
+\caption{Kochanského konstrukce přibližné poloviny obvodu kruhu s daným poloměrem}
+\label{fig:kruh}
+\end{figure}
+Ze vzorce 11 je jasné, že Kochanski došek k hodnotě $\pi$ 3,141533. [1]
+\subsubsection{Newtonova řada}
+1642-1727 [11]
+\subsubsection{Legendreho algoritmus}
+Adrien Legendry (1752-1833) v roce 1794 publikoval dílo „Éléments de géométrie“ d podobným algoritmem jako R. Decartes jen s rozdíle, že na poloměr opsaného a vepsaného 2n-úhelníku použil jiné vzorce [11].
+\begin{equation}
+r_{2n}=\sqrt{\frac{r_n(r_n+R_n)}{2}}
+\end{equation}
+\begin{equation}
+R_{2n}=\sqrt{r_nR_n}
+\end{equation}
+Nyní stačí pro výpočet $\pi$ použít vzorec 19:
+\begin{equation}
+\frac{o}{2R_n}<\pi<\frac{o}{2r_n}
+\end{equation}
+\subsubsection{Leonhard Euler}
+\subsection{Moderní algoritmy s využití počítačů}
+\section{Metoda Monte Carlo}
+\section{Srovnání metod}
+\section{Závěr}
+\newpage
+\begin{oldthebibliography}{99}
+\bibitem{BECKMANN}
+BECKMANN, Petr. Historie čísla pí. Praha: Academia, 1998. ISBN 80-200-0655-9.
+\bibitem{www}
+THUMSHIRN, Christian. Der Schweizer, der 22,4 Billionen Dezimalstellen von Pi berechnet hat. Neue Zürcher Zeitung [online]. Zürich, 2017, 21.3.2017, , 1 [cit. 2018-06-21]. Dostupné z: https://www.nzz.ch/wissenschaft/video-serie-nerdzz-der-wahrscheinlich-laengste-rekord-der-welt-ld.152445
+-november-2016/
+\bibitem{KOLMAN}
+KOLMAN, Arnošt a Marcela HEDRLÍNOVÁ. Dějiny matematiky ve starověku. Praha: Academia, 1968. ISBN 978-80-87287-77-4.
+\bibitem{Bible}
+Bible kralická: Písmo svaté Starého a Nového zákona : podle posledního vydání z roku 1613. 5. vyd. v ČBS. Praha: Česká biblická společnost, 2014. ISBN 978-80-87287-77-4.
+\bibitem{BECVAR}
+BEČVÁŘ, Jindřich, Martina BEČVÁŘOVÁ a Hana VYMAZALOVÁ. Matematika ve starověku: Egypt a Mezopotámie. Praha: Prometheus, 2003. Dějiny matematiky. ISBN 80-7196-255-4.
+\bibitem{VEJCHODSKY}
+VEJCHODSKÝ, Tomáš. Archimédův výpočet čísla pí [přednáška]. Praha: Akademie věd České republiky, 11.11.2016. In: Youtube.com [online]. [vid. 17. 5. 2018]. Záznam dostupný z: https://www.youtube.com/watch?v=8XaM9ZYxCqU
+\bibitem{Hero}
+WILLERS, Michael. Algebra bez (m)učení: Od arabských matematiků k tajným šifrám: matematika v každodenním životě : fascinující čísla a rovnice. Praha: Grada, 2012. ISBN 978-80-247-4123-9.
+\bibitem{Kochanski}
+Adam Adamandy Kochański. In: Wikipedia: the free encyclopedia [online]. San Francisco (CA): Wikimedia Foundation, 2001- [cit. 2018-05-24]. Dostupné z: https://en.wikipedia.org/wiki/Adam-Adamandy-Kocha\%C5\%84ski
+\bibitem{POSAMENTIER}
+POSAMENTIER, Alfred S. a Ingmar LEHMANN. [Pi]: A Biography of the World's Most Mysterious Number. II.Title. Amherst, N.Y.: Prometheus Books, 2004. ISBN 15-910-2200-2.
+\bibitem{BECVAR2}
+BEČVÁŘ, Jindřich. Matematika ve středověké Evropě. Praha: Prometheus, 2001. Dějiny matematiky. ISBN 80-7196-232-5.
+\bibitem{BECVAR3}
+BEČVÁŘ, Jindřich, FUCHS, Eduard, ed. Matematika v 16. a 17. století: Seminář Historie matematiky III. Praha: Prometheus, 1999. ISBN 80-7196-150-7.
+\bibitem{FRANTISEK}
+JÁCHIM, František. Jak viděli vesmír: [po stopách velkých astronomů]. Olomouc: Rubico, 2003. ISBN 80-85839-48-2.
+\bibitem{BECVAROVA}
+BEČVÁŘOVÁ, Martina, Jindřich BEČVÁŘ, Magdalena HYKŠOVÁ, Oldřich HYKŠ, Martin MELCER, Martina ŠTĚPÁNOVÁ, Miroslava OTAVOVÁ a Irena SÝKOROVÁ. Matematika ve středověké Evropě: pozdní středověk a renesance. Praha: Česká technika - nakladatelství ČVUT, 2018. Dějiny matematiky. ISBN 978-80-01-06403-0.
+\end{oldthebibliography}
+\newpage
+\listoffigures
+\listoftables
+\newpage
+\prilohy
+\section{První příloha} % podle potreby prejmenovat
+\end{document}
