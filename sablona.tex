@@ -44,15 +44,15 @@ V první části si ukážeme pomocí Lindenmannova důkazu, že $\pi$ je iracio
 Od další části vše už bude poskládáno chronologicky. Ukážeme si, jakou hodnotu používaly jednotlivé civilizace v Evropě a na Blízkém východě. Ve starověku ještě zůstaneme a rozebereme si Archimédův algoritmus.\\
 Ze středověku si představíme pouze Leonarda Fibonacciho, který tento algoritmus studoval.\\
 Čtvrtá kapitola se bude zaobírat novověkem, kde si představíme Viètův a Wallisův nekonečný součin. Jedním z témat budou i řetězové zlomky, hlavně Brounckerův řetězový zlomek. Dále bude následovat Gregoryho-Leibnizova a Newtonova řada. U Newtonovy řady si podrobně popíšeme odvození, protože je to první řada, která byla odvozena pomocí integrálů. Leonharda Eulera si zmíníme nejen kvůli tomu, že dal světu symbol $\pi$, ale i on představil veřejnosti několik řad.\\
-V předposlední části bude simulace Monte Carlo \footnote[3]{Monte Carlo je jedna z mnoha metod numerické integrace. Spočívá v generován pseudonáhodných bodů na určité ploše. Poměr bodů pod a nad křivkou představují poměr plochy pod a nad křivkou. Tuto metodu lze použít v jakémkoliv n-dimenzionálním prostoru.} a s tím spojena Buffonova jehla, kterou jsem i experimentálně ověřil.\\
+V předposlední části bude simulace Monte Carlo \footnote[3]{Monte Carlo je libovolná numerická simulaci využívající náhodnost. V tomto případě půjde o numerickou integraci.} a s tím spojena Buffonova jehla, kterou jsem i experimentálně ověřil.\\
 V poslední části se podíváme výpočty $\pi$ na počítači a nejzajímavější rekordy.
-\subsection{Vlastnosti $\pi$}
+\section{Důkaz transcendentnosti $\pi$}
 Historicky první důkaz přinesl roku 1761 Johann Heinrich Lambert. Ten potvrdil, že $\pi$ je iracionální, ale nevyvrátil, že $\pi$ je algebraické. V roce 1794 Adrien-Marie Legendre dokázal, že $\pi^2$ je iracionální, a byl přesvědčen, že není algebraické iracionální číslo, ale že to půjde těžce dokázat. Až Carl Louis Ferdinand von Lindemann v roce 1882 přišel s důkazem, že $\pi$ je transcendentní iracionální číslo.\\
 Lindemannův důkaz vychází z Eulerovy identity:
 $$
 \eu^{i\pi}+\eu^{0}=0.
 $$
-Jestliže exponenty 0 a $i\pi$ jsou různá čísla, tak musí být navzájem lineálně nezávislá\footnote[3]{}. Podle Lindemannova–Weierstrassova teorému musí být i čísla $\eu^{i\pi}$ a $\eu^{0}$ algebraicky nezávislá. Z toho také vyplývá, že alespoň 1 exponent číslo transcendentní. Již na první pohled je jasné že 0 není transcendentní, protože může vyjí jako kořen algebraické rovnice ($x=0$). V tom případě musí být $i\pi$ transcendentní. Aby z součinu čísel vyšlo transcendentní číslo, musí alespoň jeden činitel být také transcendentní číslo. A když lze zapsal, že:
+Jestliže exponenty 0 a $i\pi$ jsou různá čísla, tak musí být navzájem lineálně nezávislá\footnote[3]{Dvě čísla jsou lineálně závislá právě tehdy, když jedno jde vyjádřit jako součin druhého čísla s libovolným reálným nenulovým číslem.}. Podle Lindemannova–Weierstrassova teorému musí být i čísla $\eu^{i\pi}$ a $\eu^{0}$ algebraicky nezávislá. Z toho také vyplývá, že alespoň 1 exponent číslo transcendentní. Již na první pohled je jasné že 0 není transcendentní, protože může vyjí jako kořen algebraické rovnice ($x=0$). V tom případě musí být $i\pi$ transcendentní. Aby z součinu čísel vyšlo transcendentní číslo, musí alespoň jeden činitel být také transcendentní číslo. A když lze zapsal, že:
 $$
 i=\sqrt{-1} \ztoho i^2=-1 \ztoho i^2+1=0,
 $$
@@ -605,6 +605,7 @@ Nyní stačí pro výpočet $\pi$ použít vzorec 19:
 \subsubsection{Leonhard Euler}
 \subsection{Moderní algoritmy s využití počítačů}
 \section{Metoda Monte Carlo}
+% metod numerické integrace. Spočívá v generován pseudonáhodných bodů na určité ploše. Poměr bodů pod a nad křivkou představují poměr plochy pod a nad křivkou. Tuto metodu lze použít v jakémkoliv n-dimenzionálním prostoru.
 \section{Srovnání metod}
 \section{Závěr}
 \newpage
