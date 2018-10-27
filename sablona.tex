@@ -46,7 +46,7 @@ Ze středověku si představíme pouze Leonarda Fibonacciho, který tento algori
 Čtvrtá kapitola se bude zaobírat novověkem, kde si představíme Viètův a Wallisův nekonečný součin. Jedním z témat budou i řetězové zlomky, hlavně Brounckerův řetězový zlomek. Dále bude následovat Gregoryho-Leibnizova a Newtonova řada. U Newtonovy řady si podrobně popíšeme odvození, protože je to první řada, která byla odvozena pomocí integrálů. Leonharda Eulera si zmíníme nejen kvůli tomu, že dal světu symbol $\pi$, ale i on představil veřejnosti několik řad.\\
 V předposlední části bude simulace Monte Carlo \footnote[3]{Monte Carlo je libovolná numerická simulaci využívající náhodnost. V tomto případě půjde o numerickou integraci.} a s tím spojena Buffonova jehla, kterou jsem i experimentálně ověřil.\\
 V poslední části se podíváme výpočty $\pi$ na počítači a nejzajímavější rekordy.
-\section{Důkaz transcendentnosti $\pi$}
+\subsection{Důkaz transcendentnosti $\pi$}
 Historicky první důkaz přinesl roku 1761 Johann Heinrich Lambert. Ten potvrdil, že $\pi$ je iracionální, ale nevyvrátil, že $\pi$ je algebraické. V roce 1794 Adrien-Marie Legendre dokázal, že $\pi^2$ je iracionální, a byl přesvědčen, že není algebraické iracionální číslo, ale že to půjde těžce dokázat. Až Carl Louis Ferdinand von Lindemann v roce 1882 přišel s důkazem, že $\pi$ je transcendentní iracionální číslo.\\
 Lindemannův důkaz vychází z Eulerovy identity:
 $$
@@ -82,7 +82,7 @@ Na většině území zpravidla používali hodnotu 3 [3]. Na to poukazují pam�
 \begin{equation}
 S=\frac{1}{12}o^2,
 \end{equation}
-kde $S$ je obsah a $o$ je obvod. [5] Pokud si vzorec 2 rozepíšeme, dostaneme, že $\pi$ je v této aproximaci 3.
+kde $S$ je obsah a $o$ je obvod [5]. Pokud si vzorec 2 rozepíšeme, dostaneme, že $\pi$ je v této aproximaci 3.
 $$
 S=\frac{1}{12}o^2 \ztoho \pi r^2=\frac{1}{12}4\pi^2r^2 \ztoho 1=\frac{1}{3}\pi \ztoho \pi=3
 $$
@@ -101,7 +101,7 @@ Když si vztah upravíme, dostaneme hodnotu $\pi$.
 $$
 S=\frac{64}{81}d^2 \ztoho \frac{1}{4}\pi d^2=\frac{64}{81}d^2 \ztoho \pi=3\frac{13}{81}
 $$
-Pomocí našeho vzorce pro obsah kruhu je jasné, že pro Egypťany byla hodnota $\pi$ 3,16. Jak ke vzorci 3 došli, zůstává záhadou, ale mnoho historiků matematiky se přiklání, že na násobek $\frac{64}{81}$ přišli pomocí čtvercové sítě, kterou používali při projektování staveb. Když na čtvercové síti složené z 9 čtverců jako na obrázku 2 aproximujeme kruh osmiúhelníkem dostaneme, že obsah kruhu je $\frac{7}{9}$ druhé mocniny průměru kruhu. Protože $\frac{64}{81}$ snadno zapisovatelné pomocí kamenných zlomků, které se v té době hojně používaly, je možné, že $\frac{63}{81}$ nahradili $\frac{64}{81}$. [5]
+Pomocí našeho vzorce pro obsah kruhu je jasné, že pro Egypťany byla hodnota $\pi$ 3,16. Jak ke vzorci 3 došli, zůstává záhadou, ale mnoho historiků matematiky se přiklání, že na násobek $\frac{64}{81}$ přišli pomocí čtvercové sítě, kterou používali při projektování staveb. Když na čtvercové síti složené z 9 čtverců jako na obrázku 3 aproximujeme kruh osmiúhelníkem dostaneme, že obsah kruhu je $\frac{7}{9}$ druhé mocniny průměru kruhu. Protože $\frac{64}{81}$ snadno zapisovatelné pomocí kamenných zlomků, které se v té době hojně používaly, je možné, že $\frac{63}{81}$ nahradili $\frac{64}{81}$ [5].
 \begin{figure}[!ht]
 \includegraphics[width=6.5cm]{Egypt}
 \caption{Síť pro aproximaci kruhu}
@@ -115,10 +115,10 @@ $$
 \mathrm{chrd}^2\frac{\alpha}{2}=\frac{1-\mathrm{chrd}\textrm{ }(180\dg-\alpha)}{2},
 $$
 který lze zapsat dnešním zápisem jako:
-$$
+\begin{equation}
 \sin^2\frac{\alpha}{2}=\frac{1-\cos\alpha}{2}.
-$$
-Když se dostal až na  $1\dg$ využil novou goniometrickou funkci aproximaci obvodu kruhu $o$, kterou lze vidět na obrázku XX.
+\end{equation}
+Když se dostal až na  $1\dg$ využil novou goniometrickou funkci aproximaci obvodu kruhu $o$, kterou lze vidět na obrázku 4.
 \begin{figure}[!ht]
 \includegraphics[width=8.5cm]{Ptol}
 \caption{Ptolemaiova aproximace kruhu}
@@ -136,7 +136,7 @@ dostaneme, že:
 \begin{equation}
 \pi=\lim_{n\to\infty}\frac{n\sin\left(\frac{360\dg}{n}\right)}{2}.
 \end{equation}
-Ptolemaios pro $\alpha = 1\dg$ ($n=360$) dostal hodnotu $\pi$ 3,14166. Důvod, proč nedostal hodnotu 3,14143, je, že během svého výpočtu $\mathrm{chrd} \textrm{ }1\dg$ zaokrouhloval.
+Ptolemaios pro $\alpha = 1\dg$ ($n=360$) dostal hodnotu $\pi$ 3,14166. Důvod, proč nedostal hodnotu 3,14143, je, že během svého výpočtu $\mathrm{chrd} \textrm{ }1\dg$ pomocí vzorce 4 zaokrouhloval [3].
 \subsubsection{Archimédův algoritmus}
 Archimédes (287-212 př. n. l.[3]) použil k výpočtu $\pi$ úvahu, že obvod vepsaného pravidelného n-úhelníku $o_n$ je menší než obvod kruhu $o_k$ a že obvod opsaného pravidelného n-úhelníku $O_n$ je menší než obvod kruhu:
 \begin{figure}[!ht]
@@ -176,13 +176,13 @@ Když se hodnoty $s_6$ a $S_6$ vloží do vztahu 4, vyjde, že $3<\pi <2\sqrt{3}
 \caption{1 trojúhelník z vepsaného šestiúhelníka a 2 trojúhelníky z vepsaného dvanáctiúhelníka}
 \label{fig:kruh}
 \end{figure}
-Z obrázku 5 můžu sestavit soustavu 3 rovnic, ze kterých se dá vyjádřit $s_{2n}$:
+Z obrázku 8 můžu sestavit soustavu 3 rovnic, ze kterých se dá vyjádřit $s_{2n}$:
 \begin{enumerate}
 \item Protože se jedná o mnohoúhelník vepsaný, vrcholy budou ležet vždy n kružnici ve vzdálenosti $r$ od středu $S$.
 $$
 r = x+y
 $$
-\item Pro pravý trojúhelník z obrázku 8 podle Pythagorovy věty platí, že:
+\item Pro pravý trojúhelník z obrázku 9 podle Pythagorovy věty platí, že:
 $$
 r^2=x^2+\left(\frac{1}{2}s_n\right)^2=x^2+\frac{1}{4}s_n^2.
 $$
@@ -333,8 +333,8 @@ $$
 $$
 \subsection{Novověk}
 Konec 15. století a začátek 16. století byl ve znamení zámořských cest. Z tohoto důvodu byl požadavek na přesnější měřící přístroje, což mělo za následek rozvoj přírodních věd včetně matematiky. [1]
-\subsubsection{Viètův nekonečný součin}
-François Viète (1540–1603) jako  vymysle algoritmus na výpočet $\pi$ založený na nekonečném součinu (vzorec 10).
+\subsubsection{François Viète}
+François Viète (1540–1603) jako  vymysle algoritmus na výpočet $\pi$ založený na nekonečném součinu (vzorec 15).
 \begin{equation}
 \frac{2}{\pi}=\frac{\sqrt{2}}{2}\cdot\frac{\sqrt{2+\sqrt{2}}}{2}\cdot\frac{\sqrt{2+\sqrt{2+\sqrt{2}}}}{2}\cdot ...
 \end{equation}
@@ -436,7 +436,7 @@ Nyní stačí dosadit do vzorce pro výpočet $\pi$.
 $$
 \pi=2\frac{|SG|}{|SI|}=2\frac{\frac{3}{5}R}{\frac{1}{2}\left(3-\sqrt{5}\right)R}=\frac{12}{5\left(3-\sqrt{5}\right)}=\frac{9+3\sqrt{5}}{5}=\frac{3}{5}(3+\sqrt{5}
 $$
-Podle Vièteho geometrické aproximace přibližně vychází $\pi$ 3,14164.
+Podle Vièteho geometrické aproximace přibližně vychází $\pi$ 3,14164. [14]
 \subsubsection{Descartesův algoritmus}
 René Descartes (1596-1650) vymyslel nový algoritmus, který byl publikován až posmrtně v roce 1701. Spočíval v tom, že n-úhelník o poloměru $o$ je obehnán vepsanou a opsanou kružnicí o poloměrech $r_n$ a $R_n$, a pomocí vzorců lze spočítat poloměry pro 2n-úhelníky o stejném obvodu [11].
 \begin{figure}[!ht]
@@ -475,8 +475,8 @@ Roku 1654 Christiaan Huygens (1629-1695) použil nerovnici od Willebrorda Snella
 \begin{equation}
 \frac{3\sin\phi}{2+\cos\phi}<\phi<\tan\frac{\phi}{3}+2\sin\frac{\phi}{3},
 \end{equation}
-a když do ní dosadil, že $\phi  = \frac{\pi}{30}$, dostal, že $\pi$ je 3,141 592 653 .... Přesnost byla na 9 desetinných míst [11].
-Snell v roce, kdy vydal předchozí nerovnost, vydal v knize „Cyklometrius" 2 nerovnice zvyšující účinnost Archimédovy metody. Zjistil totiž to, že v jakékoliv fázi iterování pro $n>=3$ je $\pi$ blíže spodní hranici intervalu $q_n$ než spodní hranici intervalu $p_n$ (obrázek XX).
+a když do ní dosadil, že $\phi  = \frac{\pi}{30}$, dostal, že $\pi$ je 3,141 592 653 .... Přesnost byla na 9 desetinných míst [11].\\
+Snell v roce, kdy vydal předchozí nerovnost, vydal v knize „Cyklometrius" 2 nerovnice zvyšující účinnost Archimédovy metody. Zjistil totiž to, že v jakékoliv fázi iterování pro $n>=3$ je $\pi$ blíže spodní hranici intervalu $q_n$ než spodní hranici intervalu $p_n$ (obrázek 17).
 \begin{figure}[!ht]
 \includegraphics[width=6cm]{Snell}
 \caption{Interval z Archimédovy metody}
@@ -500,7 +500,7 @@ $$
 \frac{\pi-p_n}{\pi-p_{2n}}<4 \ztoho \pi-p_n<4\pi-4p_{2n} \ztoho -3\pi<-4p_{2n}+p_n \ztoho \pi>\frac{4}{3}p_{2n}-\frac{1}{3}p_n,
 $$
 získáme nerovnice pro výrazné zúžení intervalu z Archimédova algoritmu.\\
-Snell sice tyto nerovnosti objevil, ale dokázal je až „Huygens v De circuli magnitude inventa" v roce 1654.
+Snell sice tyto nerovnosti objevil, ale dokázal je až „Huygens v De circuli magnitude inventa" v roce 1654 [15].
 \subsubsection{Wallisův nekonečný součin}
 John Wallis (1616 – 1703 [11]) v roce 1655 v knize „Arithmetica Infinitorum“ vydává po Viètem 2. nekonečný součin a zároveň historicky 1. algoritmus pro výpočet $\pi$ obsahující pouze racionální operace [1].
 \begin{equation}
@@ -637,6 +637,10 @@ BEČVÁŘ, Jindřich, FUCHS, Eduard, ed. Matematika v 16. a 17. století: Semin�
 JÁCHIM, František. Jak viděli vesmír: [po stopách velkých astronomů]. Olomouc: Rubico, 2003. ISBN 80-85839-48-2.
 \bibitem{BECVAROVA}
 BEČVÁŘOVÁ, Martina, Jindřich BEČVÁŘ, Magdalena HYKŠOVÁ, Oldřich HYKŠ, Martin MELCER, Martina ŠTĚPÁNOVÁ, Miroslava OTAVOVÁ a Irena SÝKOROVÁ. Matematika ve středověké Evropě: pozdní středověk a renesance. Praha: Česká technika - nakladatelství ČVUT, 2018. Dějiny matematiky. ISBN 978-80-01-06403-0.
+\bibitem{FUCHS}
+FUCHS, Eduard, ed. Mathematics throughout the ages. Prague: Prometheus, 2001. History of mathematics. ISBN 80-7196-219-8.
+\bibitem{BECVAR4}
+BEČVÁŘ, Jindřich a Eduard FUCHS, ed. Matematika v proměnách věků III. Praha: Výzkumné centrum pro dějiny vědy, 2004. Dějiny matematiky. ISBN 80-728-5040-7.
 \end{oldthebibliography}
 \newpage
 \listoffigures
