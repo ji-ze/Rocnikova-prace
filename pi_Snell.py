@@ -5,10 +5,10 @@ ss=(s**2/(2+(4-s**2)**0.5))**0.5
 k=4
 
 p=(s*k)/(2*r)
-for i in range(26):
+for i in range(20):
   q=(S*k)/(2*r)
-  P=(ss*k)/(2*r)
-  print("{}uhelnik: {} < pi < {}".format(k, 4*P-p/3, 2*p/3 + q/3))
+  P=(ss*k*2)/(2*r)
+  print("{}uhelnik: {} < pi < {}".format(k, 4*P/3-p/3, 2*p/3 + q/3))
   p=P
   S=2*S/(2+(4+S**2)**0.5)
   s=(s**2/(2+(4-s**2)**0.5))**0.5
