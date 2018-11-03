@@ -271,16 +271,20 @@ r_{2n}=\frac{R_n+r_n}{2}
 R_{2n}=\sqrt{R_nr_{2n}}
 \end{equation} 
 Jak již bylo zmíněno, obvod opsané $o_{in}$ a vepsaná $o_{out}$ kružnice tvoří meze intervalu, ve kterém se nachází obvod n-úhelníka $o$. Interval lze rozepsat do dvou nerovností.
-\begin{equation}
+$$
 o_{in}<o \ztoho 2\pi r_n<o \ztoho \pi<\frac{2}{2r_n} \ztoho \pi<\frac{1}{r_n}
-\end{equation}
-\begin{equation}
+$$
+$$
 o<o_{out} \ztoho o<2\pi R_n \ztoho \frac{2}{2R_n}<\pi \ztoho \frac{1}{R_n}<\pi
-\end{equation}
+$$
 Z nerovností v rovnicích 13 a 14 lze udělat jednu nerovnost.
 \begin{equation}
 \frac{1}{R_n}<\pi<\frac{1}{r_n}
 \end{equation}
+Kdyby nezvolil obvod n-úhelníku 2 ale libovolný jiný $o$, dostal by nerovnost pro výpočet $\pi$:
+$$
+\frac{o}{2R_n}<\pi<\frac{o}{2r_n}
+$$
 Kusánský přišel ke vzorci 11 tak, že sestrojil konstrukci, v které je čtyř a osmiúhelník o stejné obvodu, takže platí, že:
 \begin{figure}[!ht]
 \includegraphics[width=5cm]{Cusa2}
@@ -438,7 +442,7 @@ $$
 $$
 Podle Vièteho geometrické aproximace přibližně vychází $\pi$ 3,14164. [14]
 \subsubsection{Descartesův algoritmus}
-René Descartes (1596-1650) vymyslel nový algoritmus, který byl publikován až posmrtně v roce 1701. Spočíval v tom, že n-úhelník o poloměru $o$ je obehnán vepsanou a opsanou kružnicí o poloměrech $r_n$ a $R_n$, a pomocí vzorců lze spočítat poloměry pro 2n-úhelníky o stejném obvodu [11].
+René Descartes (1596-1650) vymyslel nový algoritmus, který byl publikován až posmrtně v roce 1701. Spočíval v tom, že n-úhelník o poloměru $o$ je obehnán vepsanou a opsanou kružnicí o poloměrech $r_n$ a $R_n$ (obrázek 16), a pomocí vzorců lze spočítat poloměry pro 2n-úhelníky o stejném obvodu [11].
 \begin{figure}[!ht]
 \includegraphics[width=6cm]{Desc}
 \caption{Descartesův algoritmus}
@@ -459,16 +463,20 @@ můžeme $\pi$ vyjádřit nerovností:
 \frac{o}{2R_n}<\pi<\frac{o}{2r_n}
 \end{equation}
 \subsubsection{Gregoryho algoritmus}
-James Gregory (1638-1675) představil v roce 1667 veřejnosti nový algoritmu založený na jednotkové kružnice opsána nebo vepsána n-úhelníkem. Algoritmus objem $V$ a obvod $o$ pro 2n-úhelník pomocí vzorců:
+James Gregory (1638-1675) představil v roce 1667 veřejnosti nový algoritmu založený na kružnici o poloměru $r$ opsáné a vepsáné n-úhelníkem (obrázek 5). Algoritmus počítá obsah vepsaného $s$ a opsaného $S$ 2n-úhelníka pomocí vzorců [11]:
 \begin{equation}
-V_{2n}=\sqrt{V_no_n}
+s_{2n}=\sqrt{s_nS_n}
 \end{equation}
 \begin{equation}
-o_{2n}=\frac{2V_no_n}{V_n+V_2n}.
+S_{2n}=\frac{2s_nS_n}{s_n+s_{2n}}.
 \end{equation}
-Tyto vzorce platí jak pro vepsaný, tak opsaný n-úhelník. Mezi objeme a obvodem platí vztah, že
+Když upravíme vzorec pro výpočet obsahu kruho, dostaneme:
 $$
-V_n<\pi<o_n [11]. 
+S=\pi r^2 \ztoho \pi=\frac{S}{r^2},
+$$
+proto můžeme napsat, že
+$$
+\frac{s_n}{r^2}<\pi<\frac{S_n}{r^2}. 
 $$
 \subsubsection{Willebrord Snell}
 Roku 1654 Christiaan Huygens (1629-1695) použil nerovnici od Willebrorda Snella (1580-1626) z roku 1621 k výpočtu přibližné hodnoty $\pi$. Nerovnice vypadala takto:
@@ -517,7 +525,7 @@ William Brouncker (1620-1684)
 \end{equation}
 Neznáme jeho odvození, ale dochvalo se nám odvození od Leonharda Eulera z roku 1775. Jednotlivé členy Gregoryho-Leibnizovy řady rozložil:
 $$
-\frac{\pi}{4}=1+1\left(-\frac{1}{3}\right)+1\left(-\frac{1}{3}\right)\left(-\frac{1}{3}\right)+1\left(-\frac{1}{3}\right)\left(-\frac{3}{5}\right)\left(-\frac{5}{7}\right)+...
+\frac{\pi}{4}=1+1\left(-\frac{1}{3}\right)+1\left(-\frac{1}{3}\right)\left(-\frac{1}{5}\right)+1\left(-\frac{1}{3}\right)\left(-\frac{3}{5}\right)\left(-\frac{5}{7}\right)+...
 $$
 a pomocí vzorce:
 $$
@@ -529,7 +537,7 @@ $$
 $$
 Můžeme místo poslední úpravy rovnici vynásobit 4 a dostat rovnici pro samotné $\pi$:
 \begin{equation}
-\pi=\frac{4}{1+\frac{1^2}{2+\frac{3^2}{2+2+\frac{5^2}{2+...}}}}
+\pi=\frac{4}{1+\frac{1^2}{2+\frac{3^2}{2+\frac{5^2}{2+...}}}}
 \end{equation}
 \subsubsection{Gregoryho-Leibnizova řada}
 Tato nekonečná řada byla objevena nezávisle 2 matematiky: v roce 1671 James Gregory a v roce 1674 Gottfried Wilhelm Leibniz (1646-1716).
@@ -589,24 +597,51 @@ Nakonec úsečku stačí tát do vzorce pro $\pi$.
 \end{figure}
 Ze vzorce 11 je jasné, že Kochanski došek k hodnotě $\pi$ 3,141533. [1]
 \subsubsection{Newtonova řada}
-1642-1727 [11]
+Sir Issac Newton (1642-1727 [11]), zakladatel integrálního a diferenciálního počtu, objevil hned několik řad. Nejznámější vychází z jím objeveného vzorce:
+$$
+\arcsin x = \int \frac{\d x}{\sqrt{1+x}},
+$$
+který jde s použitím jeho objevu binomické věty upravit na:
+$$
+\arcsin x = \int \frac{\d x}{\sqrt{1+x}}=\int(1+\frac{1}{2}x^2+\frac{1\cdot3}{2\cdot4}x^4+\frac{1\cdot3\cdot5}{2\cdot4\cdot6}x^6+...)\d x=
+$$
+\begin{equation}
+=x+\frac{1}{2}\frac{x^3}{3}+\frac{1\cdot3}{2\cdot4}\frac{x^5}{5}+\frac{1\cdot3\cdot5}{2\cdot4\cdot6}\frac{x^7}{7}+...
+\end{equation}
+Po dosazení $x=\frac{1}{2}$, dostaneme vzorec pro výpočet $\pi$ [1]:
+$$
+\arcsin \frac{1}{2}=\frac{\pi}{6} \ztoho \arcsin \pi=6\arcsin \frac{1}{2}
+$$
+\begin{equation}
+\ztoho \pi=6\left(\frac{1}{2}+\frac{1}{2}\frac{1}{3\cdot2^3}+\frac{1\cdot3}{2\cdot4}\frac{1}{5\cdot2^5}+\frac{1\cdot3\cdot5}{2\cdot4\cdot6}\frac{1}{7\cdot2^7}+...\right),
+\end{equation}
+který jde moderním způsobem zapsat jako [17]:
+\begin{equation}
+\pi=\lim_{n\to\infty} 6\sum_{i=0}^{n} \frac{(2n)!}{2^{4n+1}(n!)^2(2n+1)}
+\end{equation}
 \subsubsection{Legendreho algoritmus}
-Adrien Legendry (1752-1833) v roce 1794 publikoval dílo „Éléments de géométrie“ d podobným algoritmem jako R. Decartes jen s rozdíle, že na poloměr opsaného a vepsaného 2n-úhelníku použil jiné vzorce [11].
+Adrien Legendry (1752-1833) v roce 1794 publikoval dílo „Éléments de géométrie“ podobným algoritmem jako M. Kusánský jen s rozdíle, že kromě poloměru opsané a vepsané kružnice $R$ a $r$ k 2n-úhelníku počítá ještě koeficient $s$.
 \begin{equation}
-r_{2n}=\sqrt{\frac{r_n(r_n+R_n)}{2}}
+R_{n+1}=\frac{r_n+R_n}{2}
 \end{equation}
 \begin{equation}
-R_{2n}=\sqrt{r_nR_n}
+r_{n+1}=\sqrt{r_nR_n}
 \end{equation}
-Nyní stačí pro výpočet $\pi$ použít vzorec 19:
 \begin{equation}
-\frac{o}{2R_n}<\pi<\frac{o}{2r_n}
+s_{n+1}=s_n-2^n(R_n-R_{n+1})^2
+\end{equation}
+Za počáteční hodnoty zvolíme $R_0=1$, $r_0=\frac{\sqrt{2}}{2}$ a $s_0=\frac{1}{4}$
+Nyní stačí pro výpočet $\pi$ použít následující vzorec [11][16]:
+\begin{equation}
+\frac{R_{2n}^2}{s_n}<\pi<\frac{R_n^2}{s_n}
 \end{equation}
 \subsubsection{Leonhard Euler}
 \subsection{Moderní algoritmy s využití počítačů}
 \section{Metoda Monte Carlo}
 % metod numerické integrace. Spočívá v generován pseudonáhodných bodů na určité ploše. Poměr bodů pod a nad křivkou představují poměr plochy pod a nad křivkou. Tuto metodu lze použít v jakémkoliv n-dimenzionálním prostoru.
 \section{Srovnání metod}
+\subsection{Míra konvergence}
+\subsection{Složitost algoritmu}
 \section{Závěr}
 \newpage
 \begin{oldthebibliography}{99}
@@ -641,6 +676,10 @@ BEČVÁŘOVÁ, Martina, Jindřich BEČVÁŘ, Magdalena HYKŠOVÁ, Oldřich HYKŠ
 FUCHS, Eduard, ed. Mathematics throughout the ages. Prague: Prometheus, 2001. History of mathematics. ISBN 80-7196-219-8.
 \bibitem{BECVAR4}
 BEČVÁŘ, Jindřich a Eduard FUCHS, ed. Matematika v proměnách věků III. Praha: Výzkumné centrum pro dějiny vědy, 2004. Dějiny matematiky. ISBN 80-728-5040-7.
+\bibitem{BRENT}
+BRENT, Richard P. The Borwein Brothers, Pi and the AGM [online]. Mathematical Sciences Institute, Australian National University, Canberra a University of Newcastle, Callaghan, 8. 8. 2018, , 7-8 [cit. 2018-11-03]. Dostupné z: https://arxiv.org/abs/1802.07558
+\bibitem{GOURÉVITCH}
+GOURÉVITCH, Boris. Newton's Formula. The worlf of pi [online]. [cit. 2018-11-03]. Dostupné z: http://www.pi314.net/eng/newton.php
 \end{oldthebibliography}
 \newpage
 \listoffigures
