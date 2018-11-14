@@ -1,16 +1,17 @@
 import math
+from decimal import *
+getcontext().prec = 24
 
 r=1
+O=Decimal(4*r**2) # plocha opsaneho
+o=Decimal(2*r**2) # plocha vepsaneho
 
-O=8*r
-S=4*r**2
-n=4
+out_file=open("Greg.csv", "w")
+out_file.write("n, p, P\n")
+for n in range(64):
+  out_file.write("{}, {}, {}\n".format(n+1, abs(Decimal(o/r**2)-Decimal(math.pi)), abs(Decimal(O/r**2)-Decimal(math.pi))))
+  oo=Decimal((o*O)).sqrt()
+  O=Decimal(2*o*O)/(Decimal(o)+Decimal(oo))
+  o=oo
 
-print("Opsany n-uhelnik")
-print("n, p, P")
-for i in range(26):
-  print("{}uhelnik: {} < pi < {}".format(n, abs(S/2-math.pi), abs(O/(2*r)-math.pi)))  #proc S/2, spravně S/r**2
-  SS=(S*O)**0.5
-  O=(2*S*O)/(S+SS)
-  S=SS
-  n*=2
+out_file.close()
