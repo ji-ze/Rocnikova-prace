@@ -1,4 +1,6 @@
 import math
+from decimal import *
+getcontext().prec = 24
 def fac(n):
    if n == 0:
        return 1
@@ -7,7 +9,10 @@ def fac(n):
 
 x=0
 
-print("n, p")
-for i in range(25):
-  x+=fac(2*i)/(2**(4*i+1)*fac(i)**2*(2*i+1))
-  print("{}, {}".format(i+1, abs(6*x-math.pi)))
+out_file=open("New.csv", "w")
+out_file.write("n, p\n")
+for i in range(64):
+  x+=Decimal(fac(2*i)/(2**(4*i+1)*fac(i)**2*(2*i+1)))
+  out_file.write("{}, {}\n".format(i+1, abs(Decimal(6*x)-Decimal(math.pi))))
+
+out_file.close()
