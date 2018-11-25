@@ -1,6 +1,7 @@
 \documentclass[rocnikovka]{gzwroc} %specialni trida pro rocnikove prace/soc; varianta se ridi argumentem rocnikovka nebo soc
 % parametry nastaveni spolecne pro oba typy prace
 \usepackage[czech]{babel}
+
 % mem
 \usepackage{amsmath,amssymb}
 \DeclareFontFamily{U}{rcjhbltx}{}
@@ -454,7 +455,7 @@ $$
 $$
 Podle Vièteho geometrické aproximace přibližně vychází $\pi$ 3,14164. [14]
 \subsubsection{Descartesův algoritmus}
-René Descartes (1596-1650) vymyslel nový algoritmus, který byl publikován až posmrtně v roce 1701. Spočíval v tom, že n-úhelník o poloměru $o$ je obehnán vepsanou a opsanou kružnicí o poloměrech $r_n$ a $R_n$ (obrázek 16), a pomocí vzorců lze spočítat poloměry pro 2n-úhelníky o stejném obvodu [11].
+René Descartes (1596-1650), francouzský matematik a filosof, který dal světu kartézskou soustavu souřadnic a racionalistickou filosofii, která dala základ klasicismu, vymyslel nový algoritmus, který byl publikován až posmrtně v roce 1701. Spočíval v tom, že n-úhelník o poloměru $o$ je obehnán vepsanou a opsanou kružnicí o poloměrech $r_n$ a $R_n$ (obrázek 16), a pomocí vzorců lze spočítat poloměry pro 2n-úhelníky o stejném obvodu [11] [17].
 \begin{figure}[!ht]
 \includegraphics[width=6cm]{Desc}
 \caption{Descartesův algoritmus}
@@ -487,9 +488,10 @@ $$
 S=\pi r^2 \ztoho \pi=\frac{S}{r^2},
 $$
 proto můžeme napsat, že
-$$
+obsah vepsaného $s$ a opsaného $S$ 2n-úhelníka pomocí vzorců [11]:
+\begin{equation}
 \frac{s_n}{r^2}<\pi<\frac{S_n}{r^2}. 
-$$
+\end{equation}
 \subsubsection{Willebrord Snell}
 Roku 1654 Christiaan Huygens (1629-1695) použil nerovnici od Willebrorda Snella (1580-1626) z roku 1621 k výpočtu přibližné hodnoty $\pi$. Nerovnice vypadala takto:
 \begin{equation}
@@ -531,7 +533,7 @@ $$
 \pi=\lim_{n\to\infty}2\prod_{i=1}^{n} \left(\frac{2i}{2i-1}\cdot\frac{2i}{2i+1} \right)=\lim_{n\to\infty}2\prod_{i=1}^{n} \frac{4i^2}{4i^2-1}
 $$
 \subsubsection{Brounckerův řetězový zlomek}
-William Brouncker (1620-1684)
+William Brouncker (1620-1684) objevil nový řetězový zlomek na výpočet $\pi$.
 \begin{equation}
 \frac{4}{\pi}=1+\frac{1^2}{2+\frac{3^2}{2+\frac{5^2}{2+...}}}
 \end{equation}
@@ -608,7 +610,7 @@ Nakonec úsečku stačí tát do vzorce pro $\pi$.
 \label{fig:kruh}
 \end{figure}
 Ze vzorce 11 je jasné, že Kochanski došek k hodnotě $\pi$ 3,141533. [1]
-\subsubsection{Newtonova řada}
+\subsubsection{Newtonovy řady}
 Sir Issac Newton (1642-1727 [11]), zakladatel integrálního a diferenciálního počtu, objevil hned několik řad. Nejznámější vychází z jím objeveného vzorce:
 $$
 \arcsin x = \int \frac{\d x}{\sqrt{1+x}},
@@ -629,7 +631,55 @@ $$
 \end{equation}
 který jde moderním způsobem zapsat jako [17]:
 \begin{equation}
-\pi=\lim_{n\to\infty} 6\sum_{i=0}^{n} \frac{(2n)!}{2^{4n+1}(n!)^2(2n+1)}
+\pi=\lim_{n\to\infty} 6\sum_{i=0}^{n} \frac{(2i)!}{2^{4i+1}(i!)^2(2i+1)}
+\end{equation}
+\begin{figure}[!ht]
+\includegraphics[width=7cm]{New}
+\caption{Kružnice $y=\sqrt{x-x^2}$ s výsečí}
+\label{fig:kruh}
+\end{figure}
+Další známou řadu publikoval 1737 v „Treatise on the Method of Fluctions and Infinite Series“. Vychází z rovnice kružnice:
+$$
+y=\sqrt{x-x^2},
+$$
+kterou lze vidět na obrázku  19. Pomocí binomické věty vyřešil obsah $a$ poloviční úseče $ABD$:
+$$
+a=\int_0^\frac{1}{4} \sqrt{x-x^2} \d x =\int_0^\frac{1}{4} \sqrt{x}\sqrt{1-x} \d x = \bigg[\frac{2}{3}\sqrt{x^3}-\frac{1}{5}\sqrt{x^5}-\frac{1}{28}\sqrt{x^7}-\frac{1}{72}\sqrt{x^9}-...\bigg]^\frac{1}{4}_0=
+$$
+\begin{equation}
+=\frac{2}{3\cdot2^3}-\frac{1}{5\cdot2^5}-\frac{1}{28\cdot2^7}-\frac{1}{72\cdot2^9}-...
+\end{equation}
+Plocha poloviční úseče je obsah $S_v$ výseče $ACD$ bez obsahu $S_t$ trojúhelníku $BCD$
+\begin{equation}
+a=S_v-S_t
+\end{equation} 
+Nejdříve spočítal úsečku $|BD|$:
+$$
+|BD|=\sqrt{\(\frac{1}{2}\)^2-\(\frac{1}{4}\)^2}=\sqrt{\frac{4-1}{16}}=\frac{\sqrt{3}}{4},
+$$
+a pak úhel $\alpha$:
+$$
+\alpha=\arctg\(\frac{|BD|}{|BC|}\)=\arctg\(\frac{\frac{\sqrt{3}}{4}}{\frac{1}{4}}\)=\arctg\sqrt{3}=60\dg.
+$$
+Z úhlu $\alpha$ je jasné, že $a$ je $\frac{1}{6}$ obsahu kruhu. S těmito znalosti lze spočítat vzorec 40.
+\begin{equation}
+a=S_v-S_t=\frac{\pi r^2}{6}-\frac{|BD|\cdot|BC|}{2}=\frac{\pi \frac{1}{4}}{6}-\frac{\frac{1}{4}\frac{\sqrt{3}}{4}}{2}=\frac{\pi}{24}-\frac{\sqrt{3}}{32} \ztoho \pi= 24\(\frac{\sqrt{3}}{32}+a\)
+\end{equation} 
+Do vzorce 41 dosadil za $a$ vzorec 39 [1].
+\begin{equation}
+\pi= \frac{3\sqrt{3}}{4}+24\(\frac{1}{12}-\frac{1}{5\cdot2^5}-\frac{1}{28\cdot2^7}-\frac{1}{72\cdot2^9}-... \)
+\end{equation}
+Vzorec 42 lze  zapsat moderním způsobem jako [17]:
+\begin{equation}
+\pi=\lim_{n\to\infty} \frac{3\sqrt{3}}{4}+24\sum_{i=0}^{n} \frac{(2i)!}{2^{4i+2}(i!)^2(2i-1)(2i+3)}
+\end{equation}
+\subsubsection{Sharpova řada}
+Abraham Sharp (1651-1742) zrychlil Gregoryho-Leibnizovu řadu tím, že do Teylorova rozvoje pro $\arctg (x)$ dosadil za $x$ $\frac{1}{\sqrt{3}}$ [1].
+$$
+\arctan(x)=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+... \ztoho \frac{\pi}{6}=\frac{1}{\sqrt{3}}\(1-\frac{1}{3^1\cdot3}+\frac{1}{3^2\cdot5}-\frac{1}{3^3\cdot7}+... \)
+$$
+\begin{equation}
+\ztoho \pi=2\sqrt{2}\(1-\frac{1}{3^1\cdot3}+\frac{1}{3^2\cdot5}-\frac{1}{3^3\cdot7}+... \)
 \end{equation}
 \subsubsection{Legendreho algoritmus}
 Adrien Legendry (1752-1833) v roce 1794 publikoval dílo „Éléments de géométrie“ podobným algoritmem jako M. Kusánský jen s rozdíle, že kromě poloměru opsané a vepsané kružnice $R$ a $r$ k 2n-úhelníku počítá ještě koeficient $s$.
@@ -648,6 +698,12 @@ Nyní stačí pro výpočet $\pi$ použít následující vzorec [11][16]:
 \frac{R_{2n}^2}{s_n}<\pi<\frac{R_n^2}{s_n}.
 \end{equation}
 \subsubsection{Leonhard Euler}
+Leonhard Euler sjednotil matematiký zápis a matematice dnešní symboliku, např.: $f(x)$, $\tint \d x$, $\im$, $\eu$, $\tsum$. Od jeho doby se řeckým písmenem $\pi$ odznačuje konstanta, o které je tato práce.\\
+Dalším výsledkem jeho celoživotní práce je objev několika nekonečných řad vedoucích k $\pi$, z nichž je neznámější vyřešení řady převrácených dvojmocí, kterou před tím se marně snažilo vyřešit celá desetiletí spousta matematiků, např. G. W. Leibnitz nebo J. Bernaulli I.
+$$
+\frac{1}{1^2}+\frac{1}{2^2}+\frac{1}{3^2}+...=\frac{\pi^2}{12}
+$$
+[1]
 \subsection{Moderní algoritmy s využití počítačů}
 \section{Metoda Monte Carlo}
 % metod numerické integrace. Spočívá v generován pseudonáhodných bodů na určité ploše. Poměr bodů pod a nad křivkou představují poměr plochy pod a nad křivkou. Tuto metodu lze použít v jakémkoliv n-dimenzionálním prostoru.
@@ -656,21 +712,178 @@ V této kapitole budu srovnávat efektivitu algoritmy zmíněné v předchozích
 $$
 \mem=\lim_{a\to\infty} \sum_{n=1}^{a}\beta(n)
 $$
-Rychlosti konvergence algoritmu definuji jako podíl záporného podílu rozdílů míry konvergence $p$ a čísla iterace a  podílu složitosti algoritmu $O$ a čísla iterace:
+Vzhledem k tomu, že chci, aby platilo, čím vyšší hodnota, tím lepší algoritmus, definuji rychlosti konvergence algoritmu jako podíl záporné diference míry konvergence $p$ a čísla 2 umocněného na diferenci složitosti algoritmu $O$:
 $$
-\beta(n)=\frac{-\frac{\Delta p}{\Delta n}}{\frac{\Delta O}{\Delta n}}=\frac{-\frac{p_{n+1}-p_n}{n+1-n}}{\frac{O_{n+1}-O_n}{n+1-n}}=\frac{p_n-p_{n+1}}{O_{n+1}-O_n}
+\beta(n)=\frac{-\frac{\Delta p}{\Delta n}}{2^{\frac{\Delta O}{\Delta n}}}=\frac{-\frac{p_{n+1}-p_n}{n+1-n}}{2^{\frac{O_{n+1}-O_n}{n+1-n}}}=\frac{p_n-p_{n+1}}{2^{O_{n+1}-O_n}}
 $$
-..
+Čitatel vyjadřuje čím větší skoky v konvergenci, tím je vyšší hodnota čitatele a tím je vyšší hodnoty rychlosti konvergence algoritmu v dané iteraci. Vynásobení -1 je abych dodržel pravidlo zmíněné v předchozím souvětí, protože u konvergujícího algoritmu vždy platí, že $p_{n+1}<p_n$.\\
+U jmenovatele platí, že čím větší skoky v ve složitosti, tím je vyšší hodnota jmenovatele a tím je menší celková hodnota rychlosti konvergence algoritmu v dané iteraci. Aby veličina byla matematicky robustní, např: vůči algoritmům, který mají iterace neobsahující žádné operace. Dám podíl složitosti algoritmu a čísla iterace do jmenovatele hlavního zlomku jako mocninu dvou, čím se zachová pravidlo u jmenovatele čím vyšší tím horší. Funkce je $2^x$ je často používaná aproximace exponenciální funkce $\eu^x$, kterou lze považovat za elementární funkci. Zlomek nenásobím -1, protože na rozdíl od míry konvergence u algoritmů, který něco dělají platí, že $O_{n+1}>O_n$.
 \begin{equation}
-\mem=\lim_{a\to\infty} \sum_{n=1}^{a}\frac{p_n-p_{n+1}}{O_{n+1}-O_n}
+\mem=\lim_{a\to\infty} \sum_{n=1}^{a}\frac{p_n-p_{n+1}}{2^{O_{n+1}-O_n}}
 \end{equation}
 
 \subsection{Míra konvergence}
-Míra konvergence $p_n$ je matematická veličina vyjadřující vzdálenost odhadu čísla $x_n$ od skutečné hodnoty čísla $x$ v n-té iteraci v algoritmu pro výpočet čísla $x$.
+Míru konvergence $p_n$ zavádím jako matematikou veličinu vyjadřující vzdálenost odhadu čísla $x_n$ v n-té iteraci od nějaké hodnoty čísla $x$, kterou považuji za skutečnou hodnotu limity dané posloupnost, v tomto případě $\pi$.
 $$
 p_n=|x_n-x|, \;\; x=\lim_{n\to\infty} x_n
 $$
+
+%Archimédův algoritmus
+%Mikuláš Kusánský
+%François Viète 
+%Descartesův algoritmus
+%Gregoryho algoritmus
+%Willebrord Snell
+%Wallisův nekonecný součin
+%Brounckerův řetezový zlomek
+%Gregoryho-Leibnizova řada
+%Newtonova řada
+%Legendreho algoritmus
+%Leonhard Euler
+
+\begin{table}[h!]
+\caption{Míra konvergence}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\bfseries číslo iterace} & \multicolumn{2}{l|}{\bfseries Archimedes} & \multicolumn{2}{l|}{\bfseries Descartes} \\ \hline
+\multicolumn{1}{|l|}{hr. intrvalu} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} \\ \hline \hline
+1 &                  0.31316     &         0.85840              &                      0.31316 &            0.85840\\ \hline
+         
+\end{tabular}
+\end{table}
+\begin{figure}[!ht]
+\includegraphics[width=16cm]{Graf1}
+\caption{Graf míry konvergence všech algoritmu popsaných v této práci}
+\label{fig:graf1}
+\end{figure}
+
 \subsection{Složitost algoritmu}
+Složitost algoritmu $O_n$ zavádím jako matematikou veličinu vyjadřující počet operací (sčítání, odčítání, násobení, dělení, umocňování a odmocňování) od počátku výpočtu až do n-té iterace.
+\paragraph{Archimedes}
+\begin{table}[h!]
+\caption{Složitost Archimédova algoritmu podle vzorce 6, 9 a 10}
+\begin{tabular}{|l||l|l|l|}
+\hline
+$n$ & 1&2&3 \\ \hline
+$O_{sh}(n)$&5+3&10+3&15+3 \\ \hline
+$O_{hh}(n)$&6+3&12+3&18+3 \\ \hline
+\end{tabular}
+\end{table}
+Při každé iteraci, viz 2. tabulka, se musí vykonat 5 operací pro výpočet 1 strany vepsaného k-úhelníku a 6 operací pro výpočet 1 strany opsaného k-úhelníku. Pro výpočet spodní nebo horní hranice ($sh$ a $hh$) $\pi$ je potřeba provést ještě 3 operace. Výsledné vzorce pro složitost Archimédova algoritmu jsou:
+$$
+O_{sh}(n)=5n+3
+$$
+$$
+O_{hh}(n)=6n+3
+$$
+\paragraph{Ptolemaios}
+Vzorce algoritmu:
+$$
+x_{n+1}=\sqrt{\frac{1-\sqrt{1-x_n}}{2}} \ztoho O(n)=5n+a
+$$
+$$
+\pi_n=\frac{2^{2+n}x_n}{2}=2^{1+n}x_n \ztoho a=3
+$$
+Vzorec pro složitost Ptolemaiova algoritmu:
+$$
+O_{sh}(n)=5n+3
+$$
+\paragraph{Kusánský}
+Vzorce algoritmu:
+$$
+r_{n+1}=\frac{R_n+r_n}{2}
+$$
+$$
+R_{n+1}=\sqrt{R_nr_{n+1}}
+$$
+Protože $r$ je závislý i na $R$ a na opak, musím složitost 1 iterace pro $r$ a $R$ počítat z obou vzorců.  Z $r$ a $R$ se na hranice intervalu pro $\pi$ dostanu 2 operacemi.
+\begin{table}[h!]
+\caption{Složitost Kusánského algoritmu}
+\begin{tabular}{|l||l|l|l|}
+\hline
+$n$ & 1&2&3 \\ \hline
+$O_{sh}(n)$&2+2&6+2&10+2 \\ \hline
+$O_{hh}(n)$&4+2&8+2&12+2 \\ \hline
+\end{tabular}
+\end{table}
+Vzorce pro složitost Kusánského algoritmu z tabulky č. 3:
+$$
+O_{sh}(n)=4(n-1)+2+2=4n
+$$
+$$
+O_{hh}(n)=4(n-1)+4+2=4n+2
+$$
+\paragraph{Viete}
+Jako 1 iteraci beru výpočet zlomku a jeho vynásobení s již vypočítaným odhadem $\pi$ z předchozí iterace, pokud to není 1. iterace, kdy se ničím nenásobí.
+\begin{table}[h!]
+\caption{Složitost Vieteho algoritmu algoritmu}
+\begin{tabular}{|l||l|l|l|l|}
+\hline
+$n$ & 1&2&3&4 \\ \hline
+$O(n)$&1&4&9&16 \\ \hline
+zpět. diference&-&3&5&7 \\ \hline
+\end{tabular}
+\end{table}
+Ze 4. tabulky plyne, že složitost algoritmu tvoří posloupnost:
+$$
+O(n)=n^2.
+$$
+\paragraph{Descartes}
+Stejný systém výpočtu složitosti jako u Kusánského algoritmu.
+\begin{table}[h!]
+\caption{Složitost Descartova algoritmu podle vzorce 20, 21 a 22}
+\begin{tabular}{|l||l|l|l|}
+\hline
+$n$ & 1&2&3 \\ \hline
+$O_{sh}(n)$&2+2&8+2&14+2 \\ \hline
+$O_{hh}(n)$&4+2&10+2&16+2 \\ \hline
+\end{tabular}
+\end{table}
+Vzorce pro složitost algoritmu z tabulky č. 5:
+$$
+O_{sh}(n)=6(n-1)+2+2=6n-2
+$$
+$$
+O_{hh}(n)=6(n-1)+4+2=6n
+$$
+\paragraph{Gregory}
+Opět stejný systém výpočtu složitosti jako u Descartova a  Kusánského algoritmu.
+\begin{table}[h!]
+\caption{Složitost Gregoryho algoritmu podle vzorce 23, 24 a 25}
+\begin{tabular}{|l||l|l|l|}
+\hline
+$n$ & 1&2&3 \\ \hline
+$O_{sh}(n)$&2+2&8+2&14+2 \\ \hline
+$O_{hh}(n)$&6+2&12+2&18+2 \\ \hline
+\end{tabular}
+\end{table}
+Vzorce pro složitost algoritmu z tabulky č. 6:
+$$
+O_{sh}(n)=6(n-1)+2+2=6n-2
+$$
+$$
+O_{hh}(n)=6n
+$$
+
+
+\begin{table}[h!]
+\caption{Složitost algoritmu}
+\begin{tabular}{|l||l|l|}
+\hline
+\bfseries{algoritmus} & \bfseries{zápis posloupnosti O(n)} & \bfseries{zpětná diference posloupnosti O(n)} \\ \hline \hline
+Archimedes (s. / h.) & $5n+3$ / $6n+3$      & 5 / 6   \\ \hline
+Ptolemaios & $5n+3$      & 5   \\ \hline
+Kusánský (s. / h.) & $4n$ / $4n+2$      & 4 / 4   \\ \hline  
+Viète & $n^2$      & $2n-1$   \\ \hline
+Descartes (s. / h.) & $6n-2$ / $6n$      & 6 / 6   \\ \hline
+Gregory (s. / h.) & $6n-2$ / $6n+2$      & 6 / 6   \\ \hline
+Snell (s. / h.) & $--$ / $--$      & 10 / 11   \\ \hline
+Wallis & $7n$    & 7   \\ \hline
+Brouncker & $3n-1$    & 3   \\ \hline
+Gregory-Leibnitz & $5n$      & 5  \\ \hline
+Newton 1 & $3n^2+11n$      & ?? $6n+11$ ??  \\ \hline
+\end{tabular}
+\end{table}
 \section{Závěr}
 \newpage
 \begin{oldthebibliography}{99}
@@ -709,6 +922,8 @@ BEČVÁŘ, Jindřich a Eduard FUCHS, ed. Matematika v proměnách věků III. Pr
 BRENT, Richard P. The Borwein Brothers, Pi and the AGM [online]. Mathematical Sciences Institute, Australian National University, Canberra a University of Newcastle, Callaghan, 8. 8. 2018, , 7-8 [cit. 2018-11-03]. Dostupné z: https://arxiv.org/abs/1802.07558
 \bibitem{GOURÉVITCH}
 GOURÉVITCH, Boris. Newton's Formula. The worlf of pi [online]. [cit. 2018-11-03]. Dostupné z: http://www.pi314.net/eng/newton.php
+\bibitem{PROKOP}
+PROKOP, Vladimír. Dějiny literatury od starověku do počátku 19. století: aneb od Mezopotámie po naše národní obrození. Sokolov: O.K.-Soft, 2001.
 \end{oldthebibliography}
 \newpage
 \listoffigures
