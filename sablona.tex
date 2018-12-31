@@ -1,4 +1,4 @@
-\documentclass[rocnikovka]{gzwroc} %specialni trida pro rocnikove prace/soc; varianta se ridi argumentem rocnikovka nebo soc
+\documentclass[soc]{gzwroc} %specialni trida pro rocnikove prace/soc; varianta se ridi argumentem rocnikovka nebo soc
 % parametry nastaveni spolecne pro oba typy prace
 
 % mem
@@ -14,9 +14,9 @@
 \autor[m]{Jiří Zelenka} % tento prikaz prida dalsiho autora, nepovinny parametr pohlavi m/f pomaha s automatickym sklonovanim
 %\konzultant{} % stejne jako autora lze pridavat konzultanty, zde chybi nepovinny parametr - implicitne m
 \vemeste{V Domoušicích} % v prohlaseni o autenticite prace je treba druhy pad mesta s predlozkou, autor sablony se z toho nechtel zblaznit a tak to proste pridal extra jako parametr
-%\datum{} % datum prohlaseni o autenticite
+\datum{datum} % datum prohlaseni o autenticite
 \anotace{Cílem mé ročníkové práce je informovat o základních metodách aproximace Ludolfova čísla (dále jen „$\pi$“). V práci je popsán historický vývoj a metody jeho výpočtu. Každou metodu zmíněnou v textu jsem otestoval v počítačové simulaci, popřípadě jsem provedl experiment vedoucí k přibližné hodnotě $\pi$. Posledním téma, kterým je tu zmíněno, je využití počítačových technologií k přiblížení se skutečné hodnotě $\pi$.}{The purpose of my thesis is to inform about the basic methods of approximation of Archimedes' constant (hereinafter "$\pi$"). It is described the historical development and methods of its calculation. Every method which I present in the text is tested by a computer simulation. Additionally, I made an experiment which led to an approximate value of $\pi$. In the end, I focus on the use of computer technology for $\pi$ calculation.} % anotace je resena timto prikazem, prvni parametr je ceska anotace, druhy preklad do anglictiny - ten nemusi byt doslovny, ale mel by zachovavat myslenku ceske varianty
-\klicovaslova{Ludolf, číslo, pí, algoritmus, účinnost výpočtu}{Archimedes, constant, pi, algorithm, efficiency of calculation} % prikaz pro nastaveni klicovych slov - stejne jako u anotace, prvni parametr jsou klicova slova v cestine, druhy jejich anglicky preklad
+\klicovaslova{Ludolf, číslo, pí, algoritmus, účinnost}{Archimedes, constant, pi, algorithm, efficiency} % prikaz pro nastaveni klicovych slov - stejne jako u anotace, prvni parametr jsou klicova slova v cestine, druhy jejich anglicky preklad
 
 %parametry nastaveni pro rocnikovou praci
 \nazevskoly{Gymnázium Zikmunda Wintra Rakovník, příspěvková organizace} % oficialni nazev skoly pro titulni stranu
@@ -37,13 +37,13 @@
 \titulnistrana % automaticky vytvori titulni stranu
 \prohlaseni % automaticky vytvori stranu s prohlasenim o autenticite
 \podekovani % zacatek nepovinneho podekovani, podobne jako na Ceskem slaviku nebo tak
-Na tomto místě můžete vložit poděkování těm, kteří vám s tvorbou práce pomohli. Poděkování je vaše autorské dílo, nemá předepsanou podobu a není povinnou součástí práce. Záleží jen na~vás, zda, komu a jakým způsobem poděkujete.
+Děkuji všem svým přátelům a učitelům, kteří mě motivovali k psaní ročníkové práce na toto téma. Hlavně pak Mgr. Vojtěchu Delongovi, který velkou část svého volného času věnoval pravidelným konzultacím a řešení problémů s literaturou a s prací na počítači i v pozdních večerních hodinách. Neposledně jsem mu vděčen i za tvorbu latexové šablony, která mi usnadnila psaní práce.
 \newpage % podekovani je treba zakoncit novou stranou, tento radek zakomentujte nebo vymazte, pokud podekovani vyradite
 \vyrobanotaci % zde se vytvari strana s anotaci
 \tableofcontents % tento prikaz vytvori obsah - kliknutim se lze presouvat v pdf
 \newpage % prikaz nove strany za obsahem
 \section{Úvod} % clanek se deli primarne na sekce - vyraz kapitola nebo cast je vyhrazen dokumentum typu knihy apod.
-Člověk si již od dob, když si začal uvědomovat tvary a velikosti, musel být vědom, že existuje jistá závislost mezi průměrem a obvodem kruhu. Nejspíš okolo 2000 př. n. l.  lidé ve vyspělých civilizacích začali užívat konstantu, kterou, když ji vynásobili průměr kruhu, dostali obvod kruhu [1].
+Člověk si již od dob, když si začal uvědomovat tvary a velikosti, musel být vědom, že existuje jistá závislost mezi průměrem a obvodem kruhu. Nejspíš okolo 2000 př. n. l. lidé ve vyspělých civilizacích začali užívat konstantu, kterou, když ji vynásobili průměr kruhu, dostali obvod kruhu [1].
 Zprvu užívali hodnoty experimentálně změřené. Až ve starověku přišel Archimédes ze Syrakus s prvním algoritmem, pomocí něhož lze nalézt hodnotu konstanty s libovolnou přesností.
 
 Vzhledem k tomu, že ve středověku nebyl téměř žádný zájem o tuto oblast matematiky, další přínosy pocházejí až z novověku [1][12]. Velký posun kupředu byl objev nekonečného součtu a součinu a řetězových zlomků. Následkem toho vzniklo bezpočet algoritmů, nicméně většina měla pomalou konvergenci\footnote[1]{Konvergence je rychlost algoritmu. Vyjadřuje, jak moc se přiblížíme skutečné hodnotě s každou další iterací (provedeným krokem).}.
@@ -67,7 +67,7 @@ Lindemannův důkaz vychází z Eulerovy identity:
 $$
 \eu^{i\pi}+\eu^{0}=0.
 $$
-Jestliže exponenty 0 a $i\pi$ jsou různá čísla, tak musí být navzájem lineárně nezávislá\footnote[3]{Dvě čísla jsou lineárně závislá právě tehdy, když jedno jde vyjádřit jako součin druhého čísla s libovolným reálným nenulovým číslem.}. Podle Lindemannova–Weierstrassova teorému musí být i čísla $\eu^{i\pi}$ a $\eu^{0}$ algebraicky nezávislá. Z toho také vyplývá, že alespoň 1 exponent číslo transcendentní. Již na první pohled je jasné, že 0 není transcendentní, protože může být kořenem algebraické rovnice ($x=0$). V tom případě musí být $i\pi$ transcendentní. Aby z součinu čísel vyšlo transcendentní číslo, musí alespoň jeden činitel být také transcendentní číslo. A když lze zapsat, že:
+Jestliže exponenty 0 a $i\pi$ jsou různá čísla, tak musí být navzájem lineárně nezávislá\footnote[4]{Dvě čísla jsou lineárně závislá právě tehdy, když jedno jde vyjádřit jako součin druhého čísla s libovolným reálným nenulovým číslem.}. Podle Lindemannova–Weierstrassova teorému musí být i čísla $\eu^{i\pi}$ a $\eu^{0}$ algebraicky nezávislá. Z toho také vyplývá, že alespoň 1 exponent číslo transcendentní. Již na první pohled je jasné, že 0 není transcendentní, protože může být kořenem algebraické rovnice ($x=0$). V tom případě musí být $i\pi$ transcendentní. Aby ze součinu čísel vyšlo transcendentní číslo, musí alespoň jeden činitel být také transcendentní číslo. A když lze zapsat, že:
 $$
 i=\sqrt{-1} \ztoho i^2=-1 \ztoho i^2+1=0,
 $$
@@ -80,7 +80,7 @@ Již před 1 000 000 let si člověk začal uvědomovat tvary, velikosti (čísl
 \caption{Zářezy na kostech [3]}
 \label{fig:kruh}
 \end{figure}
-V této době člověk začal vnímat monotonní funkce\footnote[4]{$f(x): y=x$}, např.: dvakrát větší pole znamená dvakrát víc úrody. Jenže to u kruhu, jednoho z nepřirozenějších tvarů, neplatilo. Věděli jen, že čím větší průměr, tím větší obvod. Až někdy kolem roku 2000 př. n. l. přišli na to, že, aby tato úměra platila pro výpočet, musí  průměr vynásobit konstantou, a tak začaly vznikat první aproximace $\pi$ [1].
+V této době člověk začal vnímat monotónní funkce\footnote[5]{$f(x): y=x$}, např.: dvakrát větší pole znamená dvakrát víc úrody. Jenže to u kruhu, jednoho z nepřirozenějších tvarů, neplatilo. Věděli jen, že čím větší průměr, tím větší obvod. Až někdy kolem roku 2000 př. n. l. přišli na to, že, aby tato úměra platila pro výpočet, musí průměr vynásobit konstantou, a tak začaly vznikat první aproximace $\pi$ [1].
 \subsubsection{První numerické aproximace}
 \paragraph{Blízký východ}
 Mezi prvními oblastmi, kde se doloženě rozvíjela matematika, bylo území Blízkého východu. Hlavně u velkých řek, jako je Eufrat a Tigris, se začaly vyvíjet první civilizace. Již od 3. tisíciletí př. n. l. se začínají objevovat první písemné prameny včetně matematiky.
@@ -111,7 +111,7 @@ $$
 \paragraph{Egypt}
 Matematika v Egyptě musela existovat již v 3. tisíciletím př. n. l., protože v přibližně té době probíhaly tavby pyramid a kanálů, na které byly potřeba pokročilé znalosti matematiky [3].
 
-Roku 1858 poblíž Nilu byl nalezen Rhindův papyrus , který obsahuje návod na výpočet obsahu kruhu. V příkladu R50 se tvrdí, že obsah trojúhelníka $S$ je roven $\frac{64}{81}$ vynásobenému druhou mocninou průměru $d$ [1].
+Roku 1858 poblíž Nilu byl nalezen Rhindův papyrus, který obsahuje návod na výpočet obsahu kruhu. V příkladu R50 se tvrdí, že obsah trojúhelníka $S$ je roven $\frac{64}{81}$ vynásobenému druhou mocninou průměru $d$ [1].
 \begin{equation}
 S=\frac{64}{81}d^2
 \end{equation}
@@ -119,7 +119,7 @@ Když si vztah upravíme, dostaneme hodnotu $\pi$.
 $$
 S=\frac{64}{81}d^2 \ztoho \frac{1}{4}\pi d^2=\frac{64}{81}d^2 \ztoho \pi=3\frac{13}{81}
 $$
-Pomocí našeho vzorce pro obsah kruhu je jasné, že pro Egypťany byla hodnota $\pi$ 3,16. Jak ke vzorci 3 došli, zůstává záhadou, ale mnoho historiků matematiky se přiklání, že na násobek $\frac{64}{81}$ přišli pomocí čtvercové sítě, kterou používali při projektování staveb. Když na čtvercové síti složené z 9 čtverců jako na obrázku 3 aproximujeme kruh osmiúhelníkem dostaneme, že obsah kruhu je $\frac{7}{9}$ druhé mocniny průměru kruhu. Protože $\frac{64}{81}$ snadno zapisovatelné pomocí kamenných zlomků, které se v té době hojně používaly, je možné, že $\frac{63}{81}$ nahradili $\frac{64}{81}$ [5].
+Pomocí našeho vzorce pro obsah kruhu je jasné, že pro Egypťany byla hodnota $\pi$ 3,16. Jak ke vzorci 3 došli, zůstává záhadou, ale mnoho historiků matematiky se přiklání, že na násobek $\frac{64}{81}$ přišli pomocí čtvercové sítě, kterou používali při projektování staveb. Když na čtvercové síti složené z 9 čtverců jako na obrázku 3 aproximujeme kruh osmiúhelníkem, dostaneme, že obsah kruhu je $\frac{7}{9}$ druhé mocniny průměru kruhu. Protože $\frac{64}{81}$ je snadno zapisovatelné pomocí kamenných zlomků, které se v té době hojně používaly, je možné, že $\frac{63}{81}$ nahradili $\frac{64}{81}$ [5].
 \begin{figure}[!ht]
 \includegraphics[width=6.5cm]{Egypt}
 \caption{Síť pro aproximaci kruhu}
@@ -143,14 +143,14 @@ Po úpravě vzorcem $sin^2\alpha+\cos^2\alpha=1$, který znal i Ptolemaios, lze 
 Když se dostal až na  $1\dg$ využil novou goniometrickou funkci aproximaci obvodu kruhu $o$, kterou lze vidět na obrázku 4.
 \begin{figure}[!ht]
 \includegraphics[width=8.5cm]{Ptol}
-\caption{Ptolemaiova aproximace kruhu}
+\caption{Ptolemaiova aproximace kruhu - Přezkoumat!!!}
 \label{fig:kruh}
 \end{figure}
 Tato aproximace by šla zapsat dnešním moderním zápisem takto:
 $$
 o=\lim_{n\to\infty} nr\sin\left(\frac{360\dg}{n}\right),
 $$
-když to  vložíme do vzorce pro $\pi$:
+když to vložíme do vzorce pro $\pi$:
 $$
 \pi=\frac{o}{2r},
 $$
@@ -173,7 +173,7 @@ $$ ns_n<2\pi r<nS_n $$
 \end{equation}
 kde $n$ je počet vrcholů/stran, $r$ je poloměr kružnice, $s_n$ je délka strany vepsaného n-úhelníku a $S_n$ je délka strany opsaného n-úhelníku [1]. Princip tohoto algoritmu je ten, že čím více bude mít n-úhelník vrcholů, tím více bude opisovat kruh a tím bude menší příslušný interval.
 
-Archimédes začal výpočet na snadno spočitatelném šestiúhelníku, kde délka strany vepsaného šestiúhelníka je poloměr kružnice\footnote[5]{Pravidelný šestiúhelník se skládá z šesti rovnostranných trojúhelníků. To znali již Babyloňané[1].}, pro jednoduchost výpočtu zavedeme jednotkový poloměr ($r=1$).
+Archimédes začal výpočet na snadno spočitatelném šestiúhelníku, kde délka strany vepsaného šestiúhelníka je poloměr kružnice\footnote[6]{Pravidelný šestiúhelník se skládá z šesti rovnostranných trojúhelníků. To znali již Babyloňané[1].}, pro jednoduchost výpočtu zavedeme jednotkový poloměr ($r=1$).
 \begin{figure}[!ht]
 \includegraphics[width=3.5cm]{arch3}
 \caption{Jeden trojúhelník z vepsaného šestiúhelníka}
@@ -192,7 +192,7 @@ $$ S_6^2=r^2+\left(\frac{S_6}{2}\right)^2 \ztoho 4S_6^2=4r^2+S_6^2 \ztoho S_6^2=
 $$
 \ztoho S_6=\frac{2\sqrt{3}}{3}
 $$
-Když se hodnoty $s_6$ a $S_6$ vloží do vztahu 4, vyjde, že $3<\pi <2\sqrt{3}$. Archimédes u této hodnoty nevydržel, a tak počítal dál, ale protože pro víceúhelníky není výpočet tak jednoduchý\footnote[6]{Za Archiméda nebyly známé goniometrické funkce. První, kdo určil jejich hodnoty, byl Ptolemaios. [3]}, odvodil si vztah pro 2n-úhelníky.
+Když se hodnoty $s_6$ a $S_6$ vloží do vztahu 4, vyjde, že $3<\pi <2\sqrt{3}$. Archimédes u této hodnoty nevydržel, a tak počítal dál, ale protože pro víceúhelníky není výpočet tak jednoduchý\footnote[7]{Za Archiméda nebyly známé goniometrické funkce. První, kdo určil jejich hodnoty, byl Ptolemaios. [3]}, odvodil si vztah pro 2n-úhelníky.
 
 \begin{figure}[!ht]
 \includegraphics[width=7cm]{arch2}
@@ -310,7 +310,7 @@ Kdyby nezvolil obvod n-úhelníku 2 ale libovolný jiný $o$, dostal by nerovnos
 $$
 \frac{o}{2R_n}<\pi<\frac{o}{2r_n}
 $$
-Kusánský přišel ke vzorci 9 tak, že sestrojil konstrukci, v které je čtyř- a osmiúhelník o stejné obvodu (obr. 11), takže platí, že:
+Kusánský přišel ke vzorci 9 tak, že sestrojil konstrukci, v které je čtyř- a osmiúhelník o stejném obvodu (obr. 11), takže platí, že:
 \begin{figure}[!ht]
 \includegraphics[width=5cm]{Cusa2}
 \caption{Výpočet poloměru vepsané kružnice osmiúhelníka}
@@ -319,7 +319,7 @@ Kusánský přišel ke vzorci 9 tak, že sestrojil konstrukci, v které je čty�
 $$
 |AB|=2|EF| \ztoho a_4=2a_8.
 $$
-Z tohoto tvrzení, pak vyplývá, že bod $H$, který je od středu $S$ vzdálen jako poloměr vepsané kružnice 2n-úhelníku\footnote[7]{v tomto případě osmiúhelníku}, je přesně uprostřed mezi $G$ a $V$, což jde si ověřit tak, že vezmeme pravoúhlý trojúhelník $GVB$, který bude mít úhel $\alpha$ při vrcholu $V$, a pomocí funkce tangens zapíšeme rovnici: %ověření je vlastní pozn.
+Z tohoto tvrzení, pak vyplývá, že bod $H$, který je od středu $S$ vzdálen jako poloměr vepsané kružnice 2n-úhelníku\footnote[8]{v tomto případě osmiúhelníku}, je přesně uprostřed mezi $G$ a $V$, což jde si ověřit tak, že vezmeme pravoúhlý trojúhelník $GVB$, který bude mít úhel $\alpha$ při vrcholu $V$, a pomocí funkce tangens zapíšeme rovnici: %ověření je vlastní pozn.
 $$
 \tan\left(\frac{|BG|}{|GV|}\right)=\tan\left(\frac{|FH|}{|HV|}\right) \ztoho \frac{|BG|}{|GV|}=\frac{|FH|}{|HV|} \ztoho \frac{\frac{1}{2}a_4}{|GV|}=\frac{\frac{1}{2}a_8}{|HV|}
 $$
@@ -335,11 +335,11 @@ $$
 \caption{Výpočet poloměru opsané kružnice osmiúhelníka}
 \label{fig:kruh}
 \end{figure}
-Vzorec 10 vychází z Eukleidovy věty o odvěsně (obr. 12) [9], kde:
+Vzorec 10 vychází z Euklidovy věty o odvěsně (obr. 12) [9], kde:
 $$
 |SF|^2=|SV||SH| \ztoho |SF|=\sqrt{|SV||SH|} \ztoho R_{2n}=\sqrt{R_nr_{2n}}.
 $$
-Kusánský se ještě před objevením tohoto algoritmu zabýval geometrickým  přiblížením k obvodu kruhu. Vymyslel hned několik přiblížení. Pravděpodobně nejpřesnější se nachází v knize „Dialogus de circuli quadratura“ z roku 1457, která je na obrázku 13.
+Kusánský se ještě před objevením tohoto algoritmu zabýval geometrickým přiblížením k obvodu kruhu. Vymyslel hned několik přiblížení. Pravděpodobně nejpřesnější se nachází v knize „Dialogus de circuli quadratura“ z roku 1457, která je na obrázku 13.
 \begin{figure}[!ht]
 \includegraphics[width=6.5cm]{CusaB}
 \caption{Výpočet poloměru vepsané kružnice osmiúhelníka}
@@ -361,7 +361,7 @@ $$
 \pi \approx 3,136
 $$
 \subsection{Novověk}
-Konec 15. století a začátek 16. století byl ve znamení zámořských cest. Z tohoto důvodu byl požadavek na přesnější měřící přístroje, což mělo za následek rozvoj přírodních věd včetně matematiky. [1]
+Konec 15. století a začátek 16. století byl ve znamení zámořských cest. Z tohoto důvodu byl požadavek na přesnější měřicí přístroje, což mělo za následek rozvoj přírodních věd včetně matematiky. [1]
 \subsubsection{François Viète}
 François Viète (1540–1603) jako první vymyslel algoritmus na výpočet $\pi$ založený na nekonečném součinu (vzorec 12).
 \begin{equation}
@@ -410,7 +410,7 @@ François Viète během svého života spočítal $\pi$ na 9 desetinných míst,
 \caption{Viètova geometrická aprogimace}
 \label{fig:kruh}
 \end{figure}
-Kromě tohoto algoritmu publikoval v tomtéž díle také geometrickou aproximaci $\pi$ (obrázek 14). Na obrázku je kružnice $o_k$ se středem $S$ a poloměrem $R$ nebo-li $SA$, úsečka $AI$, která je stejně dlouhá jako úsečka $DH$ a dvě rovnoběžné přímky: $IG$ a $AJ$. Obvod kružnice $o_k$ je přibližně $4SJ$. Pomocí zmíněné aproximací můžeme dopočítat přibližnou hodnotu $\pi$.
+Kromě tohoto algoritmu publikoval v tomtéž díle také geometrickou aproximaci $\pi$ (obrázek 14). Na obrázku je kružnice $o_k$ se středem $S$ a poloměrem $R$ neboli $SA$, úsečka $AI$, která je stejně dlouhá jako úsečka $DH$ a dvě rovnoběžné přímky: $IG$ a $AJ$. Obvod kružnice $o_k$ je přibližně $4SJ$. Pomocí zmíněné aproximací můžeme dopočítat přibližnou hodnotu $\pi$.
 
 Protože podle věty uuu je trojúhelník SIG podobný trojúhelníku SAJ, můžeme napsat, že
 $$
@@ -472,7 +472,7 @@ $$
 $$
 \ztoho |SG|=\frac{-2R\pm \sqrt{4R^4+60R^2}}{10}=\frac{-2R\pm 8R}{10}=\frac{-R\pm 4R}{5}
 $$
-Protože v tomto případě nemůže být délka záporná použijeme znaménko $+$.
+Protože v tomto případě nemůže být délka záporná, použijeme znaménko $+$.
 $$
 |SG|=\frac{-R+4R}{5}=\frac{3}{5}R
 $$
@@ -508,7 +508,7 @@ Roku 1654 Christiaan Huygens (1629-1695) použil nerovnici od Willebrorda Snella
 \begin{equation}
 \frac{3\sin\phi}{2+\cos\phi}<\phi<\tan\frac{\phi}{3}+2\sin\frac{\phi}{3},
 \end{equation}
-a když do ní dosadil, že $\phi  = \frac{\pi}{30}$, dostal, že $\pi$ je 3,141 592 653 .... Přesnost byla na 9 desetinných míst [11].
+a když do ní dosadil, že $\phi  = \frac{\pi}{30}$, dostal, že $\pi$ je 3,141 592 653... Přesnost byla na 9 desetinných míst [11].
 
 Snell v roce, kdy vydal předchozí nerovnost, vydal v knize „Cyclometria sive de circuli dimensione“ 2 nerovnice zvyšující účinnost Archimédovy metody. Zjistil totiž to, že v jakékoliv fázi iterování pro $n>=3$ je $\pi$ blíže spodní hranici intervalu $q_n$ než spodní hranici intervalu $p_n$ (obrázek 17).
 \begin{figure}[!ht]
@@ -546,7 +546,7 @@ Ten lze přepsat do moderní obecnější podoby pro $\pi$.
 \pi=\lim_{n\to\infty}2\prod_{i=1}^{n} \left(\frac{2i}{2i-1}\cdot\frac{2i}{2i+1} \right)=\lim_{n\to\infty}2\prod_{i=1}^{n} \frac{4i^2}{4i^2-1}
 \end{equation}
 \subsubsection{Gregoryho algoritmus}
-James Gregory (1638-1675) představil v roce 1667 veřejnosti nový algoritmu založený na kružnici o poloměru $r$ opsáné a vepsáné n-úhelníkem (obrázek 5). Algoritmus počítá obsah vepsaného $s$ a opsaného $S$ 2n-úhelníka pomocí vzorců [11]:
+James Gregory (1638-1675) představil v roce 1667 veřejnosti nový algoritmu založený na kružnici o poloměru $r$ opsané a vepsané n-úhelníkem (obrázek 5). Algoritmus počítá obsah vepsaného $s$ a opsaného $S$ 2n-úhelníka pomocí vzorců [11]:
 \begin{equation}
 s_{2n}=\sqrt{s_nS_n}
 \end{equation}
@@ -588,7 +588,7 @@ Tato nekonečná řada byla objevena nezávisle dvěma matematiky: v roce 1671 J
 \begin{equation}
 \frac{\pi}{4}=1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+...
 \end{equation}
-Gregory pomocí Cavalieriho vzorec a dlouhého dělení v integrandu dosáhl Taylorova rozvoje pro funkci arkus tangens. Taylorův rozvoj lze dnešním zápisem zapsat takto:
+Gregory pomocí Cavalieriho vzorce a dlouhého dělení v integrandu dosáhl Taylorova rozvoje pro funkci arkus tangens. Taylorův rozvoj lze dnešním zápisem zapsat takto:
 $$
 f(x)=\lim_{n\to\infty} \sum_{i=0}^{n} \frac{f^{(i)}(a)}{i!}(x-a)^i
 $$
@@ -672,7 +672,7 @@ Další známou řadu publikoval 1737 v „Treatise on the Method of Fluctions a
 $$
 y=\sqrt{x-x^2},
 $$
-kterou lze vidět na obrázku  19. Pomocí binomické věty vyřešil obsah $a$ poloviční úseče $ABD$:
+kterou lze vidět na obrázku 19. Pomocí binomické věty vyřešil obsah $a$ poloviční úseče $ABD$:
 $$
 a=\int_0^\frac{1}{4} \sqrt{x-x^2} \d x =\int_0^\frac{1}{4} \sqrt{x}\sqrt{1-x} \d x = \bigg[\frac{2}{3}\sqrt{x^3}-\frac{1}{5}\sqrt{x^5}-\frac{1}{28}\sqrt{x^7}-\frac{1}{72}\sqrt{x^9}-...\bigg]^\frac{1}{4}_0=
 $$
@@ -699,7 +699,7 @@ Do vzorce 37 dosadil za $a$ vzorec 35 [1].
 \begin{equation}
 \pi= \frac{3\sqrt{3}}{4}+24\(\frac{1}{12}-\frac{1}{5\cdot2^5}-\frac{1}{28\cdot2^7}-\frac{1}{72\cdot2^9}-... \)
 \end{equation}
-Vzorec 38 lze  zapsat moderním způsobem jako [17]:
+Vzorec 38 lze zapsat moderním způsobem jako [17]:
 \begin{equation}
 \pi=\lim_{n\to\infty} \frac{3\sqrt{3}}{4}+24\sum_{i=0}^{n} \frac{(2i)!}{2^{4i+2}(i!)^2(2i-1)(2i+3)}
 \end{equation}
@@ -714,7 +714,7 @@ $$
 \subsubsection{Leonhard Euler}
 Leonhard Euler (1707-1783) sjednotil matematický zápis a symboliku do dnešní podoby, např.: $f(x)$, $\tint \d x$, $\im$, $\eu$, $\tsum$. Od jeho doby se řeckým písmenem $\pi$ označuje konstanta, o které je tato práce.
 
-Dalším výsledkem jeho celoživotní práce je objev několika nekonečných řad vedoucích k $\pi$, z nichž je neznámější vyřešení v roce 1736 řady převrácených dvojmocí, kterou před tím se marně snažilo vyřešit celá desetiletí spousta matematiků, např. G. W. Leibnitz nebo J. Bernaulli I. Použil k tomu řadu pro $\sin x$ (Taylorův rozvoj), která byla známa už za Newtona.
+Dalším výsledkem jeho celoživotní práce je objev několika nekonečných řad vedoucích k $\pi$, z nichž je neznámější vyřešení v roce 1736 řady převrácených dvojmocí, kterou před tím se marně snažilo vyřešit celá desetiletí spousta matematiků, např. G. W. Leibniz nebo J. Bernaulli I. Použil k tomu řadu pro $\sin x$ (Taylorův rozvoj), která byla známa už za Newtona.
 $$
 \sin x=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...
 $$
@@ -722,7 +722,7 @@ $$
 \begin{equation}
 0=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+... \ztoho 0=1-\frac{x^2}{3!}+\frac{x^4}{5!}-\frac{x^6}{7!}+... \ztoho 0=1-\frac{y}{3!}+\frac{y^2}{5!}-\frac{y^3}{7!}+...
 \end{equation}
-Jestliže rovnice 41 měla před úpravou dělením kořeny: $x=n \pi, \: n\in\mathbb{Z}$, tak po substituci má kořeny: $y=(n \pi)^2, \: n\in\mathbb{N}$. Pomocí teorie rovnic vymyslel upravu ronice, dnes známou jako Vietovy vztahy, která zní: součet převrácených hodnot kořenů ($\frac{1}{(n \pi)^2}, \: n\in\mathbb{N}$) je roven záporně vzatému podílu lineárního a absolutního členu $\(\frac{1}{3!}\)$ [1].
+Jestliže rovnice 41 měla před úpravou dělením kořeny: $x=n \pi, \: n\in\mathbb{Z}$, tak po substituci má kořeny: $y=(n \pi)^2, \: n\in\mathbb{N}$. Pomocí teorie rovnic vymyslel úpravu rovnice, dnes známou jako Viètovy vztahy, která zní: součet převrácených hodnot kořenů ($\frac{1}{(n \pi)^2}, \: n\in\mathbb{N}$) je roven záporně vzatému podílu lineárního a absolutního členu $\(\frac{1}{3!}\)$ [1].
 \begin{equation}
 \frac{1}{3!}=\frac{1}{\pi^2}+\frac{1}{(2\pi)^2}+\frac{1}{(3\pi)^2}+... \ztoho \frac{\pi^2}{6}=\frac{1}{1^2}+\frac{1}{2^2}+\frac{1}{3^2}+...
 \end{equation}
@@ -741,7 +741,7 @@ Odečtením rovnice 42 od dvojnásobku 44 dostal další řadu:
 \begin{equation}
 \frac{2\pi^2}{8}-\frac{\pi^2}{6}=\frac{2}{1^2}-\frac{1}{1^2}-\frac{1}{2^2}+\frac{2}{3^2}-\frac{1}{3^2}-... \ztoho \frac{\pi^2}{12}=\frac{1}{1^2}-\frac{1}{2^2}+\frac{1}{3^2}-...
 \end{equation}
-Z rovnic 44 a 45 jde vyjádři $\pi$.
+Z rovnic 44 a 45 jde vyjádřit $\pi$.
 \begin{equation}
 \pi=\lim_{n\to\infty}  2\sqrt{2\sum_{i=1}^{n}\frac{1}{(2i-1)^2}}
 \end{equation}
@@ -749,7 +749,7 @@ Z rovnic 44 a 45 jde vyjádři $\pi$.
 \pi=\lim_{n\to\infty}  2\sqrt{3\sum_{i=1}^{n}\frac{(-1)^{i+1}}{i^2}}
 \end{equation}
 \subsubsection{Legendreho algoritmus}
-Adrien Legendry (1752-1833) v roce 1794 publikoval dílo „Éléments de géométrie“ podobným algoritmem jako M. Kusánský jen s rozdíle, že kromě poloměru opsané a vepsané kružnice $R$ a $r$ k 2n-úhelníku počítá ještě koeficient $s$.
+Adrien Legendry (1752-1833) v roce 1794 publikoval dílo „Éléments de géométrie“ podobným algoritmem jako M. Kusánský jen s rozdílem, že kromě poloměru opsané a vepsané kružnice $R$ a $r$ k 2n-úhelníku počítá ještě koeficient $s$.
 \begin{equation}
 R_{n+1}=\frac{r_n+R_n}{2}
 \end{equation}
@@ -766,14 +766,35 @@ Nyní stačí pro výpočet $\pi$ použít následující vzorec [11][16]:
 \frac{R_{2n}^2}{s_n}<\pi<\frac{R_n^2}{s_n}.
 \end{equation}
 \subsection{Moderní algoritmy s využití počítačů}
+V září roku 1949 v Laboratořích balistického výzkumu v Pensylvánii byl zřejmě proveden historicky první výpočet hodnoty $\pi$. Počítač ENIAC spočítal pomocí Machinova vzorce
+\begin{equation}
+\pi=16\arctg\frac{1}{5}-4\arctg\frac{1}{239}
+\end{equation}
+za 70 hodin $\pi$ s přesností na 2037 desetinných míst. Tento rekord byl několikrát překonán. Poprvé 1954/1955 v Dahlgrenu ve Virginii, kdy počítač NORC spočítal za 13 minut $\pi$ na 3089 platných míst.
 
+Pro změnu jiný vzorec byl použit v březnu 1957 v Počítačovém centru v Londýně. Za 53 hodin zvládl počítač Pegasus výpočet $\pi$ s užitím Strassenitzkého vzorce
+\begin{equation}
+\pi=\arctg\frac{1}{2}+\arctg\frac{1}{5}+\arctg\frac{1}{8}
+\end{equation}
+na 10 021 desetinných míst. Bohužel od 7480. místa byla chyba, protože vzorec v počítači nebyl identický. Na jaře dalšího roku byl výpočet zopakován správně.
+
+Na kombinaci Machinava a Gregoryho vzorce
+\begin{equation}
+\pi=\lim_{n\to\infty}16\sum_{i=0}^n \frac{(-1)^i}{(2i+1)\cdot5^{2i+1}}-4\sum_{i=0}^n \frac{(-1)^i}{(2i+1)\cdot239^{2i+1}}
+\end{equation}
+vsadili v červenci 1960 v Data Procissing Centre v Paříži a z počítače IBM704 získali prvních 10 000 desetinných míst za 1 hodinu 40 minut.
+ 
+Poslední vzorec zde popsaný bude Strömerův:
+\begin{equation}
+\pi=24\arctg\frac{1}{8}+8\arctg\frac{1}{57}+4\arctg\frac{1}{239}
+\end{equation}
+Byl použit v červenci 1961 na počítači IBM 7090 v IBM Processing Centre v New Yorku a za 8 hodin a 43 minu měli $\pi$ na 100 265 platných míst. Ten samý vzorec spolu s Shanksonovo-Wrenchovou metodou byl základem výpočtu $\pi$ na 500 000 desetinných míst v KPAE v Paříži počítačem CDC6600 v únoru 1967. [1][20]
 \section{Metoda Monte Carlo}
-Monte Carlo, zkráceně MC, je metoda numerického výpočtu pomocí generování náhodné veličiny\footnote[4]{Náhodná veličina je veličina s přiřazenou náhodnou hodnotou. Protože většinou je získávána pomocí algoritmu, nikoliv dílem náhody, označuje se jako pseudonáhodná.}. Použití našla hlavně s rozvoje výpočetní techniky, protože do té doby jsme nemohli generovat pseudonáhodná čísla jinak než ručními výpočty, což mělo za následek nedostatek hodnot pro seriozní výsledek za rozumný čas. Pro generování jde sice použít i fyzikální experiment, např. hod kostkou, ale i ten není čistě náhodný, protože je ovlivněn, jak házíme. V dnešní době metoda nachází hlavní užití pro fyzikální simulace pravděpodobnostních jevu, např. v kvantové fyzice, nebo k výpočtu poměru obsahů. [1][19]
-% metod numerické integrace. Spočívá v generován pseudonáhodných bodů na určité ploše. Poměr bodů pod a nad křivkou představují poměr plochy pod a nad křivkou. Tuto metodu lze použít v jakémkoliv n-dimenzionálním prostoru.
+Monte Carlo, zkráceně MC, je metoda numerického výpočtu pomocí generování náhodné veličiny\footnote[9]{Náhodná veličina je veličina s přiřazenou náhodnou hodnotou. Protože většinou je získávána pomocí algoritmu, nikoliv dílem náhody, označuje se jako pseudonáhodná.}. Použití našla hlavně s rozvoje výpočetní techniky, protože do té doby jsme nemohli generovat pseudonáhodná čísla jinak než ručními výpočty, což mělo za následek nedostatek hodnot pro seriózní výsledek za rozumný čas. Pro generování jde sice použít i fyzikální experiment, např. hod kostkou, ale i ten není čistě náhodný, protože je ovlivněn, jak házíme. V dnešní době metoda nachází hlavní užití pro fyzikální simulace pravděpodobnostních jevu, např. v kvantové fyzice, nebo k výpočtu poměru obsahů. [1][19]
 \subsection{Obsah kruhu}
 Pomocí MC sice přímo nemůžeme spočítat určitý integrál, ale můžeme si vyjádřit obsah plochy pod křivkou z daného poměru. Pokud budu znát obsah výseče, která zaujímá čtvrtinu kruhu (obrázek 20), mohu si $\pi$ spočítat.
 
-Principem této metody je, že budu generovat pseudonáhodné body na určité ploše o obsahu $S_1$ a budu zjišťovat jestli bod leží pod křivkou na ploše o obsahu $S_2$. Poměr počtu všech bodů na pod křivkou $m$ s celkovým počtem bodů $n$ je pro velké $n$ rovný poměru obsahu $S_1$ s $S_2$.
+Principem této metody je, že budu generovat pseudonáhodné body na určité ploše o obsahu $S_1$ a budu zjišťovat, jestli bod leží pod křivkou na ploše o obsahu $S_2$. Poměr počtu všech bodů na pod křivkou $m$ s celkovým počtem bodů $n$ je pro velké $n$ rovný poměru obsahu $S_1$ s $S_2$.
 \begin{equation}
 \frac{S_2}{S_1}=\frac{n}{m}, \; n\rightarrow\infty
 \end{equation}
@@ -790,9 +811,15 @@ Po vygenerování velkého množství bodů dostanu čísla $n$ a $m$, ze který
 \begin{equation}
 \frac{n}{m}=\frac{S_2}{S_1}=\frac{\frac{1}{4}\pi r^2}{a^2}=\frac{\pi}{4} \ztoho \pi=\frac{4n}{m}
 \end{equation}
+Na obrázku 21 je vystup z počítače, který počítal $\pi$ pomocí výše popsaného algoritmu.
+\begin{figure}[!ht]
+\includegraphics[width=16cm]{sk}
+\caption{Výpočet obsahu kruhu metodou Monte Carlo}
+\label{fig:graf1}
+\end{figure}
 
 \subsection{Buffonova jehla}
-Georges Louis Leclerc, kníže de Buffon, známý svým šokujícím sdělením o stáří světa\footnote[5]{Svým tvrzením, že svět je starý 75000 let, šokoval vzdělance té doby. V 18. století se stále věřilo že svět není starší více jak 6000 let.}, navrhl experiment vedoucí k hodnotě $\pi$ pomocí pravděpodobnosti. Experiment, ilustrovaný na obrázku 21, spočívá v házení jehel o délce $L$ se středem v bodě $S$ na rovnou plochu rozdělenou rovnoběžnými přímkami ve vzdálenosti $d$, která nepřekračuje délku samotné jehly.
+Georges Louis Leclerc, kníže de Buffon, známý svým šokujícím sdělením o stáří světa\footnote[10]{Svým tvrzením, že svět je starý 75000 let, šokoval vzdělance té doby. V 18. století se stále věřilo, že svět není starší více jak 6000 let.}, navrhl experiment vedoucí k hodnotě $\pi$ pomocí pravděpodobnosti. Experiment, ilustrovaný na obrázku 22, spočívá v házení jehel o délce $L$ se středem v bodě $S$ na rovnou plochu rozdělenou rovnoběžnými přímkami ve vzdálenosti $d$, která nepřekračuje délku samotné jehly.
 \begin{figure}[!ht]
 \includegraphics[width=7.5cm]{Buf}
 \caption{Buffonův experiment s jehlou}
@@ -807,7 +834,7 @@ Vztah 54 jde odvodit pomocí jednoho integrálu. Jestliže $S$ je vzdálen od p�
 $$
 x<x^\prime \ztoho x<\frac{1}{2}L\sin\phi
 $$
-Protože je stejně pravděpodobné, jakou jehla protne přímku, stačí spočítat pravděpodobnost protnutí jedné konkrétní přímky. Jestliže úhel náklonu jehly $\phi$ je v rozsahu od 0 do $\pi$ (z obou stran je stejná) a $x$ je v rozsahu od 0 do $\frac{d}{2}$, mohu všechny možnosti dopadu interpretovat grafem na obrázku 22.
+Protože je stejně pravděpodobné, jakou jehla protne přímku, stačí spočítat pravděpodobnost protnutí jedné konkrétní přímky. Jestliže úhel náklonu jehly $\phi$ je v rozsahu od 0 do $\pi$ (z obou stran je stejná) a $x$ je v rozsahu od 0 do $\frac{d}{2}$, mohu všechny možnosti dopadu interpretovat grafem na obrázku 23.
 \begin{figure}[!ht]
 \includegraphics[width=6cm]{Buf2}
 \caption{Graf protnutí přímky}
@@ -817,46 +844,44 @@ Plocha $S_1$ pod křivkou, přestavující rovnici $x=\frac{1}{2}L\sin\phi$, zn�
 $$
 P=\frac{S_1}{S_2}=\frac{\int_0^\pi \frac{1}{2}L\sin \phi \d \phi}{\frac{1}{2}d\pi}=\frac{L\bigg[-cos \phi \bigg]^\pi_0}{d\pi}=\frac{L(1+1)}{d\pi}=\frac{2L}{d\pi}
 $$
-Ze vztahu 54 lze vyjádřit $\pi$.
+Ze vztahu 54 lze vyjádřit $\pi$. [1]
 \begin{equation}
 \pi=\frac{2L}{dP}
 \end{equation}
-
+\begin{figure}[!ht]
+\includegraphics[width=16cm]{buf3}
+\caption{Simulace experimentu Buffonova jehla}
+\label{fig:graf1}
+\end{figure}
+Buffonů experiment zle taktéž nasimulovat na počítači, o čemž se dát přesvědčit na obrázku 24. V grafu je uvedena nejistota $3\sigma$\footnote[11]{Nejistota na $3\sigma$ znamená, že pravděpodobnost, že skutečná hodnota leží v intervalu ohraničeném nejistotou, je 99,7\%,}, která byla vypočítaná podle vzorce na nejistotu pro $\sigma$ [19]:
+$$
+u=\frac{1}{\sqrt{n}},
+$$
+kde $n$ je počet hodů.
 \section{Srovnání metod}
 V této kapitole budu srovnávat efektivitu algoritmů zmíněných v předchozích kapitolách podle mnou definované veličiny $\mem$. Protože $\mem$ závisí na rychlosti konvergence algoritmu $\beta(n)$, která je nespojitá funkce závislá na počtu iterací $n$, kde $n$ náleží přirozeným číslům, použiji sumaci v intervalu všech iterací, a tím dostanu hodnotu veličiny nezávislou na aktuální iteraci.
 $$
 \mem=\lim_{a\to\infty} \sum_{n=1}^{a}\beta(n)
 $$
-Vzhledem k tomu, že chci, aby platilo, čím vyšší hodnota, tím lepší algoritmus, definuji rychlosti konvergence algoritmu jako podíl záporné diference míry konvergence $p$ a čísla 2 umocněného na diferenci počtu operací $O$:
+Upravit!!!
+Vzhledem k tomu, že chci, aby platilo, čím vyšší hodnota, tím lepší algoritmus, definuji rychlosti konvergence algoritmu jako podíl záporné diference míry konvergence $p$ a čísla 2 umocněného na diferenci počtu operací od začátku výpočtu $O$\footnote[12]{V této práci $O(n)$ neznamená složitost algoritmu, ale počet operací provedených od počátku výpočtu až do n-té iterace.}:
 $$
-\beta(n)=\frac{-\frac{\Delta p}{\Delta n}}{2^{\frac{\Delta O}{\Delta n}}}=\frac{-\frac{p_{n+1}-p_n}{n+1-n}}{2^{\frac{O_{n+1}-O_n}{n+1-n}}}=\frac{p_n-p_{n+1}}{2^{O_{n+1}-O_n}}
+\beta(n)=\Delta O\frac{p_n+p_{n+1}}{2}=\frac{(O_{n+1}-O_n)(p_n+p_{n+1})}{2}
 $$
-Čitatel vyjadřuje čím větší skoky v konvergenci, tím je vyšší hodnota čitatele a tím je vyšší hodnoty rychlosti konvergence algoritmu v dané iteraci. Vynásobení -1 je abych dodržel pravidlo zmíněné v předchozím souvětí, protože u konvergujícího algoritmu vždy platí, že $p_{n+1}<p_n$.
+Upravit!!!
+Čitatel vyjadřuje čím větší skoky v konvergenci, tím je vyšší hodnota čitatele a tím je vyšší hodnoty rychlosti konvergence algoritmu v dané iteraci. Vynásobení -1 je, abych dodržel pravidlo zmíněné v předchozím souvětí, protože u konvergujícího algoritmu vždy platí, že $p_{n+1}<p_n$.
 
-U jmenovatele platí, že čím větší skoky v počtu operací, tím je vyšší hodnota jmenovatele a tím je menší celková hodnota rychlosti konvergence algoritmu v dané iteraci. Aby veličina byla matematicky robustní, např: vůči algoritmům, který mají iterace neobsahující žádné operace. Dám podíl složitosti algoritmu a čísla iterace do jmenovatele hlavního zlomku jako mocninu dvou, čím se zachová pravidlo u jmenovatele čím vyšší tím horší. Funkci $2^x$ lze považovat za elementární funkci stejně jako $\eu^x$jen s rozdílem, že je jednodušší výpočet funkční hodnoty. Zlomek nenásobím -1, protože na rozdíl od míry konvergence u algoritmů, který něco dělají platí, že $O_{n+1}>O_n$.
+U jmenovatele platí, že čím větší skoky v počtu operací, tím je vyšší hodnota jmenovatele a tím je menší celková hodnota rychlosti konvergence algoritmu v dané iteraci. Aby veličina byla matematicky robustní, např: vůči algoritmům, které mají iterace neobsahující žádné operace. Dám podíl počtu operací a čísla iterace do jmenovatele hlavního zlomku jako mocninu dvou, čím se zachová pravidlo u jmenovatele čím vyšší tím horší. Funkci $2^x$ lze považovat za elementární funkci stejně jako $\eu^x$jen s rozdílem, že je jednodušší výpočet funkční hodnoty. Zlomek nenásobím -1, protože na rozdíl od míry konvergence u algoritmů, které něco dělají, platí, že $O_{n+1}>O_n$.
 \begin{equation}
-\mem=\lim_{a\to\infty} \sum_{n=1}^{a}\frac{p_n-p_{n+1}}{2^{O_{n+1}-O_n}}
+\mem=\lim_{a\to\infty} \sum_{n=1}^{a}\frac{(O_{n+1}-O_n)(p_n+p_{n+1})}{2}
 \end{equation}
 
-\subsection{Míra konvergence}
+\paragraph{Míra konvergence}
 Míru konvergence $p_n$ zavádím jako matematikou veličinu vyjadřující vzdálenost odhadu čísla $x_n$ v n-té iteraci od nějaké hodnoty čísla $x$, kterou považuji za skutečnou hodnotu limity dané posloupnost, v tomto případě $\pi$.
 $$
 p_n=|x_n-x|, \;\; x=\lim_{n\to\infty} x_n
 $$
-
-%Archimédův algoritmus
-%Mikuláš Kusánský
-%François Viète 
-%Descartesův algoritmus
-%Gregoryho algoritmus
-%Willebrord Snell
-%Wallisův nekonecný součin
-%Brounckerův řetezový zlomek
-%Gregoryho-Leibnizova řada
-%Newtonova řada
-%Legendreho algoritmus
-%Leonhard Euler
-
+Uvedený vzorec je použit v tabulce 1, 2 a 3 na všech dosud představených algoritmech pro prvních 10 iterací. V příloze A „Míra konvergence“ jsou tabulky rozšířeny na 30 iterací.
 \begin{table}[h!]
 \caption{Míra konvergence}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
@@ -872,27 +897,7 @@ $$
 7 & 7.89e-5 & 1.58e-4 & 7.89e-5 & 1.58e-4 & 7.89e-5 & 1.58e-4 & 3.15e-4 & 1.58e-4 \\ \hline 
 8 & 1.97e-5 & 3.94e-5 & 1.97e-5 & 3.94e-5 & 1.97e-5 & 3.94e-5 & 7.89e-5 & 3.94e-5 \\ \hline 
 9 & 4.93e-6 & 9.86e-6 & 4.93e-6 & 9.86e-6 & 4.93e-6 & 9.86e-6 & 1.97e-5 & 9.86e-6 \\ \hline 
-10 & 1.23e-6 & 2.46e-6 & 1.23e-6 & 2.46e-6 & 1.23e-6 & 2.46e-6 & 4.93e-6 & 2.46e-6 \\ \hline 
-11 & 3.08e-7 & 6.16e-7 & 3.08e-7 & 6.16e-7 & 3.08e-7 & 6.16e-7 & 1.23e-6 & 6.16e-7 \\ \hline 
-12 & 7.70e-8 & 1.54e-7 & 7.70e-8 & 1.54e-7 & 7.70e-8 & 1.54e-7 & 3.08e-7 & 1.54e-7 \\ \hline 
-13 & 1.93e-8 & 3.85e-8 & 1.93e-8 & 3.85e-8 & 1.93e-8 & 3.85e-8 & 7.70e-8 & 3.85e-8 \\ \hline 
-14 & 4.81e-9 & 9.63e-9 & 4.81e-9 & 9.63e-9 & 4.81e-9 & 9.63e-9 & 1.93e-8 & 9.63e-9 \\ \hline 
-15 & 1.20e-9 & 2.41e-9 & 1.20e-9 & 2.41e-9 & 1.20e-9 & 2.41e-9 & 4.81e-9 & 2.41e-9 \\ \hline 
-16 & 3.01e-10 & 6.02e-10 & 3.01e-10 & 6.02e-10 & 3.01e-10 & 6.02e-10 & 1.20e-9 & 6.02e-10 \\ \hline 
-17 & 7.52e-11 & 1.50e-10 & 7.52e-11 & 1.50e-10 & 7.52e-11 & 1.50e-10 & 3.01e-10 & 1.50e-10 \\ \hline 
-18 & 1.88e-11 & 3.76e-11 & 1.88e-11 & 3.76e-11 & 1.88e-11 & 3.76e-11 & 7.52e-11 & 3.76e-11 \\ \hline 
-19 & 4.70e-12 & 9.40e-12 & 4.70e-12 & 9.40e-12 & 4.70e-12 & 9.40e-12 & 1.88e-11 & 9.40e-12 \\ \hline 
-20 & 1.18e-12 & 2.35e-12 & 1.18e-12 & 2.35e-12 & 1.17e-12 & 2.35e-12 & 4.70e-12 & 2.35e-12 \\ \hline 
-21 & 2.94e-13 & 5.88e-13 & 2.94e-13 & 5.87e-13 & 2.94e-13 & 5.88e-13 & 1.17e-12 & 5.88e-13 \\ \hline 
-22 & 7.37e-14 & 1.47e-13 & 7.35e-14 & 1.47e-13 & 7.33e-14 & 1.47e-13 & 2.94e-13 & 1.47e-13 \\ \hline 
-23 & 1.86e-14 & 3.68e-14 & 1.84e-14 & 3.67e-14 & 1.82e-14 & 3.68e-14 & 7.33e-14 & 3.68e-14 \\ \hline 
-24 & 4.82e-15 & 9.30e-15 & 4.62e-15 & 9.15e-15 & 4.47e-15 & 9.30e-15 & 1.82e-14 & 9.30e-15 \\ \hline 
-25 & 1.38e-15 & 2.42e-15 & 1.18e-15 & 2.26e-15 & 1.02e-15 & 2.42e-15 & 4.47e-15 & 2.42e-15 \\ \hline 
-26 & 5.19e-16 & 6.96e-16 & 3.20e-16 & 5.40e-16 & 1.64e-16 & 6.96e-16 & 1.02e-15 & 6.96e-16 \\ \hline 
-27 & 3.04e-16 & 2.66e-16 & 1.05e-16 & 1.10e-16 & 5.07e-17 & 2.66e-16 & 1.64e-16 & 2.66e-16 \\ \hline 
-28 & 2.50e-16 & 1.58e-16 & 5.15e-17 & 2.25e-18 & 1.05e-16 & 1.58e-16 & 5.07e-17 & 1.58e-16 \\ \hline 
-29 & 2.37e-16 & 1.31e-16 & 3.81e-17 & 2.46e-17 & 1.18e-16 & 1.31e-16 & 1.05e-16 & 1.31e-16 \\ \hline 
-30 & 2.33e-16 & 1.25e-16 & 3.47e-17 & 3.14e-17 & 1.21e-16 & 1.25e-16 & 1.18e-16 & 1.25e-16 \\ \hline 
+10 & 1.23e-6 & 2.46e-6 & 1.23e-6 & 2.46e-6 & 1.23e-6 & 2.46e-6 & 4.93e-6 & 2.46e-6 \\ \hline  
 \end{tabular}
 \end{table}
 
@@ -901,7 +906,7 @@ $$
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
 \hline
 \multicolumn{1}{|l|}{\bfseries č. iterace} & \multicolumn{2}{l|}{\bfseries Snell} & \multicolumn{2}{l|}{\bfseries Legendry} & \multicolumn{1}{l|}{\bfseries Ptolem.} & \multicolumn{1}{l|}{\bfseries Viete} & \multicolumn{1}{l|}{\bfseries Wallis} & \multicolumn{1}{l|}{\bfseries Brounck.}  \\ \hline
-\multicolumn{1}{|l|}{hr. intrvalu} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \hline \hline
+\multicolumn{1}{|l|}{hr. intervalu} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \hline \hline
 1 & 2.45e-3 & 7.74e-2 & 2.27e-1 & 8.58e-1 & 3.13e-1 & 1.14e+0 & 4.75e-01 & 8.58e-01 \\ \hline 
 2 & 1.55e-4 & 3.96e-3 & 1.01e-3 & 4.61e-2 & 8.01e-2 & 3.13e-1 & 2.97e-01 & 4.75e-01 \\ \hline 
 3 & 9.72e-6 & 2.37e-4 & 7.38e-9 & 8.76e-5 & 2.01e-2 & 8.01e-2 & 2.16e-01 & 3.25e-01 \\ \hline 
@@ -912,26 +917,6 @@ $$
 8 & 9.28e-12 & 2.23e-10 & 4.80e-18 & 4.80e-18 & 1.97e-5 & 7.89e-5 & 9.10e-02 & 1.25e-01 \\ \hline 
 9 & 5.80e-13 & 1.39e-11 & 4.80e-18 & 4.80e-18 & 4.93e-6 & 1.97e-5 & 8.16e-02 & 1.11e-01 \\ \hline 
 10 & 3.65e-14 & 8.70e-13 & 4.80e-18 & 4.80e-18 & 1.23e-6 & 4.93e-6 & 7.39e-02 & 9.98e-02 \\ \hline 
-11 & 2.50e-15 & 5.42e-14 & 4.80e-18 & 4.80e-18 & 3.08e-7 & 1.23e-6 & 6.75e-02 & 9.07e-02 \\ \hline 
-12 & 3.74e-16 & 3.28e-15 & 4.80e-18 & 4.80e-18 & 7.70e-8 & 3.08e-7 & 6.22e-02 & 8.32e-02 \\ \hline 
-13 & 2.41e-16 & 9.84e-17 & 4.80e-18 & 4.80e-18 & 1.93e-8 & 7.70e-8 & 5.76e-02 & 7.68e-02 \\ \hline 
-14 & 2.33e-16 & 1.01e-16 & 4.80e-18 & 4.80e-18 & 4.81e-9 & 1.93e-8 & 5.37e-02 & 7.13e-02 \\ \hline 
-15 & 2.32e-16 & 1.13e-16 & 4.80e-18 & 4.80e-18 & 1.20e-9 & 4.81e-9 & 5.03e-02 & 6.66e-02 \\ \hline 
-16 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.01e-10 & 1.20e-9 & 4.72e-02 & 6.24e-02 \\ \hline 
-17 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 7.52e-11 & 3.01e-10 & 4.46e-02 & 5.88e-02 \\ \hline 
-18 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.88e-11 & 7.52e-11 & 4.22e-02 & 5.55e-02 \\ \hline 
-19 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 4.70e-12 & 1.88e-11 & 4.00e-02 & 5.26e-02 \\ \hline 
-20 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.18e-12 & 4.70e-12 & 3.81e-02 & 5.00e-02 \\ \hline 
-21 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 2.94e-13 & 1.17e-12 & 3.63e-02 & 4.76e-02 \\ \hline 
-22 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 7.38e-14 & 2.94e-13 & 3.47e-02 & 4.54e-02 \\ \hline 
-23 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.87e-14 & 7.33e-14 & 3.32e-02 & 4.35e-02 \\ \hline 
-24 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 4.91e-15 & 1.82e-14 & 3.19e-02 & 4.16e-02 \\ \hline 
-25 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.47e-15 & 4.47e-15 & 3.06e-02 & 4.00e-02 \\ \hline 
-26 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 6.08e-16 & 1.02e-15 & 2.95e-02 & 3.84e-02 \\ \hline 
-27 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.93e-16 & 1.64e-16 & 2.84e-02 & 3.70e-02 \\ \hline 
-28 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.40e-16 & 5.07e-17 & 2.74e-02 & 3.57e-02 \\ \hline 
-29 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.26e-16 & 1.05e-16 & 2.65e-02 & 3.45e-02 \\ \hline 
-30 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.23e-16 & 1.18e-16 & 2.56e-02 & 3.33e-02 \\ \hline 
 \end{tabular}
 \end{table}
 
@@ -939,7 +924,7 @@ $$
 \caption{Míra konvergence 3}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|l|}{\bfseries č. iterace} & \multicolumn{1}{l|}{\bfseries Leibnitz} & \multicolumn{1}{l|}{\bfseries Newton} & \multicolumn{1}{l|}{\bfseries Sharp} & \multicolumn{1}{l|}{\bfseries Euler} & \multicolumn{1}{l|}{\bfseries Euler 2} & \multicolumn{1}{l|}{\bfseries Euler 3}  \\ \hline
+\multicolumn{1}{|l|}{\bfseries č. iterace} & \multicolumn{1}{l|}{\bfseries Leibniz} & \multicolumn{1}{l|}{\bfseries Newton} & \multicolumn{1}{l|}{\bfseries Sharp} & \multicolumn{1}{l|}{\bfseries Euler} & \multicolumn{1}{l|}{\bfseries Euler 2} & \multicolumn{1}{l|}{\bfseries Euler 3}  \\ \hline
 1 & 8.58e-01 & 1.42e-1 & 3.23e-1 & 6.92e-01 & 3.13e-01 & 3.23e-01 \\ \hline 
 2 & 4.75e-01 & 1.66e-2 & 6.24e-2 & 4.03e-01 & 1.60e-01 & 1.42e-01 \\ \hline 
 3 & 3.25e-01 & 2.53e-3 & 1.46e-2 & 2.84e-01 & 1.07e-01 & 7.30e-02 \\ \hline 
@@ -950,35 +935,19 @@ $$
 8 & 1.25e-01 & 6.71e-7 & 2.39e-5 & 1.14e-01 & 4.00e-02 & 1.31e-02 \\ \hline 
 9 & 1.11e-01 & 1.42e-7 & 7.12e-6 & 1.02e-01 & 3.55e-02 & 1.05e-02 \\ \hline 
 10 & 9.98e-02 & 3.07e-8 & 2.14e-6 & 9.22e-02 & 3.20e-02 & 8.62e-03 \\ \hline 
-11 & 9.07e-02 & 6.71e-9 & 6.51e-7 & 8.41e-02 & 2.91e-02 & 7.17e-03 \\ \hline 
-12 & 8.32e-02 & 1.48e-9 & 1.99e-7 & 7.73e-02 & 2.66e-02 & 6.09e-03 \\ \hline 
-13 & 7.68e-02 & 3.31e-10 & 6.14e-8 & 7.15e-02 & 2.46e-02 & 5.21e-03 \\ \hline 
-14 & 7.13e-02 & 7.45e-11 & 1.90e-8 & 6.65e-02 & 2.28e-02 & 4.53e-03 \\ \hline 
-15 & 6.66e-02 & 1.69e-11 & 5.93e-9 & 6.22e-02 & 2.13e-02 & 3.96e-03 \\ \hline 
-16 & 6.24e-02 & 3.84e-12 & 1.86e-9 & 5.84e-02 & 2.00e-02 & 3.50e-03 \\ \hline 
-17 & 5.88e-02 & 8.80e-13 & 5.83e-10 & 5.50e-02 & 1.88e-02 & 3.11e-03 \\ \hline 
-18 & 5.55e-02 & 2.03e-13 & 1.84e-10 & 5.20e-02 & 1.77e-02 & 2.79e-03 \\ \hline 
-19 & 5.26e-02 & 4.67e-14 & 5.80e-11 & 4.93e-02 & 1.68e-02 & 2.51e-03 \\ \hline 
-20 & 5.00e-02 & 1.08e-14 & 1.84e-11 & 4.69e-02 & 1.60e-02 & 2.27e-03 \\ \hline 
-21 & 4.76e-02 & 2.42e-15 & 5.84e-12 & 4.47e-02 & 1.52e-02 & 2.06e-03 \\ \hline 
-22 & 4.54e-02 & 4.77e-16 & 1.86e-12 & 4.27e-02 & 1.45e-02 & 1.88e-03 \\ \hline 
-23 & 4.35e-02 & 2.37e-17 & 5.93e-13 & 4.09e-02 & 1.39e-02 & 1.73e-03 \\ \hline 
-24 & 4.16e-02 & 8.25e-17 & 1.90e-13 & 3.92e-02 & 1.33e-02 & 1.59e-03 \\ \hline 
-25 & 4.00e-02 & 1.07e-16 & 6.06e-14 & 3.77e-02 & 1.28e-02 & 1.47e-03 \\ \hline 
-26 & 3.84e-02 & 1.13e-16 & 1.95e-14 & 3.62e-02 & 1.23e-02 & 1.36e-03 \\ \hline 
-27 & 3.70e-02 & 1.15e-16 & 6.19e-15 & 3.49e-02 & 1.18e-02 & 1.26e-03 \\ \hline 
-28 & 3.57e-02 & 1.15e-16 & 2.07e-15 & 3.37e-02 & 1.14e-02 & 1.17e-03 \\ \hline 
-29 & 3.45e-02 & 1.15e-16 & 5.87e-16 & 3.25e-02 & 1.10e-02 & 1.10e-03 \\ \hline 
-30 & 3.33e-02 & 1.15e-16 & 2.68e-16 & 3.15e-02 & 1.06e-02 & 1.03e-03 \\ \hline 
 \end{tabular}
 \end{table}
-
+Hodnoty jednotlivých algoritmu jsou ještě prezentovány v grafech na obrázcích 25 a 26. Větší měřítko těchto grafů se nachází v příloze A.
 \begin{figure}[!ht]
-\includegraphics[width=16cm]{Graf1}
-\caption{Graf míry konvergence všech algoritmu popsaných v této práci}
+\includegraphics[width=16cm]{Graf1A}
+\caption{Graf míry konvergence zde popsaných algoritmů s intervalovým výstupem (čern.-sh, červ.-hh)}
 \label{fig:graf1}
 \end{figure}
-
+\begin{figure}[!ht]
+\includegraphics[width=16cm]{Graf1B}
+\caption{Graf míry konvergence zbytku algoritmů popsaných v této práci}
+\label{fig:graf1}
+\end{figure}
 \subsection{Závislost počtu operací}
 Počet operací $O_n$ zavádím jako matematikou veličinu vyjadřující počet operací (sčítání, odčítání, násobení, dělení, umocňování a odmocňování) od počátku výpočtu až do n-té iterace. Faktoriál z $x$, pokud $x$ nebude 0, budu počítat za $x$ operací, protože pro nenulové $x$ platí, že:
 $$
@@ -987,7 +956,7 @@ $$
 v opačném případě budu $x!$ (0!) počítat za 1 operaci.
 \paragraph{Archimedes}
 \begin{table}[h!]
-\caption{Složitost Archimédova algoritmu podle vzorce 6, 9 a 10}
+\caption{Počet operací - Archimédův algoritmus (podle vzorce 6, 9 a 10)}
 \begin{tabular}{|l||l|l|l|}
 \hline
 $n$ & 1&2&3 \\ \hline
@@ -995,7 +964,7 @@ $O_{sh}(n)$&5+3&10+3&15+3 \\ \hline
 $O_{hh}(n)$&6+3&12+3&18+3 \\ \hline
 \end{tabular}
 \end{table}
-Při každé iteraci, viz 2. tabulka, se musí vykonat 5 operací pro výpočet 1 strany vepsaného k-úhelníku a 6 operací pro výpočet 1 strany opsaného k-úhelníku. Pro výpočet spodní nebo horní hranice ($sh$ a $hh$) $\pi$ je potřeba provést ještě 3 operace. Výsledné vzorce pro složitost Archimédova algoritmu jsou:
+Při každé iteraci, viz 4. tabulka, se musí vykonat 5 operací pro výpočet 1 strany vepsaného k-úhelníku a 6 operací pro výpočet 1 strany opsaného k-úhelníku. Pro výpočet spodní nebo horní hranice ($sh$ a $hh$) $\pi$ je potřeba provést ještě 3 operace. Výsledné vzorce pro počet operací Archimédova algoritmu jsou:
 $$
 O_{sh}(n)=5n+3
 $$
@@ -1010,7 +979,7 @@ $$
 $$
 \pi_n=\frac{2^{2+n}x_n}{2}=2^{1+n}x_n \ztoho a=3
 $$
-Vzorec pro složitost Ptolemaiova algoritmu:
+Vzorec pro výpočet počtu operací v Ptolemaiově algoritmu:
 $$
 O(n)=5n+3
 $$
@@ -1022,9 +991,9 @@ $$
 $$
 R_{n+1}=\sqrt{R_nr_{n+1}}
 $$
-Protože $r$ je závislý i na $R$ a naopak, musím složitost 1 iterace pro $r$ a $R$ počítat z obou vzorců.  Z $r$ a $R$ se na hranice intervalu pro $\pi$ dostanu 2 operacemi.
+Protože $r$ je závislý i na $R$ a naopak, musím počet operací v 1 iteraci pro $r$ a $R$ počítat z obou vzorců.  Z $r$ a $R$ se na hranice intervalu pro $\pi$ dostanu 2 operacemi.
 \begin{table}[h!]
-\caption{Složitost Kusánského algoritmu}
+\caption{Počet operací - Kusánského algoritmus}
 \begin{tabular}{|l||l|l|l|}
 \hline
 $n$ & 1&2&3 \\ \hline
@@ -1032,7 +1001,7 @@ $O_{sh}(n)$&2+2&6+2&10+2 \\ \hline
 $O_{hh}(n)$&4+2&8+2&12+2 \\ \hline
 \end{tabular}
 \end{table}
-Vzorce pro složitost Kusánského algoritmu z tabulky č. 3:
+Vzorce pro výpočet počtu operací v Kusánském algoritmu z tabulky č. 5:
 $$
 O_{sh}(n)=4(n-1)+2+2=4n
 $$
@@ -1042,7 +1011,7 @@ $$
 \paragraph{Viète}
 Jako 1 iteraci beru výpočet zlomku a jeho vynásobení s již vypočítaným odhadem $\pi$ z předchozí iterace, pokud to není 1. iterace, kdy se ničím nenásobí.
 \begin{table}[h!]
-\caption{Složitost Vieteho algoritmu algoritmu}
+\caption{Počet operací - Vièteho algoritmus}
 \begin{tabular}{|l||l|l|l|l|}
 \hline
 $n$ & 1&2&3&4 \\ \hline
@@ -1050,14 +1019,14 @@ $O(n)$&1&4&9&16 \\ \hline
 zpět. diference&-&3&5&7 \\ \hline
 \end{tabular}
 \end{table}
-Ze 4. tabulky plyne, že složitost algoritmu tvoří posloupnost:
+Ze 6. tabulky plyne, že složitost algoritmu tvoří posloupnost:
 $$
 O(n)=n^2.
 $$
 \paragraph{Descartes}
-Stejný systém výpočtu složitosti jako u Kusánského algoritmu.
+Stejný systém výpočtu počtu operací jako u Kusánského algoritmu.
 \begin{table}[h!]
-\caption{Složitost Descartova algoritmu podle vzorce 20, 21 a 22}
+\caption{Počet operací - Descartův algoritmus (podle vzorce 20, 21 a 22)}
 \begin{tabular}{|l||l|l|l|}
 \hline
 $n$ & 1&2&3 \\ \hline
@@ -1065,7 +1034,7 @@ $O_{sh}(n)$&2+2&8+2&14+2 \\ \hline
 $O_{hh}(n)$&4+2&10+2&16+2 \\ \hline
 \end{tabular}
 \end{table}
-Vzorce pro složitost algoritmu z tabulky č. 5:
+Vzorce pro složitost algoritmu z tabulky č. 7:
 $$
 O_{sh}(n)=6(n-1)+2+2=6n-2
 $$
@@ -1077,9 +1046,9 @@ Spodní hranice intervalu závisí na Archimédově spodní hranici odhadu $\pi$
 2n-úhelníka ($2*(5*1+3)=10+6$) a pro každou další iteraci stačí spočítat o jedničku vyšší mocninu $2^i$n-úhelníku ($5(n-1)+16=5n+11$). Samotná Snelliho nerovnost 21 pro výpočet $\pi$ přidává 3 operace, a proto $O_{sh}=5n+14$.
 Horní hranice intervalu závisí na Archimédově spodní a horní hranici odhadu $\pi$ s využitím n-úhelníka ($5n+3+6n+3=11n+6$). Samotná Snelliho nerovnost 20 přidává 3 operace, a proto $O_{sh}=11n+9$.
 \paragraph{Gregory}
-Opět stejný systém výpočtu složitosti jako u Descartova a  Kusánského algoritmu.
+Opět stejný systém výpočtu složitosti jako u Descartova a Kusánského algoritmu.
 \begin{table}[h!]
-\caption{Složitost Gregoryho algoritmu podle vzorce 23, 24 a 25}
+\caption{Počet operací - Gregoryho algoritmus (podle vzorce 23, 24 a 25)}
 \begin{tabular}{|l||l|l|l|}
 \hline
 $n$ & 1&2&3 \\ \hline
@@ -1087,7 +1056,7 @@ $O_{sh}(n)$&2+2&8+2&14+2 \\ \hline
 $O_{hh}(n)$&6+2&12+2&18+2 \\ \hline
 \end{tabular}
 \end{table}
-Vzorce pro složitost algoritmu z tabulky č. 6:
+Vzorce pro složitost algoritmu z tabulky č. 8:
 $$
 O_{sh}(n)=6(n-1)+2+2=6n-2
 $$
@@ -1096,32 +1065,112 @@ O_{hh}(n)=6n
 $$
 \paragraph{Wallis}
 \begin{table}[h!]
-\caption{Složitost Wallisova algoritmu algoritmu}
+\caption{Počet operací - Wallisův algoritmus}
 \begin{tabular}{|l||l|l|l|}
 \hline
 $n$ & 1&2&3 \\ \hline
 $O(n)$&6+1&13+1&20+1 \\ \hline
 \end{tabular}
 \end{table}
-Ze 7. tabulky plyne, že složitost algoritmu tvoří posloupnost:
+Ze 9. tabulky plyne, že složitost algoritmu tvoří posloupnost:
 $$
 O(n)=7n.
 $$
-\paragraph{Gregory-Leibnitz}
+\paragraph{Brouncker}
+Jako 1. iteraci je brána $\frac{4}{1}$ a každá další zlomek ($+\frac{i^2}{2}$)
 \begin{table}[h!]
-\caption{Složitost Gregoryho-leibnitzova algoritmu algoritmu}
+\caption{Počet operací - Brounckerův algoritmus}
+\begin{tabular}{|l||l|l|l|}
+\hline
+$n$ & 1&2&3 \\ \hline
+$O(n)$&1&4&7 \\ \hline
+\end{tabular}
+\end{table}
+Ze 10. tabulky plyne, že složitost algoritmu tvoří posloupnost:
+$$
+O(n)=3(n-1)+1=3n-2.
+$$
+\paragraph{Gregory-Leibniz}
+\begin{table}[h!]
+\caption{Počet operací - Gregoryho-Leibnizův algoritmus}
 \begin{tabular}{|l||l|l|l|}
 \hline
 $n$ & 1&2&3 \\ \hline
 $O(n)$&4+1&9+1&14+1 \\ \hline
 \end{tabular}
 \end{table}
-Ze 8. tabulky plyne, že složitost algoritmu tvoří posloupnost:
+Ze 11. tabulky plyne, že složitost algoritmu tvoří posloupnost:
 $$
 O(n)=5n.
 $$
+\paragraph{Newton 1}
 \begin{table}[h!]
-\caption{Složitost algoritmu}
+\caption{Počet operací - Newtonův 1. algoritmus}
+\begin{tabular}{|l||l|l|l|l|}
+\hline
+$n$ & 1&2&3&4 \\ \hline
+$O(n)$&14&34&60&92 \\ \hline
+zpět. diference&-&20&26&32 \\ \hline
+\end{tabular}
+\end{table}
+Ze 12. tabulky plyne, že složitost algoritmu tvoří posloupnost:
+$$
+O(n)=3n^2+11n.
+$$
+Zpětná diference z tabulky 12 dává posloupnost:
+$$
+d(O(n))=6n+8.
+$$
+\paragraph{Newton 2}
+Druhý Newtonův algoritmus bohužel k 0.54, nikoliv k $\pi$. Pravděpodobně je v zápisu připsaného z literatury chyba, a proto nemá smysl se zabývat jeho vlastnostmi.
+\paragraph{Sharp}
+Ze vzorce 40 lze sestavit tabulku celkového počtu operací v závislosti na iteraci.
+\begin{table}[h!]
+\caption{Počet operací - Sharpův algoritmus}
+\begin{tabular}{|l||l|l|l|}
+\hline
+$n$ & 1&2&3 \\ \hline
+$O(n)$&7+2&14+2&21+2 \\ \hline
+\end{tabular}
+\end{table}
+Z 13. tabulky plyne, že složitost algoritmu tvoří posloupnost:
+$$
+O(n)=7n+2.
+$$
+\paragraph{Euler}
+Ze sumace ve vzorci 43 lze vydedukoval, že pro $i+1$ je potřeba provést 2 operace ve zlomku (dělení a umocňování) a k tomu ještě přičtení hodnoty zlomku k doposud vypočítané hodnotě ($O(n)=3n+b$). Pro získání samotného $\pi$ je třeba výsledek ještě odmocnit ($b=1$). Vzorec 1. algoritmu pro počet operacích provedených do n-té iterace je:
+$$
+O(n)=3n+1.
+$$
+U druhého algoritmu se ve zlomku vyskytují 4 operace plus přičtení zlomku ($O(n)=5n+b$). Samotné $\pi$ se získá odmocněním a vynásobením dvěma ($b=2$). Vzorec 2. algoritmu pro počet operací je:
+$$
+O(n)=5n+2.
+$$
+Ve zlomku 3. algoritmu jsou opět 4 operace a následné osamocení $\pi$ si vyžádá další 2 operace, proto vzorec 3. algoritmu pro počet operacích je:
+$$
+O(n)=5n+2.
+$$
+\paragraph{Legendry}
+Stejný systém výpočtu počtu operací jako u Kusánského algoritmu.
+\begin{table}[h!]
+\caption{Počet operací - Legendryho algoritmus (podle vzorce 48-51)}
+\begin{tabular}{|l||l|l|l|}
+\hline
+$n$ & 1&2&3 \\ \hline
+$O_{sh}(n)$&9+2&18+2&27+2 \\ \hline
+$O_{hh}(n)$&7+2&16+2&25+2 \\ \hline
+\end{tabular}
+\end{table}
+Vzorce pro složitost algoritmu z tabulky č. 14:
+$$
+O_{sh}(n)=9n+2
+$$
+$$
+O_{hh}(n)=9n
+$$
+
+\begin{table}[h!]
+\caption{Počet operací v závislosti na iteraci v jednotlivých algoritmech}
 \begin{tabular}{|l||l|l|}
 \hline
 \bfseries{algoritmus} & \bfseries{závislost počtu operací $O(n)$} & \bfseries{zpětná diference} \\ \hline \hline
@@ -1134,11 +1183,51 @@ Gregoryho (s. / h.) & $6n-2$ / $6n+2$      & 6 / 6   \\ \hline
 Snellův (s. / h.) & $5n+14$ / $11n+9$      & 5 / 11   \\ \hline
 Wallisův & $7n$    & 7   \\ \hline
 Brounckerův & $3n-1$    & 3   \\ \hline
-Gregorho-Leibnitzův & $5n$      & 5  \\ \hline
-Newtonův 1 & $3n^2+11n$      & ?? $6n+11$ ??  \\ \hline
+Gregorho-Leibnizův & $5n$      & 5  \\ \hline
+Newtonův 1 & $3n^2+11n$      & $6n+8$ \\ \hline
+Sharp & $7n+2$      & 7  \\ \hline
+Euler 1 & $3n+1$      & 3  \\ \hline
+Euler 2 & $5n+2$      & 5 \\ \hline
+Euler 3 & $5n+2$      & 5  \\ \hline
+Legendryho (s. / h.) &  9n+2/9n &  9/9 \\ \hline
 \end{tabular}
 \end{table}
+\begin{table}[h!]
+\caption{Srovnání efektivity algoritmů podle $\mem$}
+\begin{tabular}{|l||l|}
+\hline
+\bfseries{algoritmus} & efektivita algoritmu $\mem$ \\ \hline \hline
+Archimedův (s. / h.) & 3.93/1.32  \\ \hline
+Ptolemaiův &   0.335 \\ \hline
+Kusánského (s. / h.) & 1.05/2.62 \\ \hline  
+Vièteho & 3.68  \\ \hline
+Descartesův (s. / h.) &  1.58/3.93    \\ \hline
+Gregoryho (s. / h.) & 5.95/3.93   \\ \hline
+Snellův (s. / h.) &  ---/---     \\ \hline
+Wallisův &  >87.0  \\ \hline
+Brounckerův &  >28.9  \\ \hline
+Gregorho-Leibnizův & 91.9 \\ \hline
+Newtonův 1 & 1.89 \\ \hline
+Sharp & 1.70 \\ \hline
+Euler 1 & >52  \\ \hline
+Euler 2 & >26.9   \\ \hline
+Euler 3 & 3.05  \\ \hline
+Legendry (s. / h.) & 1.03/4.28 \\ \hline
+\end{tabular}
+\end{table}
+
+\clearpage
 \section{Závěr}
+V práci jsme nahlédli do historického průřezu jednotlivých algoritmů a jiných způsobů výpočtu $\pi$. Sledovali jsme jejich vývoj. Každý algoritmus byl zhodnocen z několika pohledů, jak moc rychle konvergují k $\pi$ a jak moc jsou složité v počtu operací. Dále jsme si zavedli mnou vytvořenou veličinu $\mem$, která tyto dvě vlastnosti spojuje. Dále jsme se dozvěděli, jak se $\pi$ počítalo na prvních počítačích v polovině 20. století. K tomu jsme si přidali metodu Monte Carlo, která sice k výpočtu $\pi$ primárně nikdy nesloužila\footnote[13]{V té době existovaly mnohem lepší algoritmy.}, ale je to jeden ze způsobů, jak $\pi$ počítat v dnešní době s použitím počítačů.
+
+Z pohledu rychlosti s jakou algoritmus konvergoval k $\pi$, byl nejlepší Legrengyho algoritmus, který už po 4. iteraci se lišila spodní hranice intervalu o méně jak $5\cdot10^18$. Dalším o něco méně rychlejším algoritmem, ale výrazně rychlejším než zbytek algoritmů, by Snellův algoritmus. Problém s porovnáním algoritmů podle míry konvergence byl, že počítače mají zaokrouhlovací chybu na 16. desetinném místě, a proto jsme se přes hranici $2\cdot10^{-16}$ většinou nedostal.
+
+Brounckerův a první Eulerův algoritmus byly nejlepší z pohledu počtu operacích nejlepší, protože s každou iterací vzroste počet operací o 3. U všech algoritmů byla závislost na počtu operací lineární až na Viètův a Newtonův algoritmus, kde vyla exponenciální. Nedostatek tohoto porovnávání je, že se předpokládá, že každá operace je stejně náročná, jak s pohledu počtáře, tak z pohledu procesoru v počítači.
+
+Podle veličiny $\mem$ je nejlepší Viètův a Brounckerův algoritmus (tabulka 16). Oba algoritmy zkombinovaly rychlost, se kterou se blíží k $\pi$ a nízkou náročnost na počet operací. Těsně za nimi byl první Eulerůva nekonečná řada. Nejhůře v tomto porovnávání dopadla Newtonova řada, která sice rychle konvergovala, ale už od první iterace byla na počet operací velmi náročná.
+
+Jak již bylo zmíněno, $\mem$ je nástroj vhodný k porovnávání algoritmů z pohledu celkové efektivity, ale musíme brát na vědomí, že kvůli mocnině dvou ve jmenovateli dává vyšší váhu počtu operací, a tak může stranit některým algoritmům. 
+
 \newpage
 \begin{oldthebibliography}{99}
 \bibitem{BECKMANN}
@@ -1180,11 +1269,139 @@ GOURÉVITCH, Boris. Newton's Formula. The worlf of pi [online]. [cit. 2018-11-03
 PROKOP, Vladimír. Dějiny literatury od starověku do počátku 19. století: aneb od Mezopotámie po naše národní obrození. Sokolov: O.K.-Soft, 2001.
 \bibitem{VIRIUS}
 VIRIUS, Miroslav. Metoda Monte Carlo. V Praze: České vysoké učení technické, 2010. ISBN 978-80-01-04595-4.
+\bibitem{ENIAC}
+ENIAC: Electronic Numerical Integrator and Computer. In: Wikipedia: the free encyclopedia [online]. San Francisco (CA): Wikimedia Foundation, 2001- [cit. 2018-12-12]. Dostupné z: https://en.wikipedia.org/wiki/ENIAC
 \end{oldthebibliography}
 \newpage
 \listoffigures
 \listoftables
 \newpage
 \prilohy
-\section{První příloha} % podle potreby prejmenovat
+\section{Míra konvergence} % podle potreby prejmenovat
+\begin{figure}[!ht]
+\includegraphics[width=16cm]{Graf2A}
+\caption{Graf míry konvergence popsaných s intervalovým výstupem (čern.-sh, červ.-hh) ve větším měřítku}
+\label{fig:graf1}
+\end{figure}
+\begin{figure}[!ht]
+\includegraphics[width=16cm]{Graf2B}
+\caption{Graf míry konvergence zbytku algoritmů popsaných v této práci ve větším měřítku}
+\label{fig:graf1}
+\end{figure}
+\begin{table}[h!]
+\caption{Míra konvergence (rozšířená verze)}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\bfseries číslo iterace} & \multicolumn{2}{l|}{\bfseries Archimedes} & \multicolumn{2}{l|}{\bfseries Descartes} & \multicolumn{2}{l|}{\bfseries Kusánský} & \multicolumn{2}{l|}{\bfseries Gregory}  \\ \hline
+\multicolumn{1}{|l|}{hr. intervalu} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} \\ \hline \hline
+1 & 3.13e-1 & 8.58e-1 & 3.13e-1 & 8.58e-1 & 3.13e-1 & 8.58e-1 & 1.14e+0 & 8.58e-1 \\ \hline 
+2 & 8.01e-2 & 1.72e-1 & 8.01e-2 & 1.72e-1 & 8.01e-2 & 1.72e-1 & 3.13e-1 & 1.72e-1 \\ \hline 
+3 & 2.01e-2 & 4.10e-2 & 2.01e-2 & 4.10e-2 & 2.01e-2 & 4.10e-2 & 8.01e-2 & 4.10e-2 \\ \hline 
+4 & 5.04e-3 & 1.01e-2 & 5.04e-3 & 1.01e-2 & 5.04e-3 & 1.01e-2 & 2.01e-2 & 1.01e-2 \\ \hline 
+5 & 1.26e-3 & 2.53e-3 & 1.26e-3 & 2.53e-3 & 1.26e-3 & 2.53e-3 & 5.04e-3 & 2.53e-3 \\ \hline 
+6 & 3.15e-4 & 6.31e-4 & 3.15e-4 & 6.31e-4 & 3.15e-4 & 6.31e-4 & 1.26e-3 & 6.31e-4 \\ \hline 
+7 & 7.89e-5 & 1.58e-4 & 7.89e-5 & 1.58e-4 & 7.89e-5 & 1.58e-4 & 3.15e-4 & 1.58e-4 \\ \hline 
+8 & 1.97e-5 & 3.94e-5 & 1.97e-5 & 3.94e-5 & 1.97e-5 & 3.94e-5 & 7.89e-5 & 3.94e-5 \\ \hline 
+9 & 4.93e-6 & 9.86e-6 & 4.93e-6 & 9.86e-6 & 4.93e-6 & 9.86e-6 & 1.97e-5 & 9.86e-6 \\ \hline 
+10 & 1.23e-6 & 2.46e-6 & 1.23e-6 & 2.46e-6 & 1.23e-6 & 2.46e-6 & 4.93e-6 & 2.46e-6 \\ \hline 
+11 & 3.08e-7 & 6.16e-7 & 3.08e-7 & 6.16e-7 & 3.08e-7 & 6.16e-7 & 1.23e-6 & 6.16e-7 \\ \hline 
+12 & 7.70e-8 & 1.54e-7 & 7.70e-8 & 1.54e-7 & 7.70e-8 & 1.54e-7 & 3.08e-7 & 1.54e-7 \\ \hline 
+13 & 1.93e-8 & 3.85e-8 & 1.93e-8 & 3.85e-8 & 1.93e-8 & 3.85e-8 & 7.70e-8 & 3.85e-8 \\ \hline 
+14 & 4.81e-9 & 9.63e-9 & 4.81e-9 & 9.63e-9 & 4.81e-9 & 9.63e-9 & 1.93e-8 & 9.63e-9 \\ \hline 
+15 & 1.20e-9 & 2.41e-9 & 1.20e-9 & 2.41e-9 & 1.20e-9 & 2.41e-9 & 4.81e-9 & 2.41e-9 \\ \hline 
+16 & 3.01e-10 & 6.02e-10 & 3.01e-10 & 6.02e-10 & 3.01e-10 & 6.02e-10 & 1.20e-9 & 6.02e-10 \\ \hline 
+17 & 7.52e-11 & 1.50e-10 & 7.52e-11 & 1.50e-10 & 7.52e-11 & 1.50e-10 & 3.01e-10 & 1.50e-10 \\ \hline 
+18 & 1.88e-11 & 3.76e-11 & 1.88e-11 & 3.76e-11 & 1.88e-11 & 3.76e-11 & 7.52e-11 & 3.76e-11 \\ \hline 
+19 & 4.70e-12 & 9.40e-12 & 4.70e-12 & 9.40e-12 & 4.70e-12 & 9.40e-12 & 1.88e-11 & 9.40e-12 \\ \hline 
+20 & 1.18e-12 & 2.35e-12 & 1.18e-12 & 2.35e-12 & 1.17e-12 & 2.35e-12 & 4.70e-12 & 2.35e-12 \\ \hline 
+21 & 2.94e-13 & 5.88e-13 & 2.94e-13 & 5.87e-13 & 2.94e-13 & 5.88e-13 & 1.17e-12 & 5.88e-13 \\ \hline 
+22 & 7.37e-14 & 1.47e-13 & 7.35e-14 & 1.47e-13 & 7.33e-14 & 1.47e-13 & 2.94e-13 & 1.47e-13 \\ \hline 
+23 & 1.86e-14 & 3.68e-14 & 1.84e-14 & 3.67e-14 & 1.82e-14 & 3.68e-14 & 7.33e-14 & 3.68e-14 \\ \hline 
+24 & 4.82e-15 & 9.30e-15 & 4.62e-15 & 9.15e-15 & 4.47e-15 & 9.30e-15 & 1.82e-14 & 9.30e-15 \\ \hline 
+25 & 1.38e-15 & 2.42e-15 & 1.18e-15 & 2.26e-15 & 1.02e-15 & 2.42e-15 & 4.47e-15 & 2.42e-15 \\ \hline 
+26 & 5.19e-16 & 6.96e-16 & 3.20e-16 & 5.40e-16 & 1.64e-16 & 6.96e-16 & 1.02e-15 & 6.96e-16 \\ \hline 
+27 & 3.04e-16 & 2.66e-16 & 1.05e-16 & 1.10e-16 & 5.07e-17 & 2.66e-16 & 1.64e-16 & 2.66e-16 \\ \hline 
+28 & 2.50e-16 & 1.58e-16 & 5.15e-17 & 2.25e-18 & 1.05e-16 & 1.58e-16 & 5.07e-17 & 1.58e-16 \\ \hline 
+29 & 2.37e-16 & 1.31e-16 & 3.81e-17 & 2.46e-17 & 1.18e-16 & 1.31e-16 & 1.05e-16 & 1.31e-16 \\ \hline 
+30 & 2.33e-16 & 1.25e-16 & 3.47e-17 & 3.14e-17 & 1.21e-16 & 1.25e-16 & 1.18e-16 & 1.25e-16 \\ \hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\caption{Míra konvergence 2 (rozšířená verze)}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\bfseries č. iterace} & \multicolumn{2}{l|}{\bfseries Snell} & \multicolumn{2}{l|}{\bfseries Legendry} & \multicolumn{1}{l|}{\bfseries Ptolem.} & \multicolumn{1}{l|}{\bfseries Viete} & \multicolumn{1}{l|}{\bfseries Wallis} & \multicolumn{1}{l|}{\bfseries Brounck.}  \\ \hline
+\multicolumn{1}{|l|}{hr. intervalu} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{spodní} & \multicolumn{1}{l|}{horní} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \hline \hline
+1 & 2.45e-3 & 7.74e-2 & 2.27e-1 & 8.58e-1 & 3.13e-1 & 1.14e+0 & 4.75e-01 & 8.58e-01 \\ \hline 
+2 & 1.55e-4 & 3.96e-3 & 1.01e-3 & 4.61e-2 & 8.01e-2 & 3.13e-1 & 2.97e-01 & 4.75e-01 \\ \hline 
+3 & 9.72e-6 & 2.37e-4 & 7.38e-9 & 8.76e-5 & 2.01e-2 & 8.01e-2 & 2.16e-01 & 3.25e-01 \\ \hline 
+4 & 6.08e-7 & 1.46e-5 & 4.98e-18 & 3.06e-10 & 5.04e-3 & 2.01e-2 & 1.69e-01 & 2.46e-01 \\ \hline 
+5 & 3.80e-8 & 9.13e-7 & 4.80e-18 & 4.79e-18 & 1.26e-3 & 5.04e-3 & 1.39e-01 & 1.98e-01 \\ \hline 
+6 & 2.37e-9 & 5.70e-8 & 4.80e-18 & 4.80e-18 & 3.15e-4 & 1.26e-3 & 1.18e-01 & 1.66e-01 \\ \hline 
+7 & 1.48e-10 & 3.56e-9 & 4.80e-18 & 4.80e-18 & 7.89e-5 & 3.15e-4 & 1.03e-01 & 1.42e-01 \\ \hline 
+8 & 9.28e-12 & 2.23e-10 & 4.80e-18 & 4.80e-18 & 1.97e-5 & 7.89e-5 & 9.10e-02 & 1.25e-01 \\ \hline 
+9 & 5.80e-13 & 1.39e-11 & 4.80e-18 & 4.80e-18 & 4.93e-6 & 1.97e-5 & 8.16e-02 & 1.11e-01 \\ \hline 
+10 & 3.65e-14 & 8.70e-13 & 4.80e-18 & 4.80e-18 & 1.23e-6 & 4.93e-6 & 7.39e-02 & 9.98e-02 \\ \hline 
+11 & 2.50e-15 & 5.42e-14 & 4.80e-18 & 4.80e-18 & 3.08e-7 & 1.23e-6 & 6.75e-02 & 9.07e-02 \\ \hline 
+12 & 3.74e-16 & 3.28e-15 & 4.80e-18 & 4.80e-18 & 7.70e-8 & 3.08e-7 & 6.22e-02 & 8.32e-02 \\ \hline 
+13 & 2.41e-16 & 9.84e-17 & 4.80e-18 & 4.80e-18 & 1.93e-8 & 7.70e-8 & 5.76e-02 & 7.68e-02 \\ \hline 
+14 & 2.33e-16 & 1.01e-16 & 4.80e-18 & 4.80e-18 & 4.81e-9 & 1.93e-8 & 5.37e-02 & 7.13e-02 \\ \hline 
+15 & 2.32e-16 & 1.13e-16 & 4.80e-18 & 4.80e-18 & 1.20e-9 & 4.81e-9 & 5.03e-02 & 6.66e-02 \\ \hline 
+16 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.01e-10 & 1.20e-9 & 4.72e-02 & 6.24e-02 \\ \hline 
+17 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 7.52e-11 & 3.01e-10 & 4.46e-02 & 5.88e-02 \\ \hline 
+18 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.88e-11 & 7.52e-11 & 4.22e-02 & 5.55e-02 \\ \hline 
+19 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 4.70e-12 & 1.88e-11 & 4.00e-02 & 5.26e-02 \\ \hline 
+20 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.18e-12 & 4.70e-12 & 3.81e-02 & 5.00e-02 \\ \hline 
+21 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 2.94e-13 & 1.17e-12 & 3.63e-02 & 4.76e-02 \\ \hline 
+22 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 7.38e-14 & 2.94e-13 & 3.47e-02 & 4.54e-02 \\ \hline 
+23 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.87e-14 & 7.33e-14 & 3.32e-02 & 4.35e-02 \\ \hline 
+24 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 4.91e-15 & 1.82e-14 & 3.19e-02 & 4.16e-02 \\ \hline 
+25 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 1.47e-15 & 4.47e-15 & 3.06e-02 & 4.00e-02 \\ \hline 
+26 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 6.08e-16 & 1.02e-15 & 2.95e-02 & 3.84e-02 \\ \hline 
+27 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.93e-16 & 1.64e-16 & 2.84e-02 & 3.70e-02 \\ \hline 
+28 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.40e-16 & 5.07e-17 & 2.74e-02 & 3.57e-02 \\ \hline 
+29 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.26e-16 & 1.05e-16 & 2.65e-02 & 3.45e-02 \\ \hline 
+30 & 2.32e-16 & 1.14e-16 & 4.80e-18 & 4.80e-18 & 3.23e-16 & 1.18e-16 & 2.56e-02 & 3.33e-02 \\ \hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\caption{Míra konvergence 3 (rozšířená verze)}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\bfseries č. iterace} & \multicolumn{1}{l|}{\bfseries Leibniz} & \multicolumn{1}{l|}{\bfseries Newton} & \multicolumn{1}{l|}{\bfseries Sharp} & \multicolumn{1}{l|}{\bfseries Euler} & \multicolumn{1}{l|}{\bfseries Euler 2} & \multicolumn{1}{l|}{\bfseries Euler 3}  \\ \hline
+1 & 8.58e-01 & 1.42e-1 & 3.23e-1 & 6.92e-01 & 3.13e-01 & 3.23e-01 \\ \hline 
+2 & 4.75e-01 & 1.66e-2 & 6.24e-2 & 4.03e-01 & 1.60e-01 & 1.42e-01 \\ \hline 
+3 & 3.25e-01 & 2.53e-3 & 1.46e-2 & 2.84e-01 & 1.07e-01 & 7.30e-02 \\ \hline 
+4 & 2.46e-01 & 4.38e-4 & 3.74e-3 & 2.19e-01 & 8.02e-02 & 4.59e-02 \\ \hline 
+5 & 1.98e-01 & 8.15e-5 & 1.01e-3 & 1.78e-01 & 6.41e-02 & 3.07e-02 \\ \hline 
+6 & 1.66e-01 & 1.59e-5 & 2.84e-4 & 1.50e-01 & 5.34e-02 & 2.23e-02 \\ \hline 
+7 & 1.42e-01 & 3.23e-6 & 8.17e-5 & 1.30e-01 & 4.57e-02 & 1.67e-02 \\ \hline 
+8 & 1.25e-01 & 6.71e-7 & 2.39e-5 & 1.14e-01 & 4.00e-02 & 1.31e-02 \\ \hline 
+9 & 1.11e-01 & 1.42e-7 & 7.12e-6 & 1.02e-01 & 3.55e-02 & 1.05e-02 \\ \hline 
+10 & 9.98e-02 & 3.07e-8 & 2.14e-6 & 9.22e-02 & 3.20e-02 & 8.62e-03 \\ \hline 
+11 & 9.07e-02 & 6.71e-9 & 6.51e-7 & 8.41e-02 & 2.91e-02 & 7.17e-03 \\ \hline 
+12 & 8.32e-02 & 1.48e-9 & 1.99e-7 & 7.73e-02 & 2.66e-02 & 6.09e-03 \\ \hline 
+13 & 7.68e-02 & 3.31e-10 & 6.14e-8 & 7.15e-02 & 2.46e-02 & 5.21e-03 \\ \hline 
+14 & 7.13e-02 & 7.45e-11 & 1.90e-8 & 6.65e-02 & 2.28e-02 & 4.53e-03 \\ \hline 
+15 & 6.66e-02 & 1.69e-11 & 5.93e-9 & 6.22e-02 & 2.13e-02 & 3.96e-03 \\ \hline 
+16 & 6.24e-02 & 3.84e-12 & 1.86e-9 & 5.84e-02 & 2.00e-02 & 3.50e-03 \\ \hline 
+17 & 5.88e-02 & 8.80e-13 & 5.83e-10 & 5.50e-02 & 1.88e-02 & 3.11e-03 \\ \hline 
+18 & 5.55e-02 & 2.03e-13 & 1.84e-10 & 5.20e-02 & 1.77e-02 & 2.79e-03 \\ \hline 
+19 & 5.26e-02 & 4.67e-14 & 5.80e-11 & 4.93e-02 & 1.68e-02 & 2.51e-03 \\ \hline 
+20 & 5.00e-02 & 1.08e-14 & 1.84e-11 & 4.69e-02 & 1.60e-02 & 2.27e-03 \\ \hline 
+21 & 4.76e-02 & 2.42e-15 & 5.84e-12 & 4.47e-02 & 1.52e-02 & 2.06e-03 \\ \hline 
+22 & 4.54e-02 & 4.77e-16 & 1.86e-12 & 4.27e-02 & 1.45e-02 & 1.88e-03 \\ \hline 
+23 & 4.35e-02 & 2.37e-17 & 5.93e-13 & 4.09e-02 & 1.39e-02 & 1.73e-03 \\ \hline 
+24 & 4.16e-02 & 8.25e-17 & 1.90e-13 & 3.92e-02 & 1.33e-02 & 1.59e-03 \\ \hline 
+25 & 4.00e-02 & 1.07e-16 & 6.06e-14 & 3.77e-02 & 1.28e-02 & 1.47e-03 \\ \hline 
+26 & 3.84e-02 & 1.13e-16 & 1.95e-14 & 3.62e-02 & 1.23e-02 & 1.36e-03 \\ \hline 
+27 & 3.70e-02 & 1.15e-16 & 6.19e-15 & 3.49e-02 & 1.18e-02 & 1.26e-03 \\ \hline 
+28 & 3.57e-02 & 1.15e-16 & 2.07e-15 & 3.37e-02 & 1.14e-02 & 1.17e-03 \\ \hline 
+29 & 3.45e-02 & 1.15e-16 & 5.87e-16 & 3.25e-02 & 1.10e-02 & 1.10e-03 \\ \hline 
+30 & 3.33e-02 & 1.15e-16 & 2.68e-16 & 3.15e-02 & 1.06e-02 & 1.03e-03 \\ \hline 
+\end{tabular}
+\end{table}
+
 \end{document}
